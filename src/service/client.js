@@ -1,5 +1,5 @@
-export class BaseURL {
-  constructor(baseUrl) {
-    this.url = baseUrl;
+export class BaseService {
+  constructor(url) {
+    this.url = url;
   }
 }
