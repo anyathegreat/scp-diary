@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Stack } from "@mantine/core";
+
 import { getScps } from "../store/scplist/slice";
+import ScpPost from "../components/ScpPost";
 
 export default function ScpList() {
   const dispatch = useDispatch();
@@ -12,10 +15,10 @@ export default function ScpList() {
   }, [dispatch]);
 
   return (
-    <div>
-      {scpList.map((item, index) => {
-        return <div key={index}>{item.title}</div>;
+    <Stack align="center">
+      {scpList.map((item) => {
+        return <ScpPost key={`Scp-${item["scp-number"]}`} scp={item} />;
       })}
-    </div>
+    </Stack>
   );
 }
