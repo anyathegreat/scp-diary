@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import scpsSlice from "./scpList/slice";
+import scpsSlice from "./scpPosts/slice";
 import scpSlice from "./scpItem/slice";
 
 export const store = configureStore({
