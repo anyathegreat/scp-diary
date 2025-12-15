@@ -1,7 +1,12 @@
-import { Button, Group, Paper, Stack, Textarea, TextInput } from "@mantine/core";
+import { Button, Group, Paper, Stack, Textarea, TextInput, Title } from "@mantine/core";
 import { useForm } from "@mantine/form";
+import { useDispatch } from "react-redux";
+
+import { addScpItem } from "../store/scpItem/slice";
 
 export default function ScpForm() {
+  const dispatch = useDispatch();
+
   const form = useForm({
     mode: "controlled",
     initialValues: {
@@ -12,7 +17,7 @@ export default function ScpForm() {
 
     validate: {
       "scp-number": (value) => {
-        return !value.trim() ? "Номер SCP обязателен" : !/^SCP-\d{3}$/i.test(value.trim()) ? "Формат: SCP-XXX" : null;
+        return !value.trim() ? "Номер SCP обязателен" : !/^\d{3}$/i.test(value.trim()) ? "Формат: XXX" : null;
       },
 
       title: (value) => {
@@ -22,18 +27,21 @@ export default function ScpForm() {
   });
 
   const handleForm = (values) => {
-    console.log(values);
+    dispatch(addScpItem(values));
   };
 
   return (
     <form onSubmit={form.onSubmit(handleForm)}>
       <Paper w="800px" radius="md" p="md" withBorder>
-        <Stack gap="md">
+        <Title order={2} ta="center">
+          Добавте SCP объект в базу данных
+        </Title>
+        <Stack mt="sm" gap="md">
           <TextInput
             {...form.getInputProps("scp-number")}
             withAsterisk
             label="Номер SCP:"
-            placeholder="SCP-682"
+            placeholder="682"
             error={form.errors["scp-number"]}
           />
 
@@ -50,6 +58,7 @@ export default function ScpForm() {
             withAsterisk
             label="Описание:"
             radius="md"
+            placeholder="Напишите описание объекта"
             error={form.errors.description}
           />
 
