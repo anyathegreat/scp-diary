@@ -2,9 +2,9 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { scpService } from "../../service/scpService";
 import { toast } from "react-toastify";
 
-export const getScps = createAsyncThunk("scpList/getScps", async (_, { rejectWithValue }) => {
+export const addScpItem = createAsyncThunk("scpItem/addScpItem", async (body, { rejectWithValue }) => {
   try {
-    return await scpService.getAllScp();
+    return await scpService.addScp(body);
   } catch (error) {
     toast.error(error.message);
     return rejectWithValue(error.message);
@@ -12,28 +12,25 @@ export const getScps = createAsyncThunk("scpList/getScps", async (_, { rejectWit
 });
 
 const initialState = {
-  list: [],
   loading: 0,
 };
 
-export const scpsSlice = createSlice({
-  name: "scps",
+const ScpSlice = createSlice({
+  name: "scp",
   initialState,
   reducer: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getScps.pending, (state) => {
-        state.list = [];
+      .addCase(addScpItem.pending, (state) => {
         state.loading += 1;
       })
-      .addCase(getScps.fulfilled, (state, action) => {
-        state.list = action.payload;
+      .addCase(addScpItem.fulfilled, (state) => {
         state.loading -= 1;
       })
-      .addCase(getScps.rejected, (state) => {
+      .addCase(addScpItem.rejected, (state) => {
         state.loading -= 1;
       });
   },
 });
 
-export default scpsSlice.reducer;
+export default ScpSlice.reducer;
