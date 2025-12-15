@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 
 import { addScpItem } from "../store/scpItem/slice";
 
-export default function ScpForm() {
+export default function FormScp() {
   const dispatch = useDispatch();
 
   const form = useForm({

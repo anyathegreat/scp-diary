@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router";
 
 import HomePage from "./pages/HomePage";
-import ScpList from "./pages/ScpList";
+import ScpListPage from "./pages/ScpListPage";
 import NotFoundPage from "./pages/NotFoundPage";
-import ScpItem from "./pages/ScpPage";
 import AppLayout from "./layouts/AppLayout";
+import ScpDetailsPage from "./pages/ScpDetailsPage";
+import ScpPostPage from "./pages/ScpPostPage";
 
 export const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
         path: "scp",
         handle: { crumb: "Scp" },
         children: [
-          { index: true, Component: ScpList },
+          { index: true, Component: ScpListPage },
           {
             path: "not-found",
             Component: NotFoundPage,
@@ -23,10 +24,15 @@ export const router = createBrowserRouter([
           },
           {
             path: ":id",
-            Component: ScpItem,
+            Component: ScpDetailsPage,
             handle: { crumb: "Scp-id" },
           },
         ],
+      },
+      {
+        path: "posts",
+        Component: ScpPostPage,
+        handle: { crumb: "posts" },
       },
       {
         path: "*",
