@@ -17,8 +17,6 @@ class ScpService extends BaseService {
   async addScp(body) {
     const token = localStorage.getItem("access_token");
 
-    console.log(token);
-
     const headers = {
       apikey: "sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi",
       Authorization: `Bearer ${token.trim()}`,
@@ -29,6 +27,23 @@ class ScpService extends BaseService {
       headers,
       method: "POST",
       body: JSON.stringify(body),
+    });
+
+    return handleResponce(responce);
+  }
+
+  async deleteScp(id) {
+    const token = localStorage.getItem("access_token");
+
+    const headers = {
+      apikey: "sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi",
+      Authorization: `Bearer ${token.trim()}`,
+      "Content-Type": "application/json",
+    };
+
+    const responce = await fetch(`https://gtpqlyakxnistnjenuqa.supabase.co/rest/v1/creatures?id=eq.${id}`, {
+      headers,
+      method: "DELETE",
     });
 
     return handleResponce(responce);

@@ -1,8 +1,12 @@
 import { Box, Button, Card, Group, Image, Stack, Text, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { useDispatch } from "react-redux";
+
+import { deleteScpItem } from "../store/scpItem/slice";
 
 export default function ListScp({ scp }) {
-  console.log(scp);
+  const dispatch = useDispatch();
+
   return (
     <Card padding="md" h="330px" radius="md" withBorder>
       <Card.Section>
@@ -14,30 +18,24 @@ export default function ListScp({ scp }) {
       </Card.Section>
 
       <Stack align="center" justify="space-between" mt="md">
-        <Stack gap="2px" align="center">
-          <Title order={3}>{`Scp-${scp["scp-number"]}`}</Title>
-          <Text>{scp.title}</Text>
+        <Stack w="100%" gap="2px" align="center">
+          <Title size="h3" textWrap="nowrap">{`Scp-${scp["scp-number"]}`}</Title>
+          <Box w="100%">
+            <Text ta="center" truncate="end">
+              {scp.title}
+            </Text>
+          </Box>
         </Stack>
 
-        <Box>
-          <Group gap="10px" wrap="nowrap" visibleFrom="sm">
-            <Button size="sm">Изменить</Button>
+        <Group gap="8px" wrap="nowrap">
+          <Button size="sm">
+            <IconEdit />
+          </Button>
 
-            <Button size="sm" color="rgba(150, 29, 29, 1)">
-              Удалить
-            </Button>
-          </Group>
-
-          <Group gap="10px" wrap="nowrap" hiddenFrom="sm">
-            <Button size="xs">
-              <IconEdit />
-            </Button>
-
-            <Button size="xs">
-              <IconTrash />
-            </Button>
-          </Group>
-        </Box>
+          <Button onClick={() => dispatch(deleteScpItem(scp.id))} size="sm" color="rgba(150, 29, 29, 1)">
+            <IconTrash />
+          </Button>
+        </Group>
       </Stack>
     </Card>
   );

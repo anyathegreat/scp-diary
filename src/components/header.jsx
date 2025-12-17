@@ -1,37 +1,35 @@
-import { Button, Divider, Group, Stack, Text } from "@mantine/core";
 import { Link } from "react-router";
-import { IconHome, IconLibrary, IconBook, IconSquareRoundedPlus } from "@tabler/icons-react";
+import { Burger, Button, Divider, Group, Stack, Text } from "@mantine/core";
 
-const navigationItems = [
-  { icon: <IconHome size={18} />, label: "Главная", path: "/" },
-  { icon: <IconLibrary size={18} />, label: "SCP объекты", path: "scp" },
-  { icon: <IconBook size={18} />, label: "Список статей", path: "posts" },
-];
-
-export default function Header() {
+export default function Header({ opened, toggle, navItem }) {
   return (
-    <Stack mt="md" align="center" gap="sm">
-      <Text fw={700} size="34px">
-        ДНЕВНИК ИССЛЕДОВАТЕЛЯ
-      </Text>
-      <Divider mb="md" />
+    <Stack h="100%" gap="1px" mt="5px" ml="5px">
+      <Burger hiddenFrom="sm" opened={opened} onClick={toggle} aria-label="Toggle navigation" />
 
-      <Group justify="space-between">
-        {navigationItems.map((item, index) => {
-          return (
-            <Button
-              color="#756d6d"
-              key={`nav-${index}`}
-              component={Link}
-              to={item.path}
-              leftSection={item.icon}
-              px="md"
-            >
-              {item.label}
-            </Button>
-          );
-        })}
-      </Group>
+      <Stack mt="10" align="center" gap="5px">
+        <Text ta="center" fw={700} size="34px">
+          ДНЕВНИК ИССЛЕДОВАТЕЛЯ
+        </Text>
+
+        <Divider mb="md" />
+
+        <Group justify="space-between" visibleFrom="sm">
+          {navItem.map((item, index) => {
+            return (
+              <Button
+                color="#756d6d"
+                key={`nav-${index}`}
+                component={Link}
+                to={item.path}
+                leftSection={item.icon}
+                px="md"
+              >
+                {item.label}
+              </Button>
+            );
+          })}
+        </Group>
+      </Stack>
     </Stack>
   );
 }

@@ -11,6 +11,16 @@ export const addScpItem = createAsyncThunk("scpItem/addScpItem", async (body, { 
   }
 });
 
+export const deleteScpItem = createAsyncThunk("scpItem/deleteScpItem", async (id, { rejectWithValue }) => {
+  try {
+    const response = await scpService.deleteScp(id);
+    return response;
+  } catch (error) {
+    toast.error(error.message);
+    return rejectWithValue(error.message);
+  }
+});
+
 const initialState = {
   loading: 0,
 };
@@ -28,6 +38,17 @@ const ScpSlice = createSlice({
         state.loading -= 1;
       })
       .addCase(addScpItem.rejected, (state) => {
+        state.loading -= 1;
+      });
+
+    builder
+      .addCase(deleteScpItem.pending, (state) => {
+        state.loading += 1;
+      })
+      .addCase(deleteScpItem.fulfilled, (state) => {
+        state.loading -= 1;
+      })
+      .addCase(deleteScpItem.rejected, (state) => {
         state.loading -= 1;
       });
   },
