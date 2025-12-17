@@ -63,8 +63,8 @@ export default function FormScp() {
           />
 
           <Group justify="center" gap="sm">
-            <Button type="submit">Save</Button>
-            <Button onClick={form.reset}>Clean</Button>
+            <Button type="submit">Сохранить</Button>
+            <Button onClick={form.reset}>Очистить</Button>
           </Group>
         </Stack>
       </Paper>

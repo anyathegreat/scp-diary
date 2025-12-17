@@ -17,6 +17,8 @@ class ScpService extends BaseService {
   async addScp(body) {
     const token = localStorage.getItem("access_token");
 
+    console.log(token);
+
     const headers = {
       apikey: "sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi",
       Authorization: `Bearer ${token.trim()}`,
