@@ -4,7 +4,9 @@ import { toast } from "react-toastify";
 
 export const addScpItem = createAsyncThunk("scpItem/addScpItem", async (body, { rejectWithValue }) => {
   try {
-    return await scpService.addScp(body);
+    const response = await scpService.addScp(body);
+    toast.success("Объект успешно создан");
+    return response;
   } catch (error) {
     toast.error(error.message);
     return rejectWithValue(error.message);

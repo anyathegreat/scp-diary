@@ -20,13 +20,12 @@ class ScpService extends BaseService {
     const headers = {
       apikey: "sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi",
       Authorization: `Bearer ${token.trim()}`,
-      "Content-Type": "application/json",
     };
 
-    const responce = await fetch("https://gtpqlyakxnistnjenuqa.supabase.co/rest/v1/creatures", {
+    const responce = await fetch("https://gtpqlyakxnistnjenuqa.supabase.co/functions/v1/create-creature", {
       headers,
       method: "POST",
-      body: JSON.stringify(body),
+      body: body,
     });
 
     return handleResponce(responce);
