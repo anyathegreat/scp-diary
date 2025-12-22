@@ -1,24 +1,24 @@
 import { ApiError } from "../service/error";
 
-export const handleResponce = async (responce) => {
+export const handleResponse = async (response) => {
   let data = null;
 
   try {
-    data = await responce.json();
+    data = await response.json();
   } catch (error) {
-    if (responce.ok) {
+    if (response.ok) {
       return null;
     }
 
     console.error(error.message);
 
-    const text = responce.text();
-    throw new ApiError(text || responce.statusText, responce.status, data);
+    const text = response.text();
+    throw new ApiError(text || response.statusText, response.status, data);
   }
 
-  if (!responce.ok) {
-    const errorMessage = data?.error || data?.message || responce.statusText;
-    throw new ApiError(errorMessage, responce.status, data);
+  if (!response.ok) {
+    const errorMessage = data?.error || data?.message || response.statusText;
+    throw new ApiError(errorMessage, response.status, data);
   }
 
   return data;

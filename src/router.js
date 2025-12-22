@@ -5,7 +5,7 @@ import ScpListPage from "./pages/ScpListPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import AppLayout from "./layouts/AppLayout";
 import ScpDetailsPage from "./pages/ScpDetailsPage";
-import ScpPostPage from "./pages/ScpPostPage";
+import ScpArticlePage from "./pages/ScpArticlePage";
 import ScpFormPage from "./pages/ScpFormPage";
 
 export const router = createBrowserRouter([
@@ -32,9 +32,9 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        path: "posts",
-        Component: ScpPostPage,
-        handle: { crumb: "posts" },
+        path: "articles",
+        Component: ScpArticlePage,
+        handle: { crumb: "article" },
       },
       {
         path: "*",
