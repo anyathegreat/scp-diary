@@ -1,11 +1,5 @@
 export const validateImageFile = async (file) => {
   try {
-    if (!file) return null;
-
-    if (!file.type.startsWith("image/")) return "Файл не является изображением";
-
-    if (file.size > 5 * 1024 * 1024) return "Файл слишком большой (макс. 5MB)";
-
     const arrayBuffer = await file.slice(0, 16).arrayBuffer();
     const uint8Array = new Uint8Array(arrayBuffer);
     const hexString = Array.from(uint8Array)

@@ -3,6 +3,7 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { useDispatch } from "react-redux";
 
 import { deleteScpItem } from "../store/scpItem/slice";
+import { Link } from "react-router";
 
 export default function ListScp({ scp }) {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function ListScp({ scp }) {
           src={scp?.image || "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"}
           height={180}
           alt={scp.title}
+          fit="cover"
         />
       </Card.Section>
 
@@ -28,7 +30,7 @@ export default function ListScp({ scp }) {
         </Stack>
 
         <Group gap="8px" wrap="nowrap">
-          <Button size="sm">
+          <Button component={Link} to={`${scp.id}`} size="sm">
             <IconEdit />
           </Button>
 

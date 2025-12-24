@@ -1,4 +1,4 @@
-import { handleResponce } from "../helpers/api";
+import { handleResponse } from "../helpers/api";
 import { BaseService } from "./client";
 
 class ScpService extends BaseService {
@@ -7,11 +7,19 @@ class ScpService extends BaseService {
   }
 
   async getAllScp() {
-    const responce = await fetch(
+    const response = await fetch(
       `${this.url}/creatures?select=*&apikey=sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi`
     );
 
-    return handleResponce(responce);
+    return handleResponse(response);
+  }
+
+  async getScp(id) {
+    const response = await fetch(
+      `${this.url}/creatures?id=eq.${id}&apikey=sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi`
+    );
+
+    return handleResponse(response);
   }
 
   async addScp(body) {
@@ -22,13 +30,13 @@ class ScpService extends BaseService {
       Authorization: `Bearer ${token.trim()}`,
     };
 
-    const responce = await fetch("https://gtpqlyakxnistnjenuqa.supabase.co/functions/v1/create-creature", {
+    const response = await fetch("https://gtpqlyakxnistnjenuqa.supabase.co/functions/v1/create-creature", {
       headers,
       method: "POST",
       body: body,
     });
 
-    return handleResponce(responce);
+    return handleResponse(response);
   }
 
   async deleteScp(id) {
@@ -40,12 +48,12 @@ class ScpService extends BaseService {
       "Content-Type": "application/json",
     };
 
-    const responce = await fetch(`https://gtpqlyakxnistnjenuqa.supabase.co/rest/v1/creatures?id=eq.${id}`, {
+    const response = await fetch(`${this.url}/creatures?id=eq.${id}`, {
       headers,
       method: "DELETE",
     });
 
-    return handleResponce(responce);
+    return handleResponse(response);
   }
 }
 
