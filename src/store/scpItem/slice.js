@@ -1,6 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { scpService } from "../../service/scpService";
 import { toast } from "react-toastify";
+
+import { router } from "../../router";
+import { scpService } from "../../service/scpService";
+
+export const getScpItem = createAsyncThunk("scpItem/getScpItem", async (id, { rejectWithValue }) => {
+  try {
+    const response = await scpService.getScp(id);
+    if (response?.length < 1) {
+      router.navigate("../not-found");
+      throw new Error("Объект не был найден");
+    }
+
+    return response;
+  } catch (error) {
+    toast.error(error.message);
+    return rejectWithValue(error.message);
+  }
+});
 
 export const addScpItem = createAsyncThunk("scpItem/addScpItem", async (body, { rejectWithValue }) => {
   try {
@@ -16,6 +33,7 @@ export const addScpItem = createAsyncThunk("scpItem/addScpItem", async (body, { 
 export const deleteScpItem = createAsyncThunk("scpItem/deleteScpItem", async (id, { rejectWithValue }) => {
   try {
     const response = await scpService.deleteScp(id);
+    toast.success("Объект успешно удалён");
     return response;
   } catch (error) {
     toast.error(error.message);
@@ -24,6 +42,7 @@ export const deleteScpItem = createAsyncThunk("scpItem/deleteScpItem", async (id
 });
 
 const initialState = {
+  item: {},
   loading: 0,
 };
 
@@ -32,6 +51,19 @@ const ScpSlice = createSlice({
   initialState,
   reducer: {},
   extraReducers: (builder) => {
+    builder
+      .addCase(getScpItem.pending, (state) => {
+        state.item = {};
+        state.loading += 1;
+      })
+      .addCase(getScpItem.fulfilled, (state, action) => {
+        state.item = action.payload;
+        state.loading -= 1;
+      })
+      .addCase(getScpItem.rejected, (state) => {
+        state.loading -= 1;
+      });
+
     builder
       .addCase(addScpItem.pending, (state) => {
         state.loading += 1;

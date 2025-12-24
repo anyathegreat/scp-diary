@@ -19,12 +19,13 @@ export default function ScpList() {
 
   if (loading) {
     return (
-      <Group justify="center" gap="15px">
-        <Skeleton height={280} w="150px" />
-        <Skeleton height={280} w="150px" />
-        <Skeleton height={280} w="150px" />
-        <Skeleton height={280} w="150px" />
-        <Skeleton height={280} w="150px" />
+      <Group justify="center" gap="15px" nowrap="wrap">
+        <Skeleton height={280} miw="14%" maw="30%" />
+        <Skeleton height={280} miw="14%" maw="30%" />
+        <Skeleton height={280} miw="14%" maw="30%" />
+        <Skeleton height={280} miw="14%" maw="30%" />
+        <Skeleton height={280} miw="14%" maw="30%" />
+        <Skeleton height={280} miw="14%" maw="30%" />
       </Group>
     );
   }
