@@ -1,30 +1,32 @@
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { DateTime } from "luxon";
 import { Box, Button, Divider, Group, Stack, Text, Timeline, Title, useMantineTheme } from "@mantine/core";
 import { IconCalendarEvent, IconEdit, IconTrash } from "@tabler/icons-react";
 
-import { deleteNotes } from "../store/articleItem/slice";
+import { deleteNote } from "../store/articleItem/slice";
 
-import FormNotes from "./FormAddNotes";
+import FormUpdateNotes from "./FormUpdateNotes";
+import FormAddNote from "./FormAddNotes";
 
 export default function NotesArticleScp({ article, articleId }) {
   const dispatch = useDispatch();
   const theme = useMantineTheme();
 
+  const [openUpdate, setOpenUpdate] = useState(null);
+  const [noteId, setNoteId] = useState(null);
+
   const notes = article[0]?.notes || [];
 
   const formatDate = (date) => {
     const formatDate = DateTime.fromISO(date);
-    console.log(formatDate);
     const newDate = formatDate.setLocale("ru").toFormat("dd MMMM yyyy");
     return newDate;
   };
 
   const handleDeleteNote = (noteId) => {
-    dispatch(deleteNotes({ articleId: articleId, noteId: noteId }));
+    dispatch(deleteNote({ articleId: articleId, noteId: noteId }));
   };
-
-  console.log(notes);
 
   return (
     <Box bd="3px solid brown.3" m="20px" align="center" pt="md" bdrs="8px">
@@ -34,7 +36,7 @@ export default function NotesArticleScp({ article, articleId }) {
 
       <Divider mt="20px" ml="26px" mr="26px" size="2px" color="brown.1" />
 
-      <FormNotes articleId={articleId} />
+      <FormAddNote articleId={articleId} />
 
       {notes.length > 0 ? (
         <Stack w="90%" my="30px">
@@ -52,7 +54,14 @@ export default function NotesArticleScp({ article, articleId }) {
                     </Group>
 
                     <Group gap="6px" w={{ base: "100%", xs: "50%" }} justify="end">
-                      <Button size="25px" color="brown.0">
+                      <Button
+                        size="25px"
+                        color="brown.0"
+                        onClick={() => {
+                          setNoteId(item.uid);
+                          setOpenUpdate((prev) => !prev);
+                        }}
+                      >
                         <IconEdit />
                       </Button>
 
@@ -61,6 +70,8 @@ export default function NotesArticleScp({ article, articleId }) {
                       </Button>
                     </Group>
                   </Group>
+
+                  {openUpdate && noteId === item.uid && <FormUpdateNotes articleId={articleId} noteId={item.uid} />}
 
                   <Box
                     w="100%"

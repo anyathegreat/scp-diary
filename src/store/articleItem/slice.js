@@ -33,9 +33,9 @@ export const addArticleItem = createAsyncThunk("articleItem/addArticleItem", asy
   }
 });
 
-export const addNotes = createAsyncThunk("articleItem/addNotes", async (params, { dispatch, rejectWithValue }) => {
+export const addNote = createAsyncThunk("articleItem/addNote", async (params, { dispatch, rejectWithValue }) => {
   try {
-    const response = await articleService.addArticleNotes(params);
+    const response = await articleService.addArticleNote(params);
     dispatch(getArticleItem(params.articleId));
     toast.success("Заметка успешно создана");
 
@@ -47,22 +47,33 @@ export const addNotes = createAsyncThunk("articleItem/addNotes", async (params, 
   }
 });
 
-export const deleteNotes = createAsyncThunk(
-  "articleItem/deleteNotes",
-  async (params, { dispatch, rejectWithValue }) => {
-    try {
-      const response = await articleService.deleteArticleNotes(params);
-      dispatch(getArticleItem(params.articleId));
-      toast.success("Заметка успешно удалена");
+export const updateNote = createAsyncThunk("articleItem/updateNote", async (params, { dispatch, rejectWithValue }) => {
+  try {
+    const response = await articleService.updateArticleNote(params);
+    dispatch(getArticleItem(params.articleId));
+    toast.success("Заметка успешно обновленна");
 
-      return response;
-    } catch (error) {
-      console.error(error);
-      toast.error(error.message);
-      return rejectWithValue(error.message);
-    }
+    return response;
+  } catch (error) {
+    console.error(error);
+    toast.error(error.message);
+    return rejectWithValue(error.message);
   }
-);
+});
+
+export const deleteNote = createAsyncThunk("articleItem/deleteNote", async (params, { dispatch, rejectWithValue }) => {
+  try {
+    const response = await articleService.deleteArticleNote(params);
+    dispatch(getArticleItem(params.articleId));
+    toast.success("Заметка успешно удалена");
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    toast.error(error.message);
+    return rejectWithValue(error.message);
+  }
+});
 
 const initialState = {
   item: {},
@@ -99,24 +110,35 @@ const articleSlice = createSlice({
       });
 
     builder
-      .addCase(addNotes.pending, (state) => {
+      .addCase(addNote.pending, (state) => {
         state.loading += 1;
       })
-      .addCase(addNotes.fulfilled, (state) => {
+      .addCase(addNote.fulfilled, (state) => {
         state.loading -= 1;
       })
-      .addCase(addNotes.rejected, (state) => {
+      .addCase(addNote.rejected, (state) => {
         state.loading -= 1;
       });
 
     builder
-      .addCase(deleteNotes.pending, (state) => {
+      .addCase(updateNote.pending, (state) => {
         state.loading += 1;
       })
-      .addCase(deleteNotes.fulfilled, (state) => {
+      .addCase(updateNote.fulfilled, (state) => {
         state.loading -= 1;
       })
-      .addCase(deleteNotes.rejected, (state) => {
+      .addCase(updateNote.rejected, (state) => {
+        state.loading -= 1;
+      });
+
+    builder
+      .addCase(deleteNote.pending, (state) => {
+        state.loading += 1;
+      })
+      .addCase(deleteNote.fulfilled, (state) => {
+        state.loading -= 1;
+      })
+      .addCase(deleteNote.rejected, (state) => {
         state.loading -= 1;
       });
   },

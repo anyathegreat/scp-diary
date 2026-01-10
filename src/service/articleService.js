@@ -87,7 +87,22 @@ const articleREST = {
     return handleResponse(response);
   },
 
-  deleteArticleNotes: async ({ articleId, noteId }) => {
+  updateArticleNote: async ({ articleId, noteId, updatedNote }) => {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${supabaseConfig.functionUrl}/notes?article_id=${articleId}&note_uid=${noteId}`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedNote),
+    });
+
+    return handleResponse(response);
+  },
+
+  deleteArticleNote: async ({ articleId, noteId }) => {
     const token = localStorage.getItem("access_token");
 
     const response = await fetch(`${supabaseConfig.functionUrl}/notes?article_id=${articleId}&note_uid=${noteId}`, {
@@ -105,6 +120,7 @@ export const articleService = {
   getAllArticle: articleREST.getAllArticle,
   getArticle: articleREST.getArticle,
   addArticle: articleREST.addArticle,
-  addArticleNotes: articleREST.addArticleNote,
-  deleteArticleNotes: articleREST.deleteArticleNotes,
+  addArticleNote: articleREST.addArticleNote,
+  updateArticleNote: articleREST.updateArticleNote,
+  deleteArticleNote: articleREST.deleteArticleNote,
 };

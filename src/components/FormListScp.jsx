@@ -54,7 +54,7 @@ export default function FormScp() {
   return (
     <Box maw={{ base: "100%", sm: "800px" }} w="100%">
       <Title order={2} ta="center">
-        Добавте SCP объект в базу данных
+        Добавте SCP объект в базу данных:
       </Title>
 
       <Flex w="100%" direction="column" mt="md" p="md" bd="1px solid #5f5d5d" bdrs="20px">
