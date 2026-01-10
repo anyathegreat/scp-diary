@@ -8,11 +8,12 @@ const initialState = {
   loading: 0,
 };
 
-export const getArticles = createAsyncThunk("scpArticles/getArticles", async (_, { rejectWithValue }) => {
+export const getArticles = createAsyncThunk("articleList/getArticles", async (_, { rejectWithValue }) => {
   try {
     const response = await articleService.getAllArticle();
     return response;
   } catch (error) {
+    console.error(error);
     toast.error(error.message);
     return rejectWithValue(error.message);
   }

@@ -1,60 +1,85 @@
 import { handleResponse } from "../helpers/api";
-import { BaseService } from "./client";
+import { supabaseConfig } from "./articleService";
 
-class ScpService extends BaseService {
-  constructor(url) {
-    super(url);
-  }
-
-  async getAllScp() {
-    const response = await fetch(
-      `${this.url}/creatures?select=*&apikey=sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi`
-    );
-
-    return handleResponse(response);
-  }
-
-  async getScp(id) {
-    const response = await fetch(
-      `${this.url}/creatures?id=eq.${id}&apikey=sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi`
-    );
-
-    return handleResponse(response);
-  }
-
-  async addScp(body) {
+const scpREST = {
+  getAllScp: async () => {
     const token = localStorage.getItem("access_token");
 
-    const headers = {
-      apikey: "sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi",
-      Authorization: `Bearer ${token.trim()}`,
-    };
+    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?select=*&apikey=${supabaseConfig.apikey}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token.trim()}`,
+      },
+    });
 
-    const response = await fetch("https://gtpqlyakxnistnjenuqa.supabase.co/functions/v1/create-creature", {
-      headers,
+    const data = await handleResponse(response);
+
+    const newScp = data.map((item) => ({
+      scpId: item.id,
+      title: item.title,
+      number: item["scp-number"],
+      description: item.description,
+      image: item.image,
+    }));
+
+    return newScp;
+  },
+
+  getScp: async (scpId) => {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?id=eq.${scpId}&apikey=${supabaseConfig.apikey}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token.trim()}`,
+      },
+    });
+
+    const data = await handleResponse(response);
+
+    const newScp = data.map((item) => ({
+      scpId: item.id,
+      title: item.title,
+      number: item["scp-number"],
+      description: item.description,
+      image: item.image,
+    }));
+
+    return newScp;
+  },
+
+  addScp: async (body) => {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${supabaseConfig.functionUrl}/create-creature`, {
       method: "POST",
-      body: body,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
     });
 
     return handleResponse(response);
-  }
+  },
 
-  async deleteScp(id) {
+  deleteScp: async (scpId) => {
     const token = localStorage.getItem("access_token");
 
-    const headers = {
-      apikey: "sb_publishable_a8OLpm42wzifxhgGmo7Snw_mi4oB5oi",
-      Authorization: `Bearer ${token.trim()}`,
-      "Content-Type": "application/json",
-    };
-
-    const response = await fetch(`${this.url}/creatures?id=eq.${id}`, {
-      headers,
+    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?id=eq.${scpId}&apikey=${supabaseConfig.apikey}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     return handleResponse(response);
-  }
-}
+  },
+};
 
-export const scpService = new ScpService("https://gtpqlyakxnistnjenuqa.supabase.co/rest/v1");
+export const scpService = {
+  getAllScp: scpREST.getAllScp,
+  getScp: scpREST.getScp,
+  addScp: scpREST.addScp,
+  deleteScp: scpREST.deleteScp,
+};

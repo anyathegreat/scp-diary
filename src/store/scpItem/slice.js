@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-import { router } from "../../router";
 import { scpService } from "../../service/scpService";
+import { router } from "../../router";
 
-export const getScpItem = createAsyncThunk("scpItem/getScpItem", async (id, { rejectWithValue }) => {
+export const getScpItem = createAsyncThunk("scpItem/getScpItem", async (scpId, { rejectWithValue }) => {
   try {
-    const response = await scpService.getScp(id);
+    const response = await scpService.getScp(scpId);
     if (response?.length < 1) {
       router.navigate("../not-found");
       throw new Error("Объект не был найден");
@@ -14,6 +14,7 @@ export const getScpItem = createAsyncThunk("scpItem/getScpItem", async (id, { re
 
     return response;
   } catch (error) {
+    console.error(error);
     toast.error(error.message);
     return rejectWithValue(error.message);
   }
@@ -25,17 +26,19 @@ export const addScpItem = createAsyncThunk("scpItem/addScpItem", async (body, { 
     toast.success("Объект успешно создан");
     return response;
   } catch (error) {
+    console.error(error);
     toast.error(error.message);
     return rejectWithValue(error.message);
   }
 });
 
-export const deleteScpItem = createAsyncThunk("scpItem/deleteScpItem", async (id, { rejectWithValue }) => {
+export const deleteScpItem = createAsyncThunk("scpItem/deleteScpItem", async (scpId, { rejectWithValue }) => {
   try {
-    const response = await scpService.deleteScp(id);
+    const response = await scpService.deleteScp(scpId);
     toast.success("Объект успешно удалён");
     return response;
   } catch (error) {
+    console.error(error);
     toast.error(error.message);
     return rejectWithValue(error.message);
   }

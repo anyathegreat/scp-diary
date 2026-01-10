@@ -1,3 +1,6 @@
+import { Button } from "@mantine/core";
+import { handleTimeLogin } from "../testItem";
+
 export default function HomePage() {
-  return <div>Дом</div>;
+  return <Button onClick={() => handleTimeLogin()}>Получить токен</Button>;
 }

@@ -5,14 +5,15 @@ import { Provider as ReduxProvider } from "react-redux";
 
 import { router } from "./router";
 import { store } from "./store";
+import { theme } from "./theme";
 
-import "@mantine/core/styles.css";
+import "./style.css";
 
 function App() {
   return (
     <ReduxProvider store={store}>
-      <MantineProvider defaultColorScheme="dark">
-        <RouterProvider router={router}></RouterProvider>
+      <MantineProvider theme={theme} defaultColorScheme="dark">
+        <RouterProvider router={router} />
         <ToastContainer />
       </MantineProvider>
     </ReduxProvider>

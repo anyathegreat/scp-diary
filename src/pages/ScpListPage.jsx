@@ -41,7 +41,7 @@ export default function ScpList() {
       <Grid align="center" m="10px">
         {scpList.map((item) => {
           return (
-            <Grid.Col span={{ base: 6, lg: 2, md: 3, sm: 6 }} key={`Scp-${item["scp-number"]}`}>
+            <Grid.Col span={{ base: 6, lg: 2, md: 3, sm: 6 }} key={`Scp-${item.number}`}>
               <ListScp scp={item} />
             </Grid.Col>
           );

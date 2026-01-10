@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router";
 
 import HomePage from "./pages/HomePage";
-import ScpListPage from "./pages/ScpListPage";
-import NotFoundPage from "./pages/NotFoundPage";
 import AppLayout from "./layouts/AppLayout";
+import NotFoundPage from "./pages/NotFoundPage";
+import ScpListPage from "./pages/ScpListPage";
 import ScpDetailsPage from "./pages/ScpDetailsPage";
-import ScpArticlePage from "./pages/ScpArticlePage";
 import ScpFormPage from "./pages/ScpFormPage";
+import ArticleListPage from "./pages/ArticleListPage";
+import ArticleDetailsPage from "./pages/ArticleDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,8 +34,16 @@ export const router = createBrowserRouter([
       },
       {
         path: "articles",
-        Component: ScpArticlePage,
-        handle: { crumb: "article" },
+        handle: { crumb: "articles" },
+        children: [
+          { index: true, Component: ArticleListPage },
+          { path: "not-found", Component: NotFoundPage, handle: { crumb: "not found" } },
+          {
+            path: ":id",
+            Component: ArticleDetailsPage,
+            handle: { crumb: "article-id" },
+          },
+        ],
       },
       {
         path: "*",

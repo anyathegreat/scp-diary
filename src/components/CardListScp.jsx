@@ -9,7 +9,7 @@ export default function ListScp({ scp }) {
   const dispatch = useDispatch();
 
   return (
-    <Card padding="md" h="330px" radius="md" withBorder>
+    <Card padding="md" h="330px" radius="md" withBorder bg="beige.4">
       <Card.Section>
         <Image
           src={scp?.image || "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"}
@@ -21,20 +21,19 @@ export default function ListScp({ scp }) {
 
       <Stack align="center" justify="space-between" mt="md">
         <Stack w="100%" gap="2px" align="center">
-          <Title size="h3" textWrap="nowrap">{`Scp-${scp["scp-number"]}`}</Title>
-          <Box w="100%">
-            <Text ta="center" truncate="end">
-              {scp.title}
-            </Text>
-          </Box>
+          <Title order={3} textWrap="nowrap" c="brown.3">{`Scp-${scp.number}`}</Title>
+
+          <Text ta="center" truncate="end">
+            {scp.title}
+          </Text>
         </Stack>
 
         <Group gap="8px" wrap="nowrap">
-          <Button component={Link} to={`${scp.id}`} size="sm">
+          <Button component={Link} to={String(scp.scpId)} size="sm" color="brown.0">
             <IconEdit />
           </Button>
 
-          <Button onClick={() => dispatch(deleteScpItem(scp.id))} size="sm" color="rgba(150, 29, 29, 1)">
+          <Button onClick={() => dispatch(deleteScpItem(scp.scpId))} size="sm" color="#961818">
             <IconTrash />
           </Button>
         </Group>
