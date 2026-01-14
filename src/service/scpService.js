@@ -5,9 +5,10 @@ const scpREST = {
   getAllScp: async () => {
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?select=*&apikey=${supabaseConfig.apikey}`, {
+    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?select=*`, {
       method: "GET",
       headers: {
+        apikey: supabaseConfig.apikey,
         Authorization: `Bearer ${token.trim()}`,
       },
     });
@@ -28,9 +29,10 @@ const scpREST = {
   getScp: async (scpId) => {
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?id=eq.${scpId}&apikey=${supabaseConfig.apikey}`, {
+    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?id=eq.${scpId}`, {
       method: "GET",
       headers: {
+        apikey: supabaseConfig.apikey,
         Authorization: `Bearer ${token.trim()}`,
       },
     });
@@ -66,9 +68,10 @@ const scpREST = {
   deleteScp: async (scpId) => {
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?id=eq.${scpId}&apikey=${supabaseConfig.apikey}`, {
+    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?id=eq.${scpId}`, {
       method: "DELETE",
       headers: {
+        apikey: supabaseConfig.apikey,
         Authorization: `Bearer ${token}`,
       },
     });

@@ -2,18 +2,12 @@ import { useEffect, useRef } from "react";
 import { Outlet } from "react-router";
 import { AppShell, Box } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconBook, IconHome, IconLibrary } from "@tabler/icons-react";
 
 import { attachGarland } from "../helpers/lights";
+import { navigationItems } from "../constants/navigation";
 
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
-
-const navigationItems = [
-  { icon: <IconHome size={18} />, label: "Главная", path: "/" },
-  { icon: <IconLibrary size={18} />, label: "SCP объекты", path: "scp" },
-  { icon: <IconBook size={18} />, label: "Список статей", path: "articles" },
-];
 
 export default function AppLayout() {
   const headerRef = useRef(null);

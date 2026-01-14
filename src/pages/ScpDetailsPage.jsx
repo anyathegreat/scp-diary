@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 
 import { getScpItem } from "../store/scpItem/slice";
-import { Box, Group, Image, Skeleton } from "@mantine/core";
+import { Box, Flex, Group, Image, Skeleton, Text } from "@mantine/core";
 
 export default function ScpDetailsPage() {
   const dispatch = useDispatch();
@@ -22,12 +22,23 @@ export default function ScpDetailsPage() {
 
   return (
     <Box align="center">
-      <Group w={{ base: "100%", sm: "65%" }} justify="space-between" p="6px">
-        <Box>
-          <Image mah="400px" w="348px" radius="20px" fit="cover" src={scpItem[0]?.image} />
+      <Group w={{ base: "100%", sm: "90%" }} justify="space-between" p="6px" h="340px">
+        <Box w="320px">
+          <Image
+            alt="Тут должна быть картинка("
+            w="100%"
+            mah="340px"
+            radius="20px"
+            fit="cover"
+            src={scpItem[0]?.image}
+          />
         </Box>
 
-        <Box w={{ base: "100%", sm: "50%" }}>{scpItem[0]?.description}</Box>
+        <Flex w={{ base: "100%", sm: "50%" }} h="100%">
+          <Text fw={600} fz="20px">
+            {scpItem[0]?.description}
+          </Text>
+        </Flex>
       </Group>
     </Box>
   );

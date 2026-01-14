@@ -4,7 +4,7 @@ import { Box, Button, Textarea } from "@mantine/core";
 
 import { updateNote } from "../store/articleItem/slice";
 
-export default function FormUpdateNotes({ articleId, noteId }) {
+export default function FormUpdateNotes({ articleId, noteEdit }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -21,11 +21,11 @@ export default function FormUpdateNotes({ articleId, noteId }) {
   });
 
   const handleForm = (values) => {
-    dispatch(updateNote({ articleId: articleId, noteId: noteId, updatedNote: values }));
+    dispatch(updateNote({ articleId: articleId, noteId: noteEdit.uid, updatedNote: values }));
   };
 
   return (
-    <Box mt="10px">
+    <Box>
       <form onSubmit={form.onSubmit(handleForm)}>
         <Textarea
           {...form.getInputProps("text")}

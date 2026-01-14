@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { DateTime } from "luxon";
-import { Box, Button, Divider, Group, Stack, Text, Timeline, Title, useMantineTheme } from "@mantine/core";
+import { Box, Button, Divider, Group, Modal, Stack, Text, Timeline, Title, useMantineTheme } from "@mantine/core";
 import { IconCalendarEvent, IconEdit, IconTrash } from "@tabler/icons-react";
 
 import { deleteNote } from "../store/articleItem/slice";
@@ -13,10 +13,10 @@ export default function NotesArticleScp({ article, articleId }) {
   const dispatch = useDispatch();
   const theme = useMantineTheme();
 
-  const [openUpdate, setOpenUpdate] = useState(null);
-  const [noteId, setNoteId] = useState(null);
-
   const notes = article[0]?.notes || [];
+
+  const [noteEdit, setNoteEdit] = useState(null);
+  const [modalOpened, setModalOpened] = useState(false);
 
   const formatDate = (date) => {
     const formatDate = DateTime.fromISO(date);
@@ -26,6 +26,16 @@ export default function NotesArticleScp({ article, articleId }) {
 
   const handleDeleteNote = (noteId) => {
     dispatch(deleteNote({ articleId: articleId, noteId: noteId }));
+  };
+
+  const handleEditClick = (item) => {
+    setNoteEdit(item);
+    setModalOpened(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpened(false);
+    setNoteEdit(null);
   };
 
   return (
@@ -40,7 +50,7 @@ export default function NotesArticleScp({ article, articleId }) {
 
       {notes.length > 0 ? (
         <Stack w="90%" my="30px">
-          <Timeline lineWidth={6} bulletSize={20} color="blue">
+          <Timeline lineWidth={6} bulletSize={20}>
             {notes.map((item) => {
               return (
                 <Timeline.Item className="bord">
@@ -54,14 +64,7 @@ export default function NotesArticleScp({ article, articleId }) {
                     </Group>
 
                     <Group gap="6px" w={{ base: "100%", xs: "50%" }} justify="end">
-                      <Button
-                        size="25px"
-                        color="brown.0"
-                        onClick={() => {
-                          setNoteId(item.uid);
-                          setOpenUpdate((prev) => !prev);
-                        }}
-                      >
+                      <Button size="25px" color="brown.0" onClick={() => handleEditClick(item)}>
                         <IconEdit />
                       </Button>
 
@@ -70,8 +73,6 @@ export default function NotesArticleScp({ article, articleId }) {
                       </Button>
                     </Group>
                   </Group>
-
-                  {openUpdate && noteId === item.uid && <FormUpdateNotes articleId={articleId} noteId={item.uid} />}
 
                   <Box
                     w="100%"
@@ -93,6 +94,10 @@ export default function NotesArticleScp({ article, articleId }) {
       ) : (
         <Text>У вас пока нету заметок!</Text>
       )}
+
+      <Modal title="Редактировать заметку" opened={modalOpened} onClose={handleCloseModal} centered>
+        {noteEdit && <FormUpdateNotes articleId={articleId} noteEdit={noteEdit} onClose={handleCloseModal} />}
+      </Modal>
     </Box>
   );
 }

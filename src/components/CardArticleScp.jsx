@@ -1,9 +1,17 @@
-import { Box, Button, Card, Divider, Group, Stack, Text, Title } from "@mantine/core";
+import { Box, Button, Card, Divider, Group, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router";
+import { deleteArticleItem } from "../store/articleItem/slice";
 
 export default function ArticleCard({ article }) {
+  const dispatch = useDispatch();
+
   const categories = article?.categories.length != 0 ? article.categories : null;
+
+  const handleDeleteArticle = (articleId) => {
+    dispatch(deleteArticleItem(articleId));
+  };
 
   return (
     <Card w="70%" padding="md" radius="md" withBorder bg="beige.4">
@@ -16,7 +24,7 @@ export default function ArticleCard({ article }) {
           <Button size="xs" component={Link} to={String(article.articleId)} color="brown.0">
             <IconEdit />
           </Button>
-          <Button size="xs" color="#961818">
+          <Button size="xs" color="#961818" onClick={() => handleDeleteArticle(article.articleId)}>
             <IconTrash />
           </Button>
         </Group>

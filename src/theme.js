@@ -1,4 +1,4 @@
-import { createTheme, Textarea } from "@mantine/core";
+import { createTheme, Textarea, TextInput } from "@mantine/core";
 
 export const theme = createTheme({
   fontFamily: "Underdog, serif",
@@ -89,8 +89,57 @@ export const theme = createTheme({
       styles: (theme) => ({
         input: {
           backgroundColor: theme.colors.beige[4],
-          borderColor: theme.colors.brown[5],
+          border: `2px solid ${theme.colors.brown[5]}`,
           color: theme.colors.brown[5],
+        },
+      }),
+    },
+
+    TextInput: {
+      styles: (theme) => ({
+        input: {
+          backgroundColor: theme.colors.beige[4],
+          border: `2px solid ${theme.colors.brown[5]}`,
+          color: theme.colors.brown[5],
+        },
+      }),
+    },
+
+    Modal: {
+      defaultProps: {
+        closeButtonProps: {
+          onMouseEnter: (e) => {
+            e.currentTarget.style.backgroundColor = theme.colors.beige[0];
+          },
+          onMouseLeave: (e) => {
+            e.currentTarget.style.backgroundColor = theme.colors.beige[9];
+          },
+        },
+      },
+
+      styles: (theme) => ({
+        overlay: {
+          backgroundColor: theme.colors.dark[9] + "60", // с прозрачностью
+        },
+
+        header: {
+          color: theme.colors.brown[3],
+          backgroundColor: theme.colors.beige[9],
+        },
+
+        title: {
+          fontSize: "18px",
+          fontWeight: 700,
+          width: "90%",
+          textAlign: "center",
+        },
+
+        close: {
+          color: theme.colors.brown[6],
+        },
+
+        content: {
+          backgroundColor: theme.colors.beige[9],
         },
       }),
     },

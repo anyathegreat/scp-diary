@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 import { articleService } from "../../service/articleService";
+import { getArticles } from "../articleList/slice";
 import { router } from "../../router";
 
 export const getArticleItem = createAsyncThunk("articleItem/getArticleItem", async (articleId, { rejectWithValue }) => {
@@ -21,17 +22,38 @@ export const getArticleItem = createAsyncThunk("articleItem/getArticleItem", asy
   }
 });
 
-export const addArticleItem = createAsyncThunk("articleItem/addArticleItem", async (params, { rejectWithValue }) => {
-  try {
-    const response = await articleService.addArticle(params);
-    toast.success("Статья успешно созданна");
-    return response;
-  } catch (error) {
-    console.error(error);
-    toast.error(error.message);
-    return rejectWithValue(error.message);
+export const addArticleItem = createAsyncThunk(
+  "articleItem/addArticleItem",
+  async (params, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await articleService.addArticle(params.newArticle);
+      dispatch(getArticles());
+      params.cb();
+      toast.success("Статья успешно созданна");
+      return response;
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
+
+export const deleteArticleItem = createAsyncThunk(
+  "articleItem/deleteArticleItem",
+  async (params, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await articleService.deleteArticle(params);
+      dispatch(getArticles());
+      toast.success("Статья успешно удалена");
+      return response;
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 export const addNote = createAsyncThunk("articleItem/addNote", async (params, { dispatch, rejectWithValue }) => {
   try {
@@ -106,6 +128,17 @@ const articleSlice = createSlice({
         state.loading -= 1;
       })
       .addCase(addArticleItem.rejected, (state) => {
+        state.loading -= 1;
+      });
+
+    builder
+      .addCase(deleteArticleItem.pending, (state) => {
+        state.loading += 1;
+      })
+      .addCase(deleteArticleItem.fulfilled, (state) => {
+        state.loading -= 1;
+      })
+      .addCase(deleteArticleItem.rejected, (state) => {
         state.loading -= 1;
       });
 

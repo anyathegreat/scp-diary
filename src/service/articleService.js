@@ -10,13 +10,13 @@ const articleREST = {
   getAllArticle: async () => {
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(
-      `${supabaseConfig.baseUrl}/articles?select=*,categories(*),creatures(*)&apikey=${supabaseConfig.apikey}`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token.trim()}` },
-      }
-    );
+    const response = await fetch(`${supabaseConfig.baseUrl}/articles?select=*,categories(*),creatures(*)`, {
+      method: "GET",
+      headers: {
+        apikey: supabaseConfig.apikey,
+        Authorization: `Bearer ${token.trim()}`,
+      },
+    });
 
     const data = await handleResponse(response);
 
@@ -35,10 +35,11 @@ const articleREST = {
     const token = localStorage.getItem("access_token");
 
     const response = await fetch(
-      `${supabaseConfig.baseUrl}/articles?id=eq.${articleId}&select=*,categories(*),creatures(*)&apikey=${supabaseConfig.apikey}`,
+      `${supabaseConfig.baseUrl}/articles?id=eq.${articleId}&select=*,categories(*),creatures(*)`,
       {
         method: "GET",
         headers: {
+          apikey: supabaseConfig.apikey,
           Authorization: `Bearer ${token.trim()}`,
         },
       }
@@ -60,13 +61,29 @@ const articleREST = {
   addArticle: async (body) => {
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`${supabaseConfig.functionUrl}/articles`, {
+    const response = await fetch(`${supabaseConfig.baseUrl}/articles`, {
       method: "POST",
       headers: {
+        apikey: supabaseConfig.apikey,
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(body),
+    });
+
+    return handleResponse(response);
+  },
+
+  deleteArticle: async (articleId) => {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${supabaseConfig.baseUrl}/articles?id=eq.${articleId}`, {
+      method: "DELETE",
+      headers: {
+        apikey: supabaseConfig.apikey,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
     });
 
     return handleResponse(response);
@@ -120,6 +137,7 @@ export const articleService = {
   getAllArticle: articleREST.getAllArticle,
   getArticle: articleREST.getArticle,
   addArticle: articleREST.addArticle,
+  deleteArticle: articleREST.deleteArticle,
   addArticleNote: articleREST.addArticleNote,
   updateArticleNote: articleREST.updateArticleNote,
   deleteArticleNote: articleREST.deleteArticleNote,
