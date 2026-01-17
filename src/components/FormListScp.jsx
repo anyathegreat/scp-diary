@@ -3,7 +3,7 @@ import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
 
 import { addScpItem } from "../store/scpItem/slice";
-import { IconPolaroid, IconTrash } from "@tabler/icons-react";
+import { IconPolaroid } from "@tabler/icons-react";
 
 export default function FormScp() {
   const dispatch = useDispatch();
@@ -52,77 +52,62 @@ export default function FormScp() {
   };
 
   return (
-    <Box maw={{ base: "100%", sm: "800px" }} w="100%">
-      <Title order={2} ta="center">
-        Добавте SCP объект в базу данных:
-      </Title>
+    <Box maw={{ base: "100%", sm: "800px" }} w="100%" pr="20px" pl="20px">
+      <form onSubmit={form.onSubmit(handleForm)}>
+        <Stack gap="8px">
+          <TextInput
+            {...form.getInputProps("number")}
+            withAsterisk
+            size="md"
+            label="Номер SCP:"
+            placeholder="682"
+            error={form.errors.number}
+          />
 
-      <Flex w="100%" direction="column" mt="md" p="md" bd="1px solid #5f5d5d" bdrs="20px">
-        <form onSubmit={form.onSubmit(handleForm)}>
-          <Stack gap="8px">
-            <TextInput
-              {...form.getInputProps("number")}
-              withAsterisk
-              label="Номер SCP:"
-              placeholder="682"
-              error={form.errors.number}
-            />
+          <TextInput
+            {...form.getInputProps("title")}
+            withAsterisk
+            size="md"
+            label="Имя:"
+            placeholder="Токсичная ящерица"
+            error={form.errors.title}
+          />
 
-            <TextInput
-              {...form.getInputProps("title")}
-              withAsterisk
-              label="Имя:"
-              placeholder="Токсичная ящерица"
-              error={form.errors.title}
-            />
+          <Textarea
+            {...form.getInputProps("description")}
+            withAsterisk
+            size="md"
+            label="Описание:"
+            radius="md"
+            placeholder="Напишите описание объекта"
+            error={form.errors.description}
+          />
+        </Stack>
 
-            <Textarea
-              {...form.getInputProps("description")}
-              withAsterisk
-              label="Описание:"
-              radius="md"
-              placeholder="Напишите описание объекта"
-              error={form.errors.description}
-            />
-          </Stack>
-
-          <Group justify="space-between" mt="16px">
-            <Box w={{ base: "100%", sm: "60%" }}>
-              <Group w="100%" justify="center">
-                <FileInput
-                  {...form.getInputProps("image")}
-                  accept="image/png,image/jpeg,image/gif,image/WebP"
-                  name="image"
-                  w="230px"
-                  leftSection={<IconPolaroid />}
-                  size="sm"
-                  radius="md"
-                  placeholder="Выберите картинку"
-                  withAsterisk
-                  clearable
-                />
-
-                {form.values.image && (
-                  <Button
-                    color="red"
-                    onClick={() => {
-                      form.setFieldValue("image", null);
-                      form.clearFieldError("image");
-                    }}
-                  >
-                    <IconTrash />
-                  </Button>
-                )}
-              </Group>
-            </Box>
-
-            <Group w={{ base: "100%", sm: "30%" }} justify="center" gap="sm">
-              <Button type="submit">Сохранить</Button>
-              <Button onClick={handleReset}>Очистить</Button>
+        <Flex wrap="wrap" justify="space-between" align="start" mt="16px">
+          <Box w={{ base: "100%", sm: "40%" }}>
+            <Group w="100%" mb="sm" justify="center">
+              <FileInput
+                {...form.getInputProps("image")}
+                accept="image/png,image/jpeg,image/gif,image/WebP"
+                name="image"
+                w="230px"
+                leftSection={<IconPolaroid />}
+                size="sm"
+                radius="md"
+                placeholder="Выберите картинку"
+                withAsterisk
+                clearable
+              />
             </Group>
+          </Box>
+
+          <Group w={{ base: "100%", sm: "50%" }} justify="center" gap="sm" p="0px">
+            <Button type="submit">Сохранить</Button>
+            <Button onClick={handleReset}>Очистить</Button>
           </Group>
-        </form>
-      </Flex>
+        </Flex>
+      </form>
     </Box>
   );
 }

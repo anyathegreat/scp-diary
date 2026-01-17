@@ -35,9 +35,7 @@ export default function FormAddNote({ articleId }) {
           placeholder="Создание заметки: введите описание"
         />
         <Group mt="10px" justify="center">
-          <Button type="submit" color="brown.0">
-            Сохранить
-          </Button>
+          <Button type="submit">Сохранить</Button>
         </Group>
       </form>
     </Box>

@@ -15,7 +15,6 @@ export default function Sidebar({ toggle, navItems }) {
             variant="filled"
             w="90%"
             radius="md"
-            color="brown.0"
             c="beige.2"
           >
             {item.label}

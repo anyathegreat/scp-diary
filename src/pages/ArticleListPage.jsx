@@ -41,9 +41,7 @@ export default function ArticleListPage() {
 
   return (
     <Stack align="center">
-      <Button onClick={handleOpenModal} color="brown.0">
-        Добавить статью
-      </Button>
+      <Button onClick={handleOpenModal}>Добавить статью</Button>
 
       <Modal
         size="lg"

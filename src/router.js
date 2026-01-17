@@ -5,7 +5,6 @@ import AppLayout from "./layouts/AppLayout";
 import NotFoundPage from "./pages/NotFoundPage";
 import ScpListPage from "./pages/ScpListPage";
 import ScpDetailsPage from "./pages/ScpDetailsPage";
-import ScpFormPage from "./pages/ScpFormPage";
 import ArticleListPage from "./pages/ArticleListPage";
 import ArticleDetailsPage from "./pages/ArticleDetailsPage";
 
@@ -24,7 +23,6 @@ export const router = createBrowserRouter([
             Component: NotFoundPage,
             handle: { crumb: "not found" },
           },
-          { path: "create", Component: ScpFormPage, handle: { crumb: "create scp" } },
           {
             path: ":id",
             Component: ScpDetailsPage,

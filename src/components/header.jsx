@@ -28,7 +28,6 @@ export default function Header({ opened, toggle, navItems }) {
               to={item.path}
               leftSection={item.icon}
               variant="filled"
-              color="brown.0"
               c="beige.2"
               radius="md"
             >

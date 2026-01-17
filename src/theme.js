@@ -1,4 +1,4 @@
-import { createTheme, Textarea, TextInput } from "@mantine/core";
+import { createTheme, Divider } from "@mantine/core";
 
 export const theme = createTheme({
   fontFamily: "Underdog, serif",
@@ -56,6 +56,14 @@ export const theme = createTheme({
       }),
     },
 
+    Button: {
+      styles: (theme) => ({
+        root: {
+          backgroundColor: theme.colors.brown[0],
+        },
+      }),
+    },
+
     AppShell: {
       styles: (theme) => ({
         root: {
@@ -68,6 +76,7 @@ export const theme = createTheme({
       styles: (theme) => ({
         root: {
           border: `3px solid ${theme.colors.brown[5]}`,
+          backgroundColor: theme.colors.beige[4],
         },
       }),
     },
@@ -87,6 +96,12 @@ export const theme = createTheme({
 
     Textarea: {
       styles: (theme) => ({
+        label: {
+          color: theme.colors.brown[5],
+          fontSize: "16px",
+          fontWeight: 600,
+        },
+
         input: {
           backgroundColor: theme.colors.beige[4],
           border: `2px solid ${theme.colors.brown[5]}`,
@@ -97,9 +112,29 @@ export const theme = createTheme({
 
     TextInput: {
       styles: (theme) => ({
+        label: {
+          color: theme.colors.brown[5],
+          fontSize: "16px",
+          fontWeight: 600,
+        },
+
         input: {
           backgroundColor: theme.colors.beige[4],
           border: `2px solid ${theme.colors.brown[5]}`,
+          color: theme.colors.brown[5],
+        },
+      }),
+    },
+
+    FileInput: {
+      styles: (theme) => ({
+        input: {
+          backgroundColor: theme.colors.beige[4],
+          border: `2px solid ${theme.colors.brown[5]}`,
+          color: theme.colors.brown[5],
+        },
+
+        section: {
           color: theme.colors.brown[5],
         },
       }),

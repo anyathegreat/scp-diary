@@ -14,14 +14,12 @@ export default function ArticleCard({ article }) {
   };
 
   return (
-    <Card w="70%" padding="md" radius="md" withBorder bg="beige.4">
+    <Card w={{ base: "100%", sm: "70%" }} padding="md" radius="md" withBorder>
       <Group justify="space-between">
-        <Title order={3} c="brown.3">
-          {article.title}
-        </Title>
+        <Title order={3}>{article.title}</Title>
 
         <Group justify="end" gap="10px" w="20%">
-          <Button size="xs" component={Link} to={String(article.articleId)} color="brown.0">
+          <Button size="xs" component={Link} to={String(article.articleId)}>
             <IconEdit />
           </Button>
           <Button size="xs" color="#961818" onClick={() => handleDeleteArticle(article.articleId)}>
@@ -32,7 +30,7 @@ export default function ArticleCard({ article }) {
 
       {categories && (
         <Box>
-          <Divider mt="6px" color="brown.4" size="2px" />
+          <Divider mt="6px" size="2px" color="brown.3" />
 
           <Group gap="8px" mt="6px">
             {categories.map((item) => {

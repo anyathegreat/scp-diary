@@ -34,15 +34,7 @@ export default function ArticleDetailsPage() {
             {creatures.map((item) => {
               return (
                 <Grid.Col span={4} key={`articleScp-${item.id}`}>
-                  <Card
-                    w="200px"
-                    padding="md"
-                    radius="md"
-                    withBorder
-                    component={Link}
-                    to={`/scp/${item.id}`}
-                    bg="beige.4"
-                  >
+                  <Card w="200px" padding="md" radius="md" withBorder component={Link} to={`/scp/${item.id}`}>
                     <Card.Section>
                       <Image src={item.image}></Image>
                     </Card.Section>

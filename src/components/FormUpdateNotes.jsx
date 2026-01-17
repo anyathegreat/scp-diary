@@ -36,9 +36,7 @@ export default function FormUpdateNotes({ articleId, noteEdit }) {
         />
 
         <Box w="100% " align="center" mt="10px">
-          <Button type="submit" color="brown.0">
-            Сохранить
-          </Button>
+          <Button type="submit">Сохранить</Button>
         </Box>
       </form>
     </Box>

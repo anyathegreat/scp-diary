@@ -1,1 +1,9 @@
 @import url("@mantine/core/styles.css");
+
+.mantine-FileInput-section .mantine-CloseButton-root {
+  color: var(--mantine-color-brown-5);
+}
+
+.mantine-FileInput-section .mantine-CloseButton-root:hover {
+  background-color: var(--mantine-color-beige-0);
+}

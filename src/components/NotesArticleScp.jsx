@@ -44,7 +44,7 @@ export default function NotesArticleScp({ article, articleId }) {
         Хронология изучения:
       </Title>
 
-      <Divider mt="20px" ml="26px" mr="26px" size="2px" color="brown.1" />
+      <Divider mt="20px" ml="26px" mr="26px" size="2px" color="brown.3" />
 
       <FormAddNote articleId={articleId} />
 
@@ -64,7 +64,7 @@ export default function NotesArticleScp({ article, articleId }) {
                     </Group>
 
                     <Group gap="6px" w={{ base: "100%", xs: "50%" }} justify="end">
-                      <Button size="25px" color="brown.0" onClick={() => handleEditClick(item)}>
+                      <Button size="25px" onClick={() => handleEditClick(item)}>
                         <IconEdit />
                       </Button>
 
@@ -96,7 +96,7 @@ export default function NotesArticleScp({ article, articleId }) {
       )}
 
       <Modal title="Редактировать заметку" opened={modalOpened} onClose={handleCloseModal} centered>
-        {noteEdit && <FormUpdateNotes articleId={articleId} noteEdit={noteEdit} onClose={handleCloseModal} />}
+        {noteEdit && <FormUpdateNotes articleId={articleId} noteEdit={noteEdit} />}
       </Modal>
     </Box>
   );

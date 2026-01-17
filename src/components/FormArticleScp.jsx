@@ -37,9 +37,7 @@ export default function FormArticleScp({ handleCloseModal }) {
             placeholder="Введите название статьи. Вся настройка статьи будет внутри"
           />
 
-          <Button type="submit" color="brown.0">
-            Создать
-          </Button>
+          <Button type="submit">Создать</Button>
         </Group>
       </form>
     </Box>

@@ -1,17 +1,27 @@
-import { Box, Button, Grid, Group, Skeleton, Stack } from "@mantine/core";
+import { Box, Button, Grid, Group, Modal, Skeleton, Stack } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { getScps } from "../store/scpList/slice";
 
 import ListScp from "../components/CardListScp";
-import { Link } from "react-router";
+import FormScp from "../components/FormListScp";
 
 export default function ScpList() {
   const dispatch = useDispatch();
 
   const scpList = useSelector((state) => state.scpList.list);
   const { loading } = useSelector((state) => state.scpList);
+
+  const [openModal, setOpenModal] = useState();
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   useEffect(() => {
     dispatch(getScps());
@@ -33,10 +43,28 @@ export default function ScpList() {
   return (
     <Stack>
       <Box align="center">
-        <Button component={Link} to="create">
-          Добавить Scp объект
-        </Button>
+        <Button onClick={handleOpenModal}>Добавить Scp объект</Button>
       </Box>
+
+      <Modal
+        visibleFrom="sm"
+        size="lg"
+        title="Добавить SCP объект в базу данных"
+        opened={openModal}
+        onClose={handleCloseModal}
+      >
+        {openModal && <FormScp />}
+      </Modal>
+
+      <Modal
+        hiddenFrom="sm"
+        title="Добавить SCP объект в базу данных"
+        fullScreen
+        opened={openModal}
+        onClose={handleCloseModal}
+      >
+        {openModal && <FormScp />}
+      </Modal>
 
       <Grid align="center" m="10px">
         {scpList.map((item) => {

@@ -9,7 +9,7 @@ export default function ListScp({ scp }) {
   const dispatch = useDispatch();
 
   return (
-    <Card padding="md" h="330px" radius="md" withBorder bg="beige.4">
+    <Card padding="md" h="330px" radius="md" withBorder>
       <Card.Section>
         <Image
           src={scp?.image || "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"}
@@ -21,7 +21,7 @@ export default function ListScp({ scp }) {
 
       <Stack align="center" justify="space-between" mt="md">
         <Stack w="100%" gap="2px" align="center">
-          <Title order={3} textWrap="nowrap" c="brown.3">{`Scp-${scp.number}`}</Title>
+          <Title order={3} textWrap="nowrap">{`Scp-${scp.number}`}</Title>
 
           <Text ta="center" truncate="end">
             {scp.title}
@@ -29,7 +29,7 @@ export default function ListScp({ scp }) {
         </Stack>
 
         <Group gap="8px" wrap="nowrap">
-          <Button component={Link} to={String(scp.scpId)} size="sm" color="brown.0">
+          <Button component={Link} to={String(scp.scpId)} size="sm">
             <IconEdit />
           </Button>
 
