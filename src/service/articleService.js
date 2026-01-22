@@ -42,7 +42,7 @@ const articleREST = {
           apikey: supabaseConfig.apikey,
           Authorization: `Bearer ${token.trim()}`,
         },
-      }
+      },
     );
 
     const data = await handleResponse(response);
@@ -131,6 +131,23 @@ const articleREST = {
 
     return handleResponse(response);
   },
+
+  addArticleScpObject: async (body) => {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${supabaseConfig.baseUrl}/articles_creatures`, {
+      method: "POST",
+      headers: {
+        apikey: supabaseConfig.apikey,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(body),
+    });
+
+    return handleResponse(response);
+  },
 };
 
 export const articleService = {
@@ -141,4 +158,5 @@ export const articleService = {
   addArticleNote: articleREST.addArticleNote,
   updateArticleNote: articleREST.updateArticleNote,
   deleteArticleNote: articleREST.deleteArticleNote,
+  addArticleScpObject: articleREST.addArticleScpObject,
 };

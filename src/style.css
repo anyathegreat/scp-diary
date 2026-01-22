@@ -7,3 +7,15 @@
 .mantine-FileInput-section .mantine-CloseButton-root:hover {
   background-color: var(--mantine-color-beige-0);
 }
+
+.mantine-Select-option:hover {
+  background-color: var(--mantine-color-beige-9);
+}
+
+.mantine-ComboboxChevron-chevron {
+  color: var(--mantine-color-brown-8);
+}
+
+.mantine-Accordion-control:hover {
+  background-color: var(--mantine-color-brown-9);
+}

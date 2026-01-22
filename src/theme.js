@@ -140,6 +140,52 @@ export const theme = createTheme({
       }),
     },
 
+    Accordion: {
+      styles: (theme) => ({
+        root: {
+          backgroundColor: theme.colors.brown[5],
+        },
+
+        icon: {
+          color: theme.colors.beige[0],
+        },
+
+        label: {
+          color: theme.colors.beige[0],
+          fontSize: "18px",
+          fontWeight: 700,
+        },
+
+        content: {
+          backgroundColor: theme.colors.beige[7],
+          color: theme.colors.brown[5],
+        },
+      }),
+    },
+
+    Select: {
+      styles: (theme) => ({
+        input: {
+          color: theme.colors.brown[5],
+          fontSize: "18px",
+          fontWeight: 600,
+        },
+
+        wrapper: {
+          "--input-bg": theme.colors.beige[4],
+          "--input-bd": theme.colors.brown[5],
+        },
+
+        dropdown: {
+          backgroundColor: theme.colors.beige[4],
+          border: `3px solid ${theme.colors.brown[8]}`,
+          color: theme.colors.brown[5],
+          fontSize: "18px",
+          fontWeight: 600,
+        },
+      }),
+    },
+
     Modal: {
       defaultProps: {
         closeButtonProps: {
@@ -154,7 +200,7 @@ export const theme = createTheme({
 
       styles: (theme) => ({
         overlay: {
-          backgroundColor: theme.colors.dark[9] + "60", // с прозрачностью
+          backgroundColor: theme.colors.dark[9] + "60",
         },
 
         header: {
@@ -163,7 +209,7 @@ export const theme = createTheme({
         },
 
         title: {
-          fontSize: "18px",
+          fontSize: "22px",
           fontWeight: 700,
           width: "90%",
           textAlign: "center",

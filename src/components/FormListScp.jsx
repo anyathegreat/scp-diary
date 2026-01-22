@@ -40,7 +40,7 @@ export default function FormScp() {
     const formData = new FormData();
 
     formData.append("title", values.title);
-    formData.append("scp-number", values.number);
+    formData.append("scp_number", values.number);
     if (values.description) formData.append("description", values.description);
     if (values.image) formData.append("image", values.image);
 

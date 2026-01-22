@@ -21,7 +21,7 @@ export default function ListScp({ scp }) {
 
       <Stack align="center" justify="space-between" mt="md">
         <Stack w="100%" gap="2px" align="center">
-          <Title order={3} textWrap="nowrap">{`Scp-${scp.number}`}</Title>
+          <Title order={3} textWrap="nowrap">{`Scp-${scp.scpNumber}`}</Title>
 
           <Text ta="center" truncate="end">
             {scp.title}

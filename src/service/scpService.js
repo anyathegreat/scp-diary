@@ -18,7 +18,7 @@ const scpREST = {
     const newScp = data.map((item) => ({
       scpId: item.id,
       title: item.title,
-      number: item["scp-number"],
+      scpNumber: item["scp_number"],
       description: item.description,
       image: item.image,
     }));
@@ -42,7 +42,7 @@ const scpREST = {
     const newScp = data.map((item) => ({
       scpId: item.id,
       title: item.title,
-      number: item["scp-number"],
+      scpNumber: item["scp_number"],
       description: item.description,
       image: item.image,
     }));

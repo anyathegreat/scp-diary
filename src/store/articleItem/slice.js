@@ -36,7 +36,7 @@ export const addArticleItem = createAsyncThunk(
       toast.error(error.message);
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const deleteArticleItem = createAsyncThunk(
@@ -52,7 +52,7 @@ export const deleteArticleItem = createAsyncThunk(
       toast.error(error.message);
       return rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 export const addNote = createAsyncThunk("articleItem/addNote", async (params, { dispatch, rejectWithValue }) => {
@@ -96,6 +96,23 @@ export const deleteNote = createAsyncThunk("articleItem/deleteNote", async (para
     return rejectWithValue(error.message);
   }
 });
+
+export const updateArticleScp = createAsyncThunk(
+  "articleItem/updateArticleScp",
+  async (params, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await articleService.addArticleScpObject(params);
+      dispatch(getArticleItem(params.article_id));
+      toast.success("Scp успешно привязанно");
+
+      return response;
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
 const initialState = {
   item: {},
@@ -172,6 +189,17 @@ const articleSlice = createSlice({
         state.loading -= 1;
       })
       .addCase(deleteNote.rejected, (state) => {
+        state.loading -= 1;
+      });
+
+    builder
+      .addCase(updateArticleScp.pending, (state) => {
+        state.loading += 1;
+      })
+      .addCase(updateArticleScp.fulfilled, (state) => {
+        state.loading -= 1;
+      })
+      .addCase(updateArticleScp.rejected, (state) => {
         state.loading -= 1;
       });
   },

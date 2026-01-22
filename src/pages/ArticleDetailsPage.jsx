@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router";
-import { Box, Card, Grid, Image, Skeleton, Stack, Text, Title } from "@mantine/core";
+import { useParams } from "react-router";
+import { Accordion, Box, Skeleton, Stack, Title, Group, Button, Divider, Modal } from "@mantine/core";
 
 import { getArticleItem } from "../store/articleItem/slice";
 
 import NotesArticleScp from "../components/NotesArticleScp";
+import { IconBiohazardFilled } from "@tabler/icons-react";
+import FormArticleAddScp from "../components/FormArticleAddScp";
 
 export default function ArticleDetailsPage() {
   const dispatch = useDispatch();
@@ -13,6 +15,9 @@ export default function ArticleDetailsPage() {
 
   const article = useSelector((state) => state.articleItem.item);
   const { loading } = useSelector((state) => state.articleItem);
+
+  const [openAddScp, setOpenAddScp] = useState(false);
+  // const [openModalTag, setModalTeg] = useState(false);
 
   useEffect(() => {
     dispatch(getArticleItem(id));
@@ -24,27 +29,55 @@ export default function ArticleDetailsPage() {
     return <Skeleton height={100} w="70%" />;
   }
 
+  const handleOpenModal = () => {
+    setOpenAddScp(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenAddScp(false);
+  };
+
   return (
     <Stack>
       {creatures.length > 0 && (
         <Box align="center">
-          <Title order={3}>Scp объекты которые используются в статье:</Title>
+          <Stack w="80%" gap="sm">
+            <Group justify="space-between">
+              <Title order={3}>Scp объекты которые используются в статье:</Title>
 
-          <Grid w="60%" mt="20px" gap="20px" justify="center">
-            {creatures.map((item) => {
-              return (
-                <Grid.Col span={4} key={`articleScp-${item.id}`}>
-                  <Card w="200px" padding="md" radius="md" withBorder component={Link} to={`/scp/${item.id}`}>
-                    <Card.Section>
-                      <Image src={item.image}></Image>
-                    </Card.Section>
+              <Group gap="sm">
+                <Button onClick={handleOpenModal}>Добавить Scp в статью</Button>
+                <Button>Добавить теги в статью</Button>
+              </Group>
+            </Group>
 
-                    <Text mt="6px">{item.title}</Text>
-                  </Card>
-                </Grid.Col>
-              );
-            })}
-          </Grid>
+            {openAddScp && (
+              <Modal
+                centered
+                size="lg"
+                opened={openAddScp}
+                onClose={handleCloseModal}
+                title="Прикрепить объект к статье"
+              >
+                <FormArticleAddScp articleId={id} />
+              </Modal>
+            )}
+
+            <Stack>
+              <Accordion>
+                {creatures.map((item) => {
+                  return (
+                    <Accordion.Item key={item.id} value={item.title}>
+                      <Accordion.Control
+                        icon={<IconBiohazardFilled />}
+                      >{`Scp-${item["scp_number"]} - ${item.title}`}</Accordion.Control>
+                      <Accordion.Panel>{item.description}</Accordion.Panel>
+                    </Accordion.Item>
+                  );
+                })}
+              </Accordion>
+            </Stack>
+          </Stack>
         </Box>
       )}
 
