@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getScps } from "../store/scpList/slice";
 
 import ListScp from "../components/CardListScp";
-import FormScp from "../components/FormListScp";
+import FormScp from "../components/form/FormListScp";
 
 export default function ScpList() {
   const dispatch = useDispatch();
@@ -69,7 +69,7 @@ export default function ScpList() {
       <Grid align="center" m="10px">
         {scpList.map((item) => {
           return (
-            <Grid.Col span={{ base: 6, lg: 2, md: 3, sm: 6 }} key={`Scp-${item.number}`}>
+            <Grid.Col span={{ base: 6, lg: 2, md: 3, sm: 6 }} key={`Scp-${item.scpNumber}`}>
               <ListScp scp={item} />
             </Grid.Col>
           );

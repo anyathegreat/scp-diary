@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { Box, Flex, Group, Image, Skeleton, Text, Typography } from "@mantine/core";
 
 import { getScpItem } from "../store/scpItem/slice";
-import { Box, Flex, Group, Image, Skeleton, Text } from "@mantine/core";
 
 export default function ScpDetailsPage() {
   const dispatch = useDispatch();
@@ -35,9 +35,9 @@ export default function ScpDetailsPage() {
         </Box>
 
         <Flex w={{ base: "100%", sm: "50%" }} h="100%">
-          <Text fw={600} fz="20px">
-            {scpItem[0]?.description}
-          </Text>
+          <Typography>
+            <div style={{ backgroundColor: "#000000" }} dangerouslySetInnerHTML={{ __html: scpItem[0]?.description }} />
+          </Typography>
         </Flex>
       </Group>
     </Box>

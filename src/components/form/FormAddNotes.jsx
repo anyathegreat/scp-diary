@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
-import { Box, Button, Textarea } from "@mantine/core";
+import { Box, Button, Group, Textarea } from "@mantine/core";
 
-import { updateNote } from "../store/articleItem/slice";
+import { addNote } from "../../store/articleItem/slice";
 
-export default function FormUpdateNotes({ articleId, noteEdit }) {
+export default function FormAddNote({ articleId }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -20,24 +20,23 @@ export default function FormUpdateNotes({ articleId, noteEdit }) {
     },
   });
 
-  const handleForm = (values) => {
-    dispatch(updateNote({ articleId: articleId, noteId: noteEdit.uid, updatedNote: values }));
+  const handleForm = (formFields) => {
+    dispatch(addNote({ articleId: articleId, newNote: formFields }));
   };
 
   return (
-    <Box>
+    <Box w="90%" mt="10px" p="10px">
       <form onSubmit={form.onSubmit(handleForm)}>
         <Textarea
           {...form.getInputProps("text")}
-          size="md"
+          rows={4}
           radius="md"
-          rows={3}
-          placeholder="Введите описание статьи"
+          size="lg"
+          placeholder="Создание заметки: введите описание"
         />
-
-        <Box w="100% " align="center" mt="10px">
+        <Group mt="10px" justify="center">
           <Button type="submit">Сохранить</Button>
-        </Box>
+        </Group>
       </form>
     </Box>
   );

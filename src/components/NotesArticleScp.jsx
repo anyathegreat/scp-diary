@@ -6,8 +6,8 @@ import { IconCalendarEvent, IconEdit, IconTrash } from "@tabler/icons-react";
 
 import { deleteNote } from "../store/articleItem/slice";
 
-import FormUpdateNotes from "./FormUpdateNotes";
-import FormAddNote from "./FormAddNotes";
+import FormUpdateNotes from "./form/FormUpdateNotes";
+import FormAddNote from "./form/FormAddNotes";
 
 export default function NotesArticleScp({ article, articleId }) {
   const dispatch = useDispatch();

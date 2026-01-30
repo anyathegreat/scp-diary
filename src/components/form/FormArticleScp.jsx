@@ -2,7 +2,7 @@ import { Box, Button, Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
 
-import { addArticleItem } from "../store/articleItem/slice";
+import { addArticleItem } from "../../store/articleItem/slice";
 
 export default function FormArticleScp({ handleCloseModal }) {
   const dispatch = useDispatch();

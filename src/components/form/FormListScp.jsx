@@ -2,7 +2,7 @@ import { Box, Button, FileInput, Flex, Group, Stack, Textarea, TextInput, Title 
 import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
 
-import { addScpItem } from "../store/scpItem/slice";
+import { addScpItem } from "../../store/scpItem/slice";
 import { IconPolaroid } from "@tabler/icons-react";
 
 export default function FormScp() {

@@ -148,6 +148,59 @@ const articleREST = {
 
     return handleResponse(response);
   },
+
+  deleteArticleScpObject: async ({ article_id, creature_id }) => {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(
+      `${supabaseConfig.baseUrl}/articles_creatures?article_id=eq.${article_id}&creature_id=eq.${creature_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          apikey: supabaseConfig.apikey,
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    return handleResponse(response);
+  },
+
+  addArticleCategoryObject: async (body) => {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${supabaseConfig.baseUrl}/articles_categories`, {
+      method: "POST",
+      headers: {
+        apikey: supabaseConfig.apikey,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(body),
+    });
+
+    return handleResponse(response);
+  },
+
+  deleteArticleCategoryObject: async ({ article_id, category_id }) => {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(
+      `${supabaseConfig.baseUrl}/articles_categories?article_id=eq.${article_id}&category_id=eq.${category_id}`,
+      {
+        method: "DELETE",
+        headers: {
+          apikey: supabaseConfig.apikey,
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    return handleResponse(response);
+  },
 };
 
 export const articleService = {
@@ -159,4 +212,7 @@ export const articleService = {
   updateArticleNote: articleREST.updateArticleNote,
   deleteArticleNote: articleREST.deleteArticleNote,
   addArticleScpObject: articleREST.addArticleScpObject,
+  deleteArticleScpObject: articleREST.deleteArticleScpObject,
+  addArticleCategoryObject: articleREST.addArticleCategoryObject,
+  deleteArticleCategoryObject: articleREST.deleteArticleCategoryObject,
 };

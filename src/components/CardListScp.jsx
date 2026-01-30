@@ -1,9 +1,9 @@
+import { useDispatch } from "react-redux";
+import { Link } from "react-router";
 import { Box, Button, Card, Group, Image, Stack, Text, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
-import { useDispatch } from "react-redux";
 
 import { deleteScpItem } from "../store/scpItem/slice";
-import { Link } from "react-router";
 
 export default function ListScp({ scp }) {
   const dispatch = useDispatch();
