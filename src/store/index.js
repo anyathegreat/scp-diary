@@ -4,7 +4,7 @@ import scpsSlice from "./scpList/slice";
 import scpSlice from "./scpItem/slice";
 import articlesSlice from "./articleList/slice";
 import articleSlice from "./articleItem/slice";
-import CategoryAllSlice from "./categoryList/slice";
+import categoriesSlice from "./categoryList/slice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +12,6 @@ export const store = configureStore({
     scpItem: scpSlice,
     articleItem: articleSlice,
     articleList: articlesSlice,
-    categoryList: CategoryAllSlice,
+    categoryList: categoriesSlice,
   },
 });

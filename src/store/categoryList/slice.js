@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 import { categoryService } from "../../service/categoryService";
 
-export const getCategorys = createAsyncThunk("categoryList/getCategorys", async (_, { rejectWithValue }) => {
+export const getCategories = createAsyncThunk("categoryList/getCategories", async (_, { rejectWithValue }) => {
   try {
     return await categoryService.getAllCategory();
   } catch (error) {
@@ -18,24 +18,24 @@ const initialState = {
   loading: 0,
 };
 
-export const categoryAllSlice = createSlice({
-  name: "categorys",
+export const categoriesSlice = createSlice({
+  name: "categories",
   initialState,
   reducer: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getCategorys.pending, (state) => {
+      .addCase(getCategories.pending, (state) => {
         state.list = [];
         state.loading += 1;
       })
-      .addCase(getCategorys.fulfilled, (state, action) => {
+      .addCase(getCategories.fulfilled, (state, action) => {
         state.list = action.payload;
         state.loading -= 1;
       })
-      .addCase(getCategorys.rejected, (state) => {
+      .addCase(getCategories.rejected, (state) => {
         state.loading -= 1;
       });
   },
 });
 
-export default categoryAllSlice.reducer;
+export default categoriesSlice.reducer;

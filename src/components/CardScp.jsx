@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Link } from "react-router";
-import { Box, Button, Card, Group, Image, Stack, Text, Title } from "@mantine/core";
+import { Button, Card, Group, Image, Stack, Text, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 import { deleteScpItem } from "../store/scpItem/slice";

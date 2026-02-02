@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getArticles } from "../store/articleList/slice";
 
-import ArticleCard from "../components/CardArticleScp";
+import ArticleCard from "../components/CardArticle";
 import FormArticleScp from "../components/form/FormAddArticle";
 
 export default function ArticleListPage() {

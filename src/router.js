@@ -7,6 +7,7 @@ import ScpListPage from "./pages/ScpListPage";
 import ScpDetailsPage from "./pages/ScpDetailsPage";
 import ArticleListPage from "./pages/ArticleListPage";
 import ArticleDetailsPage from "./pages/ArticleDetailsPage";
+import CategoryListPage from "./pages/CategoryListPage";
 
 export const router = createBrowserRouter([
   {
@@ -40,6 +41,19 @@ export const router = createBrowserRouter([
             path: ":id",
             Component: ArticleDetailsPage,
             handle: { crumb: "article-id" },
+          },
+        ],
+      },
+      {
+        path: "categories",
+        handle: { crumb: "categories" },
+        children: [
+          { index: true, Component: CategoryListPage },
+          { path: "not-found", Component: NotFoundPage, handle: { crumb: "not found" } },
+          {
+            path: ":id",
+            Component: ArticleDetailsPage,
+            handle: { crumb: "category-id" },
           },
         ],
       },
