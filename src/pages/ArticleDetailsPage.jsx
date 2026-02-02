@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { Box, Skeleton, Stack, Title, Group, Button, Text, Divider, Tabs, Typography, Modal } from "@mantine/core";
+import { Box, Stack, Title, Group, Button, Text, Divider, Tabs, Typography, Modal, Flex } from "@mantine/core";
 
 import { getArticleItem } from "../store/articleItem/slice";
 
@@ -51,17 +51,17 @@ export default function ArticleDetailsPage() {
       {articleItem && (
         <Box>
           <Stack w="100%" gap="sm" bd="3px solid beige.8" p="lg" bdrs="4px">
-            <Group justify="space-between">
+            <Flex wrap="wrap" gap="md" align="center" justify={{ base: "center", xs: "space-between" }}>
               <Title>{articleItem.title}</Title>
 
               <Button onClick={handleModalTitleArticle}>
                 <IconEdit />
               </Button>
-            </Group>
+            </Flex>
 
             <Divider size="md" color="beige.8" />
 
-            <Group justify="space-between">
+            <Flex wrap="wrap" gap="md" align="center" justify={{ base: "center", xs: "space-between" }}>
               {categories && (
                 <Group gap="sm">
                   {categories.map((item) => {
@@ -88,17 +88,17 @@ export default function ArticleDetailsPage() {
               <Button onClick={handleModalCategory}>
                 <IconEdit />
               </Button>
-            </Group>
+            </Flex>
           </Stack>
 
           <Box mt="md" bd="3px solid beige.8" p="md" bdrs="4px">
-            <Group justify="space-between">
+            <Flex wrap="wrap" gap="md" align="center" justify={{ base: "center", xs: "space-between" }}>
               <Title order={3}>Scp объекты привязанные к статье:</Title>
 
               <Button onClick={handleModalScp}>
                 <IconEdit />
               </Button>
-            </Group>
+            </Flex>
 
             {creatures && (
               <Tabs defaultValue="" allowTabDeactivation mt="20px">
