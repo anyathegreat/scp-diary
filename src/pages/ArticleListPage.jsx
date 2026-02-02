@@ -13,18 +13,14 @@ export default function ArticleListPage() {
   const articles = useSelector((state) => state.articleList.list);
   const { loading } = useSelector((state) => state.articleList);
 
-  const [openModal, setOpenModal] = useState(false);
+  const [modalAddArticle, setModalAddArticle] = useState(false);
 
   useEffect(() => {
     dispatch(getArticles());
   }, [dispatch]);
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const handleModalAddArticle = () => {
+    setModalAddArticle((prev) => !prev);
   };
 
   if (loading) {
@@ -41,17 +37,19 @@ export default function ArticleListPage() {
 
   return (
     <Stack align="center">
-      <Button onClick={handleOpenModal}>Добавить статью</Button>
+      <Button onClick={handleModalAddArticle}>Добавить статью</Button>
 
-      <Modal
-        size="lg"
-        opened={openModal}
-        onClose={handleCloseModal}
-        title="Для создания статьи напишите её название"
-        centered
-      >
-        {openModal && <FormArticleScp handleCloseModal={handleCloseModal} />}
-      </Modal>
+      {modalAddArticle && (
+        <Modal
+          size="lg"
+          opened={modalAddArticle}
+          onClose={handleModalAddArticle}
+          title="Для создания статьи напишите её название"
+          centered
+        >
+          <FormArticleScp handleCloseModal={handleModalAddArticle} />
+        </Modal>
+      )}
 
       {articles.map((item) => {
         return <ArticleCard key={`article-${item.articleId}`} article={item} />;

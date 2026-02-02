@@ -18,28 +18,20 @@ export default function ArticleDetailsPage() {
   const article = useSelector((state) => state.articleItem.item);
   // const { loading } = useSelector((state) => state.articleItem);
 
-  const [openModalAddScp, setOpenModalAddScp] = useState(false);
-  const [openModalCategory, setOpenModalCategory] = useState(false);
-  const [openModalTitleArticle, setOpenModalTitleArticle] = useState(false);
+  const [modalAddScp, setModalAddScp] = useState(false);
+  const [modalAddCategory, setModalAddCategory] = useState(false);
+  const [modalUpdateTitleArticle, setModalUpdateTitleArticle] = useState(false);
 
-  const handleOpenModalScp = () => {
-    setOpenModalAddScp(true);
+  const handleModalScp = () => {
+    setModalAddScp((prev) => !prev);
   };
 
-  const handleCloseModalScp = () => {
-    setOpenModalAddScp(false);
-  };
-
-  const handleOpenModalCategory = () => {
-    setOpenModalCategory(true);
-  };
-
-  const handleCloseModalCategory = () => {
-    setOpenModalCategory(false);
+  const handleModalCategory = () => {
+    setModalAddCategory((prev) => !prev);
   };
 
   const handleModalTitleArticle = () => {
-    setOpenModalTitleArticle((prev) => !prev);
+    setModalUpdateTitleArticle((prev) => !prev);
   };
 
   useEffect(() => {
@@ -93,7 +85,7 @@ export default function ArticleDetailsPage() {
 
               {!categories && <Text fz="20px">В этой статье нету категорий</Text>}
 
-              <Button onClick={handleOpenModalCategory}>
+              <Button onClick={handleModalCategory}>
                 <IconEdit />
               </Button>
             </Group>
@@ -103,7 +95,7 @@ export default function ArticleDetailsPage() {
             <Group justify="space-between">
               <Title order={3}>Scp объекты привязанные к статье:</Title>
 
-              <Button onClick={handleOpenModalScp}>
+              <Button onClick={handleModalScp}>
                 <IconEdit />
               </Button>
             </Group>
@@ -135,28 +127,22 @@ export default function ArticleDetailsPage() {
 
           <NotesArticleScp article={article} articleId={id} />
 
-          {openModalTitleArticle && (
+          {modalUpdateTitleArticle && (
             <Modal
               size="lg"
               centered
               title="Редактировать название статьи"
-              opened={openModalTitleArticle}
+              opened={modalUpdateTitleArticle}
               onClose={handleModalTitleArticle}
             >
               <FormArticleUpdateTitle articleId={id} close={handleModalTitleArticle} />
             </Modal>
           )}
 
-          {openModalAddScp && (
-            <ModalArticleScp open={handleOpenModalScp} close={handleCloseModalScp} article={articleItem} />
-          )}
+          {modalAddScp && <ModalArticleScp open={modalAddScp} close={handleModalScp} article={articleItem} />}
 
-          {openModalCategory && (
-            <ModalArticleCategory
-              open={handleOpenModalCategory}
-              close={handleCloseModalCategory}
-              article={articleItem}
-            />
+          {modalAddCategory && (
+            <ModalArticleCategory open={modalAddCategory} close={handleModalCategory} article={articleItem} />
           )}
         </Box>
       )}

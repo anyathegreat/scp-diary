@@ -13,14 +13,10 @@ export default function ScpList() {
   const scpList = useSelector((state) => state.scpList.list);
   const { loading } = useSelector((state) => state.scpList);
 
-  const [openModal, setOpenModal] = useState();
+  const [modalAddScp, setModalAddScp] = useState();
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
+  const handleModalAddScp = () => {
+    setModalAddScp((prev) => !prev);
   };
 
   useEffect(() => {
@@ -43,28 +39,20 @@ export default function ScpList() {
   return (
     <Stack>
       <Box align="center">
-        <Button onClick={handleOpenModal}>Добавить Scp объект</Button>
+        <Button onClick={handleModalAddScp}>Добавить Scp объект</Button>
       </Box>
 
-      <Modal
-        visibleFrom="sm"
-        size="lg"
-        title="Добавить SCP объект в базу данных"
-        opened={openModal}
-        onClose={handleCloseModal}
-      >
-        {openModal && <FormScp />}
-      </Modal>
-
-      <Modal
-        hiddenFrom="sm"
-        title="Добавить SCP объект в базу данных"
-        fullScreen
-        opened={openModal}
-        onClose={handleCloseModal}
-      >
-        {openModal && <FormScp />}
-      </Modal>
+      {modalAddScp && (
+        <Modal
+          visibleFrom="sm"
+          size="lg"
+          title="Добавить SCP объект в базу данных"
+          opened={modalAddScp}
+          onClose={handleModalAddScp}
+        >
+          <FormScp />
+        </Modal>
+      )}
 
       <Grid align="center" m="10px">
         {scpList.map((item) => {
