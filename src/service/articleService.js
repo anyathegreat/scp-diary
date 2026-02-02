@@ -74,6 +74,22 @@ const articleREST = {
     return handleResponse(response);
   },
 
+  updateArticleTitle: async ({ articleId, updateArticle }) => {
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${supabaseConfig.baseUrl}/articles?id=eq.${articleId}`, {
+      method: "PATCH",
+      headers: {
+        apikey: supabaseConfig.apikey,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updateArticle),
+    });
+
+    return handleResponse(response);
+  },
+
   deleteArticle: async (articleId) => {
     const token = localStorage.getItem("access_token");
 
@@ -215,4 +231,5 @@ export const articleService = {
   deleteArticleScpObject: articleREST.deleteArticleScpObject,
   addArticleCategoryObject: articleREST.addArticleCategoryObject,
   deleteArticleCategoryObject: articleREST.deleteArticleCategoryObject,
+  updateArticleTitle: articleREST.updateArticleTitle,
 };

@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Outlet } from "react-router";
-import { AppShell, Box } from "@mantine/core";
+import { AppShell, Box, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
 import { attachGarland } from "../helpers/lights";
@@ -26,20 +26,24 @@ export default function AppLayout() {
         breakpoint: "sm",
         collapsed: { mobile: !opened, desktop: true },
       }}
+      bg="beige.1"
+      align="center"
     >
-      <AppShell.Header ref={headerRef}>
-        <Header opened={opened} toggle={toggle} navItems={navigationItems} />
-      </AppShell.Header>
+      <Stack maw="1200px">
+        <AppShell.Header ref={headerRef}>
+          <Header opened={opened} toggle={toggle} navItems={navigationItems} />
+        </AppShell.Header>
 
-      <AppShell.Navbar>
-        <Sidebar toggle={toggle} navItems={navigationItems} />
-      </AppShell.Navbar>
+        <AppShell.Navbar>
+          <Sidebar toggle={toggle} navItems={navigationItems} />
+        </AppShell.Navbar>
 
-      <AppShell.Main h="0px">
-        <Box bg="beige.1" p="20px" mih="100%">
-          <Outlet />
-        </Box>
-      </AppShell.Main>
+        <AppShell.Main>
+          <Box p="20px" mih="100%">
+            <Outlet />
+          </Box>
+        </AppShell.Main>
+      </Stack>
     </AppShell>
   );
 }

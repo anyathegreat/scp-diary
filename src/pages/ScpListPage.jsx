@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { getScps } from "../store/scpList/slice";
 
 import ListScp from "../components/CardListScp";
-import FormScp from "../components/form/FormListScp";
+import FormScp from "../components/form/FormAddListScp";
 
 export default function ScpList() {
   const dispatch = useDispatch();

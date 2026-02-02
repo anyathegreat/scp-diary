@@ -1,4 +1,4 @@
-import { createTheme, Divider } from "@mantine/core";
+import { createTheme, Divider, List } from "@mantine/core";
 
 export const theme = createTheme({
   fontFamily: "Underdog, serif",
@@ -159,6 +159,37 @@ export const theme = createTheme({
         content: {
           backgroundColor: theme.colors.beige[7],
           color: theme.colors.brown[5],
+        },
+      }),
+    },
+
+    Tabs: {
+      styles: (theme) => ({
+        list: {
+          "--tabs-list-gap": "13px",
+        },
+
+        tab: {
+          border: `2px solid ${theme.colors.brown[3]}`,
+          color: theme.colors.brown[3],
+          fontSize: "18px",
+          fontWeight: "600",
+        },
+
+        panel: {
+          color: theme.colors.brown[3],
+          fontSize: "18px",
+          padding: "8px",
+          border: `2px solid ${theme.colors.brown[3]}`,
+        },
+      }),
+    },
+
+    Typography: {
+      styles: (theme) => ({
+        root: {
+          color: theme.colors.brown[3],
+          backgroundColor: theme.colors.beige[1],
         },
       }),
     },

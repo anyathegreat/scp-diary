@@ -39,6 +39,23 @@ export const addArticleItem = createAsyncThunk(
   },
 );
 
+export const updateArticleItemTitle = createAsyncThunk(
+  "articleItem/updateArticleItemTitle",
+  async (params, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await articleService.updateArticleTitle(params.body);
+      dispatch(getArticleItem(params.body.articleId));
+      params.cb();
+      toast.success("Название статьи успешно обновленно");
+      return response;
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+      return rejectWithValue(error.message);
+    }
+  },
+);
+
 export const deleteArticleItem = createAsyncThunk(
   "articleItem/deleteArticleItem",
   async (params, { dispatch, rejectWithValue }) => {
@@ -55,19 +72,22 @@ export const deleteArticleItem = createAsyncThunk(
   },
 );
 
-export const addNote = createAsyncThunk("articleItem/addNote", async (params, { dispatch, rejectWithValue }) => {
-  try {
-    const response = await articleService.addArticleNote(params);
-    dispatch(getArticleItem(params.articleId));
-    toast.success("Заметка успешно создана");
+export const addArticleNote = createAsyncThunk(
+  "articleItem/addArticleNote",
+  async (params, { dispatch, rejectWithValue }) => {
+    try {
+      const response = await articleService.addArticleNote(params);
+      dispatch(getArticleItem(params.articleId));
+      toast.success("Заметка успешно создана");
 
-    return response;
-  } catch (error) {
-    console.error(error);
-    toast.error(error.message);
-    return rejectWithValue(error.message);
-  }
-});
+      return response;
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+      return rejectWithValue(error.message);
+    }
+  },
+);
 
 export const updateNote = createAsyncThunk("articleItem/updateNote", async (params, { dispatch, rejectWithValue }) => {
   try {
@@ -204,6 +224,17 @@ const articleSlice = createSlice({
       });
 
     builder
+      .addCase(updateArticleItemTitle.pending, (state) => {
+        state.loading += 1;
+      })
+      .addCase(updateArticleItemTitle.fulfilled, (state) => {
+        state.loading -= 1;
+      })
+      .addCase(updateArticleItemTitle.rejected, (state) => {
+        state.loading -= 1;
+      });
+
+    builder
       .addCase(deleteArticleItem.pending, (state) => {
         state.loading += 1;
       })
@@ -215,13 +246,13 @@ const articleSlice = createSlice({
       });
 
     builder
-      .addCase(addNote.pending, (state) => {
+      .addCase(addArticleNote.pending, (state) => {
         state.loading += 1;
       })
-      .addCase(addNote.fulfilled, (state) => {
+      .addCase(addArticleNote.fulfilled, (state) => {
         state.loading -= 1;
       })
-      .addCase(addNote.rejected, (state) => {
+      .addCase(addArticleNote.rejected, (state) => {
         state.loading -= 1;
       });
 

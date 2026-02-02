@@ -19,3 +19,11 @@
 .mantine-Accordion-control:hover {
   background-color: var(--mantine-color-brown-9);
 }
+
+.mantine-Tabs-tab:hover {
+  background-color: var(--mantine-color-beige-8);
+}
+
+[data-mantine-color-scheme="dark"] .m_89d60db1 {
+  --tab-border-color: var(--mantine-color-brown-3);
+}

@@ -2,9 +2,9 @@ import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Group, Textarea } from "@mantine/core";
 
-import { addNote } from "../../store/articleItem/slice";
+import { addArticleNote } from "../../store/articleItem/slice";
 
-export default function FormAddNote({ articleId }) {
+export default function FormaddArticleNote({ articleId }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -21,7 +21,7 @@ export default function FormAddNote({ articleId }) {
   });
 
   const handleForm = (formFields) => {
-    dispatch(addNote({ articleId: articleId, newNote: formFields }));
+    dispatch(addArticleNote({ articleId: articleId, newNote: formFields }));
   };
 
   return (

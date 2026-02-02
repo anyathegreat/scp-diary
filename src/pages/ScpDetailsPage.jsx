@@ -36,7 +36,7 @@ export default function ScpDetailsPage() {
 
         <Flex w={{ base: "100%", sm: "50%" }} h="100%">
           <Typography>
-            <div style={{ backgroundColor: "#000000" }} dangerouslySetInnerHTML={{ __html: scpItem[0]?.description }} />
+            <div dangerouslySetInnerHTML={{ __html: scpItem[0]?.description }} />
           </Typography>
         </Flex>
       </Group>

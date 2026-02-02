@@ -28,7 +28,7 @@ export default function FormArticleDeleteCategory({ article, closeModal }) {
   }));
 
   return (
-    <Box p="6px" bd="4px solid brown.0" bdrs="20px">
+    <Box p="md" bd="3px solid brown.4" bdrs="4px">
       <Title order={3} mb="10px" ta="center">
         Отвязать scp от статьи
       </Title>

@@ -7,7 +7,7 @@ import { IconCalendarEvent, IconEdit, IconTrash } from "@tabler/icons-react";
 import { deleteNote } from "../store/articleItem/slice";
 
 import FormUpdateNotes from "./form/FormUpdateNotes";
-import FormAddNote from "./form/FormAddNotes";
+import FormAddArticleNote from "./form/FormAddArticleNotes";
 
 export default function NotesArticleScp({ article, articleId }) {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export default function NotesArticleScp({ article, articleId }) {
   const notes = article[0]?.notes || [];
 
   const [noteEdit, setNoteEdit] = useState(null);
-  const [modalOpened, setModalOpened] = useState(false);
+  const [openModalNotes, setOpenModalNotes] = useState(false);
 
   const formatDate = (date) => {
     const formatDate = DateTime.fromISO(date);
@@ -30,23 +30,23 @@ export default function NotesArticleScp({ article, articleId }) {
 
   const handleEditClick = (item) => {
     setNoteEdit(item);
-    setModalOpened(true);
+    setOpenModalNotes(true);
   };
 
   const handleCloseModal = () => {
-    setModalOpened(false);
+    setOpenModalNotes(false);
     setNoteEdit(null);
   };
 
   return (
-    <Box bd="3px solid brown.3" m="20px" align="center" pt="md" bdrs="8px">
+    <Box mt="md" bd="3px solid beige.8" p="md" bdrs="4px">
       <Title order={2} fz="36px">
         Хронология изучения:
       </Title>
 
       <Divider mt="20px" ml="26px" mr="26px" size="2px" color="brown.3" />
 
-      <FormAddNote articleId={articleId} />
+      <FormAddArticleNote articleId={articleId} />
 
       {notes.length > 0 ? (
         <Stack w="90%" my="30px">
@@ -95,9 +95,11 @@ export default function NotesArticleScp({ article, articleId }) {
         <Text>У вас пока нету заметок!</Text>
       )}
 
-      <Modal title="Редактировать заметку" opened={modalOpened} onClose={handleCloseModal} centered>
-        {noteEdit && <FormUpdateNotes articleId={articleId} noteEdit={noteEdit} />}
-      </Modal>
+      {noteEdit && (
+        <Modal title="Редактировать заметку" opened={openModalNotes} onClose={handleCloseModal} centered>
+          <FormUpdateNotes articleId={articleId} noteEdit={noteEdit} />
+        </Modal>
+      )}
     </Box>
   );
 }
