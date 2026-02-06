@@ -1,7 +1,12 @@
 import { Button, Card, Group, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { useDispatch } from "react-redux";
 
 export default function CardCategory({ category }) {
+  const dispatch = useDispatch();
+
+  const deleteCategory = () => {};
+
   return (
     <Card>
       <Group justify="space-between">

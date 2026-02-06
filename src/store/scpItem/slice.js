@@ -9,7 +9,7 @@ export const getScpItem = createAsyncThunk("scpItem/getScpItem", async (scpId, {
     const response = await scpService.getScp(scpId);
     if (response?.length < 1) {
       router.navigate("../not-found");
-      throw new Error("Объект не был найден");
+      throw new Error("Scp не был найден");
     }
 
     return response;
