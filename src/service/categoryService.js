@@ -1,5 +1,5 @@
+import { supabaseConfig } from "../constants/supabaseUrl";
 import { handleResponse } from "../helpers/api";
-import { supabaseConfig } from "./articleService";
 
 const categoryREST = {
   getAllCategory: async () => {

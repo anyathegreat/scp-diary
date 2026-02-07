@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Grid, Modal, Stack } from "@mantine/core";
+import { Box, Button, Grid } from "@mantine/core";
 
 import { getCategories } from "../store/categoryList/slice";
 
 import CardCategory from "../components/CardCategory";
-import FormAddCategory from "../components/form/FormAddCategory";
+import ModalAddCategory from "../components/modal/ModalAddCategory";
 
 export default function CategoryListPage() {
   const dispatch = useDispatch();
@@ -38,9 +38,11 @@ export default function CategoryListPage() {
       </Grid>
 
       {modalAddCategory && (
-        <Modal size="lg" centered title="Создание категории" opened={modalAddCategory} onClose={handleModalAddCategory}>
-          <FormAddCategory close={handleModalAddCategory} />
-        </Modal>
+        <ModalAddCategory typeVisible="hiddenFrom" open={modalAddCategory} close={setModalAddCategory} />
+      )}
+
+      {modalAddCategory && (
+        <ModalAddCategory typeVisible="visibleFrom" open={modalAddCategory} close={setModalAddCategory} />
       )}
     </Box>
   );

@@ -8,6 +8,8 @@ import ScpDetailsPage from "./pages/ScpDetailsPage";
 import ArticleListPage from "./pages/ArticleListPage";
 import ArticleDetailsPage from "./pages/ArticleDetailsPage";
 import CategoryListPage from "./pages/CategoryListPage";
+import AdminPanelPage from "./pages/admin/AdminPanelPage";
+import AdminArticlePage from "./pages/admin/AdminArticlePage";
 
 export const router = createBrowserRouter([
   {
@@ -22,7 +24,7 @@ export const router = createBrowserRouter([
           {
             path: "not-found",
             Component: NotFoundPage,
-            handle: { crumb: "not found" },
+            handle: { crumb: "not-found" },
           },
           {
             path: ":id",
@@ -36,7 +38,7 @@ export const router = createBrowserRouter([
         handle: { crumb: "articles" },
         children: [
           { index: true, Component: ArticleListPage },
-          { path: "not-found", Component: NotFoundPage, handle: { crumb: "not found" } },
+          { path: "not-found", Component: NotFoundPage, handle: { crumb: "not-found" } },
           {
             path: ":id",
             Component: ArticleDetailsPage,
@@ -49,12 +51,21 @@ export const router = createBrowserRouter([
         handle: { crumb: "categories" },
         children: [
           { index: true, Component: CategoryListPage },
-          { path: "not-found", Component: NotFoundPage, handle: { crumb: "not found" } },
+          { path: "not-found", Component: NotFoundPage, handle: { crumb: "not-found" } },
           {
             path: ":id",
             Component: ArticleDetailsPage,
             handle: { crumb: "category-id" },
           },
+        ],
+      },
+      {
+        path: "admin",
+        handle: { crumb: "admin" },
+        children: [
+          { index: true, Component: AdminPanelPage },
+          { path: "not-found", Component: NotFoundPage, handle: { crumb: "not-found" } },
+          { path: "articles", Component: AdminArticlePage, handle: { crumb: "articles" } },
         ],
       },
       {

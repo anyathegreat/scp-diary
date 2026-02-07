@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 
 import { getScps } from "../store/scpList/slice";
 
-import ListScp from "../components/CardScp";
-import FormScp from "../components/form/FormAddListScp";
+import CardScp from "../components/CardScp";
+import ModalAddScp from "../components/modal/ModalAddScp";
 
 export default function ScpList() {
   const dispatch = useDispatch();
@@ -42,27 +42,17 @@ export default function ScpList() {
         <Button onClick={handleModalAddScp}>Добавить Scp объект</Button>
       </Box>
 
-      {modalAddScp && (
-        <Modal
-          visibleFrom="sm"
-          size="lg"
-          title="Добавить SCP объект в базу данных"
-          opened={modalAddScp}
-          onClose={handleModalAddScp}
-        >
-          <FormScp />
-        </Modal>
-      )}
-
       <Grid align="center" m="10px">
         {scpList.map((item) => {
           return (
             <Grid.Col span={{ base: 6, lg: 2, md: 3, sm: 6 }} key={`Scp-${item.scpNumber}`}>
-              <ListScp scp={item} />
+              <CardScp scp={item} />
             </Grid.Col>
           );
         })}
       </Grid>
+
+      {modalAddScp && <ModalAddScp open={modalAddScp} close={handleModalAddScp} />}
     </Stack>
   );
 }

@@ -5,7 +5,7 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 import { deleteArticleItem } from "../store/articleItem/slice";
 
-export default function ArticleCard({ article }) {
+export default function CardArticle({ article }) {
   const dispatch = useDispatch();
 
   const categories = article?.categories.length != 0 ? article.categories : null;
@@ -23,7 +23,7 @@ export default function ArticleCard({ article }) {
           <Button size="xs" component={Link} to={String(article.articleId)}>
             <IconEdit />
           </Button>
-          <Button size="xs" color="#961818" onClick={() => handleDeleteArticle(article.articleId)}>
+          <Button size="xs" bg="#961818" onClick={() => handleDeleteArticle(article.articleId)}>
             <IconTrash />
           </Button>
         </Group>

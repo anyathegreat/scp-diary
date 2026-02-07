@@ -5,7 +5,7 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 import { deleteScpItem } from "../store/scpItem/slice";
 
-export default function ListScp({ scp }) {
+export default function CardScp({ scp }) {
   const dispatch = useDispatch();
 
   return (
@@ -33,7 +33,7 @@ export default function ListScp({ scp }) {
             <IconEdit />
           </Button>
 
-          <Button onClick={() => dispatch(deleteScpItem(scp.scpId))} size="sm" color="#961818">
+          <Button onClick={() => dispatch(deleteScpItem(scp.scpId))} size="sm" bg="#961818">
             <IconTrash />
           </Button>
         </Group>

@@ -20,10 +20,11 @@ export const getScpItem = createAsyncThunk("scpItem/getScpItem", async (scpId, {
   }
 });
 
-export const addScpItem = createAsyncThunk("scpItem/addScpItem", async (body, { rejectWithValue }) => {
+export const addScpItem = createAsyncThunk("scpItem/addScpItem", async (params, { rejectWithValue }) => {
   try {
-    const response = await scpService.addScp(body);
+    const response = await scpService.addScp(params.formData);
     toast.success("Объект успешно создан");
+    params.cb();
     return response;
   } catch (error) {
     console.error(error);

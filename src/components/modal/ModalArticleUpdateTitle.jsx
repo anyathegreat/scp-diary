@@ -1,15 +1,22 @@
-import { Box, Button, Group, TextInput } from "@mantine/core";
+import { Box, Button, Group, Modal, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
 import { updateArticleItemTitle } from "../../store/articleItem/slice";
+import ModalTypeVisible from "./ModalTypeVisible";
 
-export default function FormArticleUpdateTitle({ articleId, close }) {
+export default function ModalArticleUpdateTitle({ typeVisible, articleId, open, close }) {
   const dispatch = useDispatch();
 
   const form = useForm({
     mode: "uncontrolled",
     initialValues: {
       title: "",
+    },
+
+    validate: {
+      title: (value) => {
+        return !value.trim() ? "Название статьи обязательно" : null;
+      },
     },
   });
 
@@ -22,7 +29,7 @@ export default function FormArticleUpdateTitle({ articleId, close }) {
     );
   };
 
-  return (
+  const modalForm = (
     <Box>
       <form onSubmit={form.onSubmit(handleForm)} w="100%">
         <Group mt="10px" gap="10px" justify="center">
@@ -39,5 +46,15 @@ export default function FormArticleUpdateTitle({ articleId, close }) {
         </Group>
       </form>
     </Box>
+  );
+
+  return (
+    <ModalTypeVisible
+      typeVisible={typeVisible}
+      children={modalForm}
+      title="Редактировать название статьи"
+      open={open}
+      close={close}
+    />
   );
 }

@@ -34,7 +34,7 @@ export default function FormArticleAddScp({ articleId, closeModal }) {
   return (
     <Box p="md" bd="3px solid brown.4" bdrs="4px">
       <Title order={3} mb="10px" ta="center">
-        Привязать scp к статье
+        Привязать scp
       </Title>
 
       <form onSubmit={form.onSubmit(handleForm)}>

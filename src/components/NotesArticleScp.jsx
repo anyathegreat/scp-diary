@@ -6,8 +6,8 @@ import { IconCalendarEvent, IconEdit, IconTrash } from "@tabler/icons-react";
 
 import { deleteNote } from "../store/articleItem/slice";
 
-import FormUpdateNotes from "./form/FormUpdateNotes";
 import FormAddArticleNote from "./form/FormAddArticleNotes";
+import ModalArticleUpdateNotes from "./modal/ModalArticleUpdateNotes";
 
 export default function NotesArticleScp({ article, articleId }) {
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ export default function NotesArticleScp({ article, articleId }) {
                         <IconEdit />
                       </Button>
 
-                      <Button size="25px" color="#961818" onClick={() => handleDeleteNote(item.uid)}>
+                      <Button size="25px" bg="#961818" onClick={() => handleDeleteNote(item.uid)}>
                         <IconTrash />
                       </Button>
                     </Group>
@@ -95,11 +95,27 @@ export default function NotesArticleScp({ article, articleId }) {
         <Text>У вас пока нету заметок!</Text>
       )}
 
-      {noteEdit && (
-        <Modal title="Редактировать заметку" opened={openModalNotes} onClose={handleCloseModal} centered>
-          <FormUpdateNotes articleId={articleId} noteEdit={noteEdit} />
-        </Modal>
-      )}
+      <Box>
+        {noteEdit && (
+          <ModalArticleUpdateNotes
+            typeVisible="hiddenFrom"
+            open={openModalNotes}
+            close={handleCloseModal}
+            articleId={articleId}
+            noteEdit={noteEdit}
+          />
+        )}
+
+        {noteEdit && (
+          <ModalArticleUpdateNotes
+            typeVisible="visibleFrom"
+            open={openModalNotes}
+            close={handleCloseModal}
+            articleId={articleId}
+            noteEdit={noteEdit}
+          />
+        )}
+      </Box>
     </Box>
   );
 }

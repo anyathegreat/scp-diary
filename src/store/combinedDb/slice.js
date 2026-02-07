@@ -14,17 +14,17 @@ export const getCombinedDbData = createAsyncThunk("combinedDb/combinedDbData", a
     const allFetch = [
       {
         name: "Статьи",
-        link: "admin-articles",
+        link: "articles",
         tableArticle: article,
       },
       {
         name: "Scp объекты",
-        link: "admin-scps",
+        link: "scps",
         tableScp: scp,
       },
       {
         name: "Категории",
-        link: "admin-categories",
+        link: "categories",
         tableCategory: category,
       },
     ];

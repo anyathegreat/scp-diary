@@ -1,10 +1,12 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
-import { Box, Button, Textarea } from "@mantine/core";
+import { Box, Button, Modal, Textarea } from "@mantine/core";
 
 import { updateNote } from "../../store/articleItem/slice";
 
-export default function FormUpdateNotes({ articleId, noteEdit }) {
+import ModalTypeVisible from "./ModalTypeVisible";
+
+export default function ModalArticleUpdateNotes({ typeVisible, articleId, noteEdit, open, close }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -15,7 +17,10 @@ export default function FormUpdateNotes({ articleId, noteEdit }) {
 
     validate: {
       text: (value) => {
-        return !value.trim() ? "Введите описание" : null;
+        if (!value.trim()) return "Введите описание";
+        if (value.trim().length < 40) return "Описание должно состоять минимум из 40 символов";
+
+        return null;
       },
     },
   });
@@ -24,7 +29,7 @@ export default function FormUpdateNotes({ articleId, noteEdit }) {
     dispatch(updateNote({ articleId: articleId, noteId: noteEdit.uid, updatedNote: values }));
   };
 
-  return (
+  const modalForm = (
     <Box>
       <form onSubmit={form.onSubmit(handleForm)}>
         <Textarea
@@ -40,5 +45,15 @@ export default function FormUpdateNotes({ articleId, noteEdit }) {
         </Box>
       </form>
     </Box>
+  );
+
+  return (
+    <ModalTypeVisible
+      typeVisible={typeVisible}
+      children={modalForm}
+      open={open}
+      close={close}
+      title="Редактировать заметку"
+    />
   );
 }

@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getArticles } from "../store/articleList/slice";
 
-import ArticleCard from "../components/CardArticle";
-import FormArticleScp from "../components/form/FormAddArticle";
+import CardArticle from "../components/CardArticle";
+import ModalAddArticle from "../components/modal/ModalAddArticle";
 
 export default function ArticleListPage() {
   const dispatch = useDispatch();
@@ -39,21 +39,17 @@ export default function ArticleListPage() {
     <Stack align="center">
       <Button onClick={handleModalAddArticle}>Добавить статью</Button>
 
+      {articles.map((item) => {
+        return <CardArticle key={`article-${item.articleId}`} article={item} />;
+      })}
+
       {modalAddArticle && (
-        <Modal
-          size="lg"
-          opened={modalAddArticle}
-          onClose={handleModalAddArticle}
-          title="Для создания статьи напишите её название"
-          centered
-        >
-          <FormArticleScp handleCloseModal={handleModalAddArticle} />
-        </Modal>
+        <ModalAddArticle typeVisible="visibleFrom" open={modalAddArticle} close={handleModalAddArticle} />
       )}
 
-      {articles.map((item) => {
-        return <ArticleCard key={`article-${item.articleId}`} article={item} />;
-      })}
+      {modalAddArticle && (
+        <ModalAddArticle typeVisible="hiddenFrom" open={modalAddArticle} close={handleModalAddArticle} />
+      )}
     </Stack>
   );
 }

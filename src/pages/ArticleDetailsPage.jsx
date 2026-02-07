@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Stack, Title, Group, Button, Text, Divider, Tabs, Typography, Modal, Flex } from "@mantine/core";
+import { IconEdit } from "@tabler/icons-react";
 
 import { getArticleItem } from "../store/articleItem/slice";
 
 import NotesArticleScp from "../components/NotesArticleScp";
-import ModalArticleScp from "../components/modal/ModalArticleScp";
-import ModalArticleCategory from "../components/modal/ModalArticleCategory";
-import { IconEdit } from "@tabler/icons-react";
-import FormArticleUpdateTitle from "../components/form/FormArticleUpdateTitle";
+import ModalArticleEditScp from "../components/modal/ModalArticleEditScp";
+import ModalArticleEditCategory from "../components/modal/ModalArticleEditCategory";
+import ModalArticleUpdateTitle from "../components/modal/ModalArticleUpdateTitle";
 
 export default function ArticleDetailsPage() {
   const dispatch = useDispatch();
@@ -127,77 +127,66 @@ export default function ArticleDetailsPage() {
 
           <NotesArticleScp article={article} articleId={id} />
 
-          {modalUpdateTitleArticle && (
-            <Modal
-              size="lg"
-              centered
-              title="Редактировать название статьи"
-              opened={modalUpdateTitleArticle}
-              onClose={handleModalTitleArticle}
-            >
-              <FormArticleUpdateTitle articleId={id} close={handleModalTitleArticle} />
-            </Modal>
-          )}
+          <Box>
+            {modalUpdateTitleArticle && (
+              <ModalArticleUpdateTitle
+                typeVisible="hiddenFrom"
+                open={modalUpdateTitleArticle}
+                close={handleModalTitleArticle}
+                articleId={id}
+              />
+            )}
+            {modalUpdateTitleArticle && (
+              <ModalArticleUpdateTitle
+                typeVisible="visibleFrom"
+                open={modalUpdateTitleArticle}
+                close={handleModalTitleArticle}
+                articleId={id}
+              />
+            )}
+          </Box>
 
-          {modalAddScp && <ModalArticleScp open={modalAddScp} close={handleModalScp} article={articleItem} />}
+          <Box>
+            {modalAddScp && (
+              <ModalArticleEditScp
+                typeVisible="hiddenFrom"
+                open={modalAddScp}
+                close={handleModalScp}
+                article={articleItem}
+              />
+            )}
 
-          {modalAddCategory && (
-            <ModalArticleCategory open={modalAddCategory} close={handleModalCategory} article={articleItem} />
-          )}
+            {modalAddScp && (
+              <ModalArticleEditScp
+                typeVisible="visibleFrom"
+                open={modalAddScp}
+                close={handleModalScp}
+                article={articleItem}
+              />
+            )}
+          </Box>
+
+          <Box>
+            {modalAddCategory && (
+              <ModalArticleEditCategory
+                typeVisible="hiddenFrom"
+                open={modalAddCategory}
+                close={handleModalCategory}
+                article={articleItem}
+              />
+            )}
+
+            {modalAddCategory && (
+              <ModalArticleEditCategory
+                typeVisible="visibleFrom"
+                open={modalAddCategory}
+                close={handleModalCategory}
+                article={articleItem}
+              />
+            )}
+          </Box>
         </Box>
       )}
     </Box>
   );
-
-  // return (
-  //   <>
-  //     {articleItem && (
-  //       <Box ta="center">
-  //         <Box align="center" mb="md">
-  //           <Flex w="80%" wrap="wrap" gap="sm" justify={{ base: "center", sm: "space-between" }}>
-  //             <Title>{articleItem.title}</Title>
-  //             {categories && (
-  //               <Flex wrap="wrap" gap="sm" justify={{ base: "center", sm: "end" }}>
-  //                 {categories.map((item) => {
-  //                   return (
-  //                     <Box key={`category-${item.id}`} bg="brown.4" p="10px" bdrs="12px">
-  //                       <Text fz="16px" fw={700} c="beige.0">
-  //                         {`# ${item.name}`}
-  //                       </Text>
-  //                     </Box>
-  //                   );
-  //                 })}
-  //               </Flex>
-  //             )}
-  //           </Flex>
-  //         </Box>
-  //         {creatures && (
-  //           <Box align="center">
-  //             <Stack w="80%" gap="sm">
-  //               <Group gap="sm" justify="center">
-  //                 <Button onClick={handleOpenModalScp}>Отредактировать Scp</Button>
-  //                 <Button onClick={handleOpenModalCategory}>Отредактировать категорию</Button>
-  //               </Group>
-  //               <Stack>
-  //                 <Title order={3}>Scp объекты которые используются в статье:</Title>
-  //                 <Accordion>
-  //                   {creatures.map((item) => {
-  //                     return (
-  //                       <Accordion.Item key={item.id} value={item.title}>
-  //                         <Accordion.Control
-  //                           icon={<IconBiohazardFilled />}
-  //                         >{`Scp-${item["scp_number"]} - ${item.title}`}</Accordion.Control>
-  //                         <Accordion.Panel>{item.description}</Accordion.Panel>
-  //                       </Accordion.Item>
-  //                     );
-  //                   })}
-  //                 </Accordion>
-  //               </Stack>
-  //             </Stack>
-  //           </Box>
-  //         )}
-  //       </Box>
-  //     )}
-  //   </>
-  // );
 }

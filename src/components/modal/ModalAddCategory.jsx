@@ -1,9 +1,12 @@
-import { Box, Button, Group, TextInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
+import { useForm } from "@mantine/form";
+import { Box, Button, Group, TextInput } from "@mantine/core";
+
 import { addCategoryItem } from "../../store/categoryItem/slice";
 
-export default function FormAddCategory({ close }) {
+import ModalTypeVisible from "./ModalTypeVisible";
+
+export default function ModalAddCategory({ typeVisible, open, close }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -19,7 +22,12 @@ export default function FormAddCategory({ close }) {
       },
 
       slug: (value) => {
-        !value.trim() ? "Slug обязателен" : null;
+        if (!value.trim()) return "Slug обязателен";
+        if (!/^[a-z0-9]+$/.test(value)) {
+          return "Slug должен быть маленькими буквами";
+        }
+
+        return null;
       },
     },
   });
@@ -28,7 +36,7 @@ export default function FormAddCategory({ close }) {
     dispatch(addCategoryItem({ body: { name: value.name, slug: value.slug }, cb: close }));
   };
 
-  return (
+  const modalForm = (
     <Box>
       <form onSubmit={form.onSubmit(handleForm)} w="100%">
         <Group mt="10px" gap="10px" justify="center">
@@ -40,21 +48,30 @@ export default function FormAddCategory({ close }) {
             radius="md"
             placeholder="Введите название категории"
           />
-
           <TextInput
             {...form.getInputProps("slug")}
             withAsterisk
             size="md"
             w="500px"
             radius="md"
-            pattern="^[a-z0-9]+$"
             placeholder="Введите slug для категории"
-            error="slug должен быть маленькими буквами"
           />
-
-          <Button type="submit">Создать</Button>
         </Group>
+
+        <Box align="center" mt="10px">
+          <Button type="submit">Создать</Button>
+        </Box>
       </form>
     </Box>
+  );
+
+  return (
+    <ModalTypeVisible
+      typeVisible={typeVisible}
+      children={modalForm}
+      open={open}
+      close={close}
+      title="Создание категории"
+    />
   );
 }

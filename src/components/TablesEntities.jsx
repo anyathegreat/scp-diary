@@ -1,9 +1,8 @@
 import { Table } from "@mantine/core";
-import { useNavigate } from "react-router";
+
+import { router } from "../router";
 
 export default function TablesEntities({ tables }) {
-  const navigate = useNavigate();
-
   return (
     <Table verticalSpacing="md" horizontalSpacing="lg" highlightOnHover="true">
       <Table.Thead>
@@ -15,7 +14,7 @@ export default function TablesEntities({ tables }) {
       <Table.Tbody>
         {tables.map((item, index) => {
           return (
-            <Table.Tr key={`table-${index}`} onClick={() => navigate(`${item.link}`)}>
+            <Table.Tr key={`table-${index}`} onClick={() => router.navigate(`${item.link}`)}>
               {console.log(item.link)}
               <Table.Td>{item.name}</Table.Td>
             </Table.Tr>

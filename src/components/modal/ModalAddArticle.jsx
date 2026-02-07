@@ -1,10 +1,12 @@
-import { Box, Button, Group, TextInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
+import { useForm } from "@mantine/form";
+import { Box, Button, Group, TextInput } from "@mantine/core";
 
 import { addArticleItem } from "../../store/articleItem/slice";
 
-export default function FormArticleScp({ handleCloseModal }) {
+import ModalTypeVisible from "./ModalTypeVisible";
+
+export default function ModalAddArticle({ typeVisible, open, close }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -21,10 +23,10 @@ export default function FormArticleScp({ handleCloseModal }) {
   });
 
   const handleForm = (newArticle) => {
-    dispatch(addArticleItem({ newArticle, cb: handleCloseModal }));
+    dispatch(addArticleItem({ newArticle, cb: close }));
   };
 
-  return (
+  const modalForm = (
     <Box>
       <form onSubmit={form.onSubmit(handleForm)} w="100%">
         <Group mt="10px" gap="10px" justify="center">
@@ -41,5 +43,15 @@ export default function FormArticleScp({ handleCloseModal }) {
         </Group>
       </form>
     </Box>
+  );
+
+  return (
+    <ModalTypeVisible
+      typeVisible={typeVisible}
+      children={modalForm}
+      open={open}
+      close={close}
+      title="Создание статьи"
+    />
   );
 }

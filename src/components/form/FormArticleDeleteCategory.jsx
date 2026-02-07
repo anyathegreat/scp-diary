@@ -30,7 +30,7 @@ export default function FormArticleDeleteCategory({ article, closeModal }) {
   return (
     <Box p="md" bd="3px solid brown.4" bdrs="4px">
       <Title order={3} mb="10px" ta="center">
-        Отвязать scp от статьи
+        Отвязать категорию
       </Title>
 
       <form onSubmit={form.onSubmit(handleForm)}>

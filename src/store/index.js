@@ -5,6 +5,7 @@ import scpSlice from "./scpItem/slice";
 import articlesSlice from "./articleList/slice";
 import articleSlice from "./articleItem/slice";
 import categoriesSlice from "./categoryList/slice";
+import combinedDbSlice from "./combinedDb/slice";
 
 export const store = configureStore({
   reducer: {
@@ -13,5 +14,6 @@ export const store = configureStore({
     articleItem: articleSlice,
     articleList: articlesSlice,
     categoryList: categoriesSlice,
+    combinedDb: combinedDbSlice,
   },
 });
