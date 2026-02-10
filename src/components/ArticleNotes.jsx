@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useMediaQuery } from "@mantine/hooks";
 import { DateTime } from "luxon";
 import { Box, Divider, Title, Button, Group, Stack, Text, Timeline, useMantineTheme } from "@mantine/core";
 import { IconCalendarEvent, IconEdit, IconTrash } from "@tabler/icons-react";
@@ -10,14 +11,21 @@ import FormAddArticleNote from "./form/FormAddArticleNotes";
 import ModalArticleUpdateNotes from "./modal/ModalArticleUpdateNotes";
 
 export default function ArticleNotes({ article, articleId }) {
-  const notes = article[0]?.notes || [];
-
   const dispatch = useDispatch();
   const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs})`);
 
-  const formatDate = (date) => {
+  const notes = article[0]?.notes || [];
+
+  const formatDesktopDate = (date) => {
     const formatDate = DateTime.fromISO(date);
     const newDate = formatDate.setLocale("ru").toFormat("dd MMMM yyyy");
+    return newDate;
+  };
+
+  const formatMobileDate = (date) => {
+    const formatDate = DateTime.fromISO(date);
+    const newDate = formatDate.setLocale("ru").toFormat("dd.LL.yyyy");
     return newDate;
   };
 
@@ -48,21 +56,21 @@ export default function ArticleNotes({ article, articleId }) {
 
       <FormAddArticleNote articleId={articleId} />
 
-      <Stack w="90%" my="30px" p="md" visibleFrom="sm">
-        <Timeline lineWidth={6} bulletSize={20}>
+      <Stack w={{ base: "92%", sm: "90%" }} my="30px" gap="0">
+        <Timeline lineWidth={isMobile ? 5 : 6} bulletSize={isMobile ? 15 : 20}>
           {notes.map((item) => {
             return (
               <Timeline.Item className="bord">
                 <Group gap="6px" c="brown.1" justify="space-between">
                   <Group gap="6px" align="center">
-                    <IconCalendarEvent />
+                    {!isMobile && <IconCalendarEvent />}
 
                     <Text fw={700} size="16px" c="brown.1">
-                      {formatDate(item.createdAt)}
+                      {isMobile ? formatMobileDate(item.createdAt) : formatDesktopDate(item.createdAt)}
                     </Text>
                   </Group>
 
-                  <Group gap="6px" w={{ base: "100%", xs: "50%" }} justify="end">
+                  <Group gap="6px" w={{ base: "60%", xs: "50%" }} justify="end">
                     <Button size="25px" onClick={() => handleEditClick(item)}>
                       <IconEdit />
                     </Button>
