@@ -6,7 +6,7 @@ import { IconEdit } from "@tabler/icons-react";
 
 import { getArticleItem } from "../store/articleItem/slice";
 
-import NotesArticleScp from "../components/NotesArticleScp";
+import ArticleNotes from "../components/ArticleNotes";
 import ModalArticleEditScp from "../components/modal/ModalArticleEditScp";
 import ModalArticleEditCategory from "../components/modal/ModalArticleEditCategory";
 import ModalArticleUpdateTitle from "../components/modal/ModalArticleUpdateTitle";
@@ -114,8 +114,9 @@ export default function ArticleDetailsPage() {
 
                 {creatures.map((item) => {
                   return (
-                    <Tabs.Panel key={`tabScp-${item.id}`} value={item["scp_number"]}>
+                    <Tabs.Panel mt="2px" key={`tabScp-${item.id}`} value={item["scp_number"]}>
                       <Typography>
+                        <Title order={3}>{`Scp-${item["scp_number"]} - ${item.title}`}</Title>
                         <div dangerouslySetInnerHTML={{ __html: item?.description }} />
                       </Typography>
                     </Tabs.Panel>
@@ -125,12 +126,12 @@ export default function ArticleDetailsPage() {
             )}
           </Box>
 
-          <NotesArticleScp article={article} articleId={id} />
+          <ArticleNotes article={article} articleId={id} />
 
           <Box>
             {modalUpdateTitleArticle && (
               <ModalArticleUpdateTitle
-                typeVisible="hiddenFrom"
+                modalVariant="desktop"
                 open={modalUpdateTitleArticle}
                 close={handleModalTitleArticle}
                 articleId={id}
@@ -138,7 +139,7 @@ export default function ArticleDetailsPage() {
             )}
             {modalUpdateTitleArticle && (
               <ModalArticleUpdateTitle
-                typeVisible="visibleFrom"
+                modalVariant="mobile"
                 open={modalUpdateTitleArticle}
                 close={handleModalTitleArticle}
                 articleId={id}
@@ -149,7 +150,7 @@ export default function ArticleDetailsPage() {
           <Box>
             {modalAddScp && (
               <ModalArticleEditScp
-                typeVisible="hiddenFrom"
+                modalVariant="desktop"
                 open={modalAddScp}
                 close={handleModalScp}
                 article={articleItem}
@@ -158,7 +159,7 @@ export default function ArticleDetailsPage() {
 
             {modalAddScp && (
               <ModalArticleEditScp
-                typeVisible="visibleFrom"
+                modalVariant="mobile"
                 open={modalAddScp}
                 close={handleModalScp}
                 article={articleItem}
@@ -169,7 +170,7 @@ export default function ArticleDetailsPage() {
           <Box>
             {modalAddCategory && (
               <ModalArticleEditCategory
-                typeVisible="hiddenFrom"
+                modalVariant="desktop"
                 open={modalAddCategory}
                 close={handleModalCategory}
                 article={articleItem}
@@ -178,7 +179,7 @@ export default function ArticleDetailsPage() {
 
             {modalAddCategory && (
               <ModalArticleEditCategory
-                typeVisible="visibleFrom"
+                modalVariant="mobile"
                 open={modalAddCategory}
                 close={handleModalCategory}
                 article={articleItem}

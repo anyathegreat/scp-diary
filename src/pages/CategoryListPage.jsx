@@ -38,11 +38,11 @@ export default function CategoryListPage() {
       </Grid>
 
       {modalAddCategory && (
-        <ModalAddCategory typeVisible="hiddenFrom" open={modalAddCategory} close={setModalAddCategory} />
+        <ModalAddCategory modalVariant="desktop" open={modalAddCategory} close={setModalAddCategory} />
       )}
 
       {modalAddCategory && (
-        <ModalAddCategory typeVisible="visibleFrom" open={modalAddCategory} close={setModalAddCategory} />
+        <ModalAddCategory modalVariant="mobile" open={modalAddCategory} close={setModalAddCategory} />
       )}
     </Box>
   );

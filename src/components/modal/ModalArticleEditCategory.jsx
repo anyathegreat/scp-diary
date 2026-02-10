@@ -3,9 +3,9 @@ import { Box, Button, Group } from "@mantine/core";
 
 import FormArticleAddCategory from "../form/FormArticleAddCategory";
 import FormArticleDeleteCategory from "../form/FormArticleDeleteCategory";
-import ModalTypeVisible from "./ModalTypeVisible";
+import CustomModal from "./CustomModal";
 
-export default function ModalArticleEditCategory({ typeVisible, open, close, article }) {
+export default function ModalArticleEditCategory({ modalVariant, open, close, article }) {
   const [addArticleCategory, setAddArticleCategory] = useState(false);
   const [deleteArticleCategory, setDeleteArticleCategory] = useState(false);
 
@@ -22,8 +22,12 @@ export default function ModalArticleEditCategory({ typeVisible, open, close, art
   const modalChildren = (
     <Box>
       <Group justify="center" gap="sm" mb="sm">
-        <Button onClick={handleAddArticleCategory}>Привязать категорию</Button>
-        <Button onClick={handleDeleteArticleCategory}>Отвязать категорию</Button>
+        <Button w="190px" onClick={handleAddArticleCategory}>
+          Привязать категорию
+        </Button>
+        <Button w="190px" onClick={handleDeleteArticleCategory}>
+          Отвязать категорию
+        </Button>
       </Group>
 
       {addArticleCategory && <FormArticleAddCategory articleId={article.articleId} closeModal={close} />}
@@ -32,12 +36,12 @@ export default function ModalArticleEditCategory({ typeVisible, open, close, art
   );
 
   return (
-    <ModalTypeVisible
-      typeVisible={typeVisible}
+    <CustomModal
+      modalVariant={modalVariant}
       children={modalChildren}
       title="Изменение категории в статье"
-      open={open}
-      close={close}
+      opened={open}
+      onClose={close}
     />
   );
 }

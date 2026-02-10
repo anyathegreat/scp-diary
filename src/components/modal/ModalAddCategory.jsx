@@ -4,9 +4,9 @@ import { Box, Button, Group, TextInput } from "@mantine/core";
 
 import { addCategoryItem } from "../../store/categoryItem/slice";
 
-import ModalTypeVisible from "./ModalTypeVisible";
+import CustomModal from "./CustomModal";
 
-export default function ModalAddCategory({ typeVisible, open, close }) {
+export default function ModalAddCategory({ modalVariant, open, close }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -66,11 +66,11 @@ export default function ModalAddCategory({ typeVisible, open, close }) {
   );
 
   return (
-    <ModalTypeVisible
-      typeVisible={typeVisible}
+    <CustomModal
+      modalVariant={modalVariant}
       children={modalForm}
-      open={open}
-      close={close}
+      opened={open}
+      onClose={close}
       title="Создание категории"
     />
   );

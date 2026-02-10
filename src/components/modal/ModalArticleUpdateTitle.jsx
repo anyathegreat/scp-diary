@@ -1,10 +1,12 @@
 import { Box, Button, Group, Modal, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
-import { updateArticleItemTitle } from "../../store/articleItem/slice";
-import ModalTypeVisible from "./ModalTypeVisible";
 
-export default function ModalArticleUpdateTitle({ typeVisible, articleId, open, close }) {
+import { updateArticleItemTitle } from "../../store/articleItem/slice";
+
+import CustomModal from "./CustomModal";
+
+export default function ModalArticleUpdateTitle({ modalVariant, articleId, open, close }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -49,12 +51,12 @@ export default function ModalArticleUpdateTitle({ typeVisible, articleId, open, 
   );
 
   return (
-    <ModalTypeVisible
-      typeVisible={typeVisible}
+    <CustomModal
+      modalVariant={modalVariant}
       children={modalForm}
       title="Редактировать название статьи"
-      open={open}
-      close={close}
+      opened={open}
+      onClose={close}
     />
   );
 }

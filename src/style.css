@@ -24,6 +24,10 @@
   background-color: var(--mantine-color-beige-8);
 }
 
+.mantine-Tabs-list::before {
+  border: none;
+}
+
 [data-mantine-color-scheme="dark"] .m_89d60db1 {
   --tab-border-color: var(--mantine-color-brown-3);
 }

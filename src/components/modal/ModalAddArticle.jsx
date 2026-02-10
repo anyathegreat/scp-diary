@@ -4,9 +4,9 @@ import { Box, Button, Group, TextInput } from "@mantine/core";
 
 import { addArticleItem } from "../../store/articleItem/slice";
 
-import ModalTypeVisible from "./ModalTypeVisible";
+import CustomModal from "./CustomModal";
 
-export default function ModalAddArticle({ typeVisible, open, close }) {
+export default function ModalAddArticle({ modalVariant, open, close }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -46,11 +46,11 @@ export default function ModalAddArticle({ typeVisible, open, close }) {
   );
 
   return (
-    <ModalTypeVisible
-      typeVisible={typeVisible}
+    <CustomModal
+      modalVariant={modalVariant}
       children={modalForm}
-      open={open}
-      close={close}
+      opened={open}
+      onClose={close}
       title="Создание статьи"
     />
   );

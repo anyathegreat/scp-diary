@@ -1,4 +1,4 @@
-import { Button, Modal, Skeleton, Stack } from "@mantine/core";
+import { Button, Skeleton, Stack } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -44,11 +44,11 @@ export default function ArticleListPage() {
       })}
 
       {modalAddArticle && (
-        <ModalAddArticle typeVisible="visibleFrom" open={modalAddArticle} close={handleModalAddArticle} />
+        <ModalAddArticle modalVariant="desktop" open={modalAddArticle} close={handleModalAddArticle} />
       )}
 
       {modalAddArticle && (
-        <ModalAddArticle typeVisible="hiddenFrom" open={modalAddArticle} close={handleModalAddArticle} />
+        <ModalAddArticle modalVariant="mobile" open={modalAddArticle} close={handleModalAddArticle} />
       )}
     </Stack>
   );

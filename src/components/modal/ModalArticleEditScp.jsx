@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Box, Button, Group, Modal } from "@mantine/core";
+import { Box, Button, Group } from "@mantine/core";
 
-import ModalTypeVisible from "./ModalTypeVisible";
 import FormArticleAddScp from "../form/FormArticleAddScp";
 import FormArticleDeleteScp from "../form/FormArticleDeleteScp";
+import CustomModal from "./CustomModal";
 
-export default function ModalArticleEditScp({ typeVisible, open, close, article }) {
+export default function ModalArticleEditScp({ modalVariant, open, close, article }) {
   const [addArticleScp, setAddArticleScp] = useState(false);
   const [deleteArticleScp, setDeleteArticleScp] = useState(false);
 
@@ -22,8 +22,12 @@ export default function ModalArticleEditScp({ typeVisible, open, close, article 
   const modalChildren = (
     <Box>
       <Group justify="center" gap="sm" mb="sm">
-        <Button onClick={handleAddArticleScp}>Привязать scp</Button>
-        <Button onClick={handleDeleteArticleScp}>Отвязать scp</Button>
+        <Button w="140px" onClick={handleAddArticleScp}>
+          Привязать scp
+        </Button>
+        <Button w="140px" onClick={handleDeleteArticleScp}>
+          Отвязать scp
+        </Button>
       </Group>
 
       {addArticleScp && <FormArticleAddScp articleId={article.articleId} closeModal={close} />}
@@ -32,12 +36,12 @@ export default function ModalArticleEditScp({ typeVisible, open, close, article 
   );
 
   return (
-    <ModalTypeVisible
-      typeVisible={typeVisible}
+    <CustomModal
+      modalVariant={modalVariant}
       children={modalChildren}
       title="Изменение Scp в статье"
-      open={open}
-      close={close}
+      opened={open}
+      onClose={close}
     />
   );
 }

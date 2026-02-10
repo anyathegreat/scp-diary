@@ -1,12 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
-import { Box, Button, Modal, Textarea } from "@mantine/core";
+import { Box, Button, Textarea } from "@mantine/core";
 
 import { updateNote } from "../../store/articleItem/slice";
+import CustomModal from "./CustomModal";
 
-import ModalTypeVisible from "./ModalTypeVisible";
-
-export default function ModalArticleUpdateNotes({ typeVisible, articleId, noteEdit, open, close }) {
+export default function ModalArticleUpdateNotes({ modalVariant, articleId, noteEdit, open, close }) {
   const dispatch = useDispatch();
 
   const form = useForm({
@@ -48,11 +47,11 @@ export default function ModalArticleUpdateNotes({ typeVisible, articleId, noteEd
   );
 
   return (
-    <ModalTypeVisible
-      typeVisible={typeVisible}
+    <CustomModal
+      modalVariant={modalVariant}
       children={modalForm}
-      open={open}
-      close={close}
+      opened={open}
+      onClose={close}
       title="Редактировать заметку"
     />
   );

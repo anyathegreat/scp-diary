@@ -52,7 +52,8 @@ export default function ScpList() {
         })}
       </Grid>
 
-      {modalAddScp && <ModalAddScp open={modalAddScp} close={handleModalAddScp} />}
+      {modalAddScp && <ModalAddScp modalVariant="desktop" open={modalAddScp} close={handleModalAddScp} />}
+      {modalAddScp && <ModalAddScp modalVariant="mobile" open={modalAddScp} close={handleModalAddScp} />}
     </Stack>
   );
 }
