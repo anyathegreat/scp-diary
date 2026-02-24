@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box } from "@mantine/core";
+import { Box, Group, Table, Title } from "@mantine/core";
 
 import { getCombinedDbData } from "../../store/combinedDb/slice";
 
-import TablesEntities from "../../components/TablesEntities";
+import { router } from "../../router";
 
 export default function AdminPanelPage() {
   const dispatch = useDispatch();
@@ -17,7 +17,25 @@ export default function AdminPanelPage() {
 
   return (
     <Box>
-      <TablesEntities tables={tablesSupabase} />
+      <Title>Существующие таблицы</Title>
+
+      <Table verticalSpacing="md" horizontalSpacing="lg" highlightOnHover="true" mt="20px">
+        <Table.Thead>
+          <Table.Tr>
+            <Table.Th>Название</Table.Th>
+          </Table.Tr>
+        </Table.Thead>
+
+        <Table.Tbody>
+          {tablesSupabase.map((item, index) => {
+            return (
+              <Table.Tr key={`table-${index}`} onClick={() => router.navigate(`${item.link}`)}>
+                <Table.Td>{item.name}</Table.Td>
+              </Table.Tr>
+            );
+          })}
+        </Table.Tbody>
+      </Table>
     </Box>
   );
 }

@@ -10,6 +10,7 @@ import ArticleDetailsPage from "./pages/ArticleDetailsPage";
 import CategoryListPage from "./pages/CategoryListPage";
 import AdminPanelPage from "./pages/admin/AdminPanelPage";
 import AdminArticlePage from "./pages/admin/AdminArticlePage";
+import AdminArticleNotesPage from "./pages/admin/AdminArticleNotesPage";
 
 export const router = createBrowserRouter([
   {
@@ -65,7 +66,15 @@ export const router = createBrowserRouter([
         children: [
           { index: true, Component: AdminPanelPage },
           { path: "not-found", Component: NotFoundPage, handle: { crumb: "not-found" } },
-          { path: "articles", Component: AdminArticlePage, handle: { crumb: "articles" } },
+          {
+            path: "articles",
+            handle: { crumb: "articles" },
+            children: [
+              { index: true, Component: AdminArticlePage },
+              { path: "notes/:id", Component: AdminArticleNotesPage, handle: { crumb: "article-notes" } },
+              { path: "not-found", Component: NotFoundPage, handle: { crumb: "not-found" } },
+            ],
+          },
         ],
       },
       {

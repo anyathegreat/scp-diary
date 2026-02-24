@@ -61,6 +61,7 @@ export const deleteArticleItem = createAsyncThunk(
   async (params, { dispatch, rejectWithValue }) => {
     try {
       const response = await articleService.deleteArticle(params);
+      console.log(params);
       dispatch(getArticles());
       toast.success("Статья успешно удалена");
       return response;
@@ -91,8 +92,9 @@ export const addArticleNote = createAsyncThunk(
 
 export const updateNote = createAsyncThunk("articleItem/updateNote", async (params, { dispatch, rejectWithValue }) => {
   try {
-    const response = await articleService.updateArticleNote(params);
-    dispatch(getArticleItem(params.articleId));
+    const response = await articleService.updateArticleNote(params.body);
+    dispatch(getArticleItem(params.body.articleId));
+    params.cb();
     toast.success("Заметка успешно обновленна");
 
     return response;
