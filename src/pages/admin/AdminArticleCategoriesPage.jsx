@@ -1,0 +1,113 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import { IconTrash } from "@tabler/icons-react";
+import { Box, Button, Flex, Group, Table, Title } from "@mantine/core";
+
+import { deleteArticleCategory, getArticleItem } from "../../store/articleItem/slice";
+import { router } from "../../router";
+
+import ModalAdminArticleAddCategory from "../../components/modal/admin/ModalAdminArticleAddCategory";
+
+export default function AdminArticleCategoriesPage() {
+  const dispatch = useDispatch();
+  const { id } = useParams();
+
+  const [modalArticleAddCategory, setModalArticleAddCategory] = useState(false);
+
+  const article = useSelector((state) => state.articleItem.item);
+  const { loading } = useSelector((state) => state.articleItem);
+
+  const articleItem = article[0] || null;
+  const categories = article[0]?.categories || [];
+
+  const handleDeleteCategory = (categoryId) => {
+    dispatch(deleteArticleCategory({ body: { category_id: categoryId, article_id: id } }));
+  };
+
+  const handleModalArticleAddCategory = () => {
+    setModalArticleAddCategory((prev) => !prev);
+  };
+
+  useEffect(() => {
+    dispatch(getArticleItem(id));
+  }, [dispatch, id]);
+
+  if (loading) {
+    return <Box></Box>;
+  }
+
+  return (
+    <Box>
+      {articleItem && (
+        <Box>
+          <Flex justify={{ base: "center", sm: "space-between" }} wrap="wrap" gap="sm">
+            <Title>{`Категории статьи: ${articleItem.title}`} </Title>
+
+            <Group gap="sm">
+              <Button size="md" onClick={() => router.navigate("/admin/articles")}>
+                Назад
+              </Button>
+
+              <Button size="md" onClick={handleModalArticleAddCategory}>
+                Добавить
+              </Button>
+            </Group>
+          </Flex>
+
+          <Table verticalSpacing="md" horizontalSpacing="md" mt="20px">
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>Название</Table.Th>
+                <Table.Th>slug</Table.Th>
+                <Table.Th w={{ base: "40%", sm: "30%" }} style={{ wordBreak: "break-word" }}>
+                  Редактировать
+                </Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+
+            <Table.Tbody>
+              {categories.length > 0 ? (
+                categories.map((item) => {
+                  return (
+                    <Table.Tr key={`tableCategories-${item.id}`}>
+                      <Table.Td>{item.name}</Table.Td>
+                      <Table.Td>{item.slug}</Table.Td>
+
+                      <Table.Td ta="center">
+                        <Button bg="#961818" onClick={() => handleDeleteCategory(item.id)}>
+                          <IconTrash />
+                        </Button>
+                      </Table.Td>
+                    </Table.Tr>
+                  );
+                })
+              ) : (
+                <Table.Tr ta="center">
+                  <Table.Td colSpan={3}>У статьи нет привязанных категорий</Table.Td>
+                </Table.Tr>
+              )}
+            </Table.Tbody>
+          </Table>
+        </Box>
+      )}
+
+      {modalArticleAddCategory && (
+        <ModalAdminArticleAddCategory
+          modalVariant="desktop"
+          articleId={id}
+          open={modalArticleAddCategory}
+          close={handleModalArticleAddCategory}
+        />
+      )}
+      {modalArticleAddCategory && (
+        <ModalAdminArticleAddCategory
+          modalVariant="mobile"
+          articleId={id}
+          open={modalArticleAddCategory}
+          close={handleModalArticleAddCategory}
+        />
+      )}
+    </Box>
+  );
+}

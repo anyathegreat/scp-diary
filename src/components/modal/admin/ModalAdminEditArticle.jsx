@@ -2,10 +2,11 @@ import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Group, Text, TextInput } from "@mantine/core";
 
-import CustomModal from "../CustomModal";
 import { Link } from "react-router";
 import { updateArticleItemTitle } from "../../../store/articleItem/slice";
 import { getArticles } from "../../../store/articleList/slice";
+
+import CustomModal from "../CustomModal";
 
 export default function ModalAdminEditArticle({ modalVariant, article, open, close }) {
   const dispatch = useDispatch();
@@ -62,7 +63,9 @@ export default function ModalAdminEditArticle({ modalVariant, article, open, clo
               Изменить привязанные категории:
             </Text>
 
-            <Button>Категории</Button>
+            <Button component={Link} to={`categories/${article.articleId}`}>
+              Категории
+            </Button>
           </Group>
 
           <Group w="100%" justify="space-between">
@@ -70,7 +73,9 @@ export default function ModalAdminEditArticle({ modalVariant, article, open, clo
               Изменить привязанных scp:
             </Text>
 
-            <Button>Scp объекты</Button>
+            <Button component={Link} to={`scps/${article.articleId}`}>
+              Scp объекты
+            </Button>
           </Group>
 
           <Button type="submit">Редактировать</Button>

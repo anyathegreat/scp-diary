@@ -11,6 +11,8 @@ import CategoryListPage from "./pages/CategoryListPage";
 import AdminPanelPage from "./pages/admin/AdminPanelPage";
 import AdminArticlePage from "./pages/admin/AdminArticlePage";
 import AdminArticleNotesPage from "./pages/admin/AdminArticleNotesPage";
+import AdminArticleCategoriesPage from "./pages/admin/AdminArticleCategoriesPage";
+import AdminArticleScpPage from "./pages/admin/AdminArticleScpPage";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +74,16 @@ export const router = createBrowserRouter([
             children: [
               { index: true, Component: AdminArticlePage },
               { path: "notes/:id", Component: AdminArticleNotesPage, handle: { crumb: "article-notes" } },
+              {
+                path: "categories/:id",
+                Component: AdminArticleCategoriesPage,
+                handle: { crumb: "article-categories" },
+              },
+              {
+                path: "scps/:id",
+                Component: AdminArticleScpPage,
+                handle: { crumb: "article-categories" },
+              },
               { path: "not-found", Component: NotFoundPage, handle: { crumb: "not-found" } },
             ],
           },

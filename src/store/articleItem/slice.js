@@ -179,7 +179,7 @@ export const deleteArticleCategory = createAsyncThunk(
     try {
       const response = await articleService.deleteArticleCategoryObject(params.body);
       dispatch(getArticleItem(params.body.article_id));
-      params.cb();
+      if (params.cb) params.cb();
       toast.success("Категория успешно отвязанна");
 
       return response;
