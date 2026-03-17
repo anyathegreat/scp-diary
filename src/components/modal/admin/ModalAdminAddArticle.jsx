@@ -1,9 +1,10 @@
+import { useDispatch } from "react-redux";
+import { useForm } from "@mantine/form";
 import { Box, Button, Group, TextInput } from "@mantine/core";
 
-import CustomModal from "../CustomModal";
-import { useForm } from "@mantine/form";
-import { useDispatch } from "react-redux";
 import { addArticleItem } from "../../../store/articleItem/slice";
+
+import CustomModal from "../CustomModal";
 
 export default function ModalAdminAddArticle({ modalVariant, open, close }) {
   const dispatch = useDispatch();
@@ -52,6 +53,6 @@ export default function ModalAdminAddArticle({ modalVariant, open, close }) {
       opened={open}
       onClose={close}
       title="Создание статьи"
-    ></CustomModal>
+    />
   );
 }

@@ -53,13 +53,33 @@ const scpREST = {
   addScp: async (body) => {
     const token = localStorage.getItem("access_token");
 
-    const response = await fetch(`${supabaseConfig.functionUrl}/create-creature`, {
+    const response = await fetch(`${supabaseConfig.baseUrl}/creatures`, {
       method: "POST",
       headers: {
+        apikey: supabaseConfig.apikey,
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
+
       body: JSON.stringify(body),
+    });
+
+    return handleResponse(response);
+  },
+
+  updateScp: async ({ scpId, updateScp }) => {
+    console.log(updateScp);
+    const token = localStorage.getItem("access_token");
+
+    const response = await fetch(`${supabaseConfig.baseUrl}/creatures?id=eq.${scpId}`, {
+      method: "PATCH",
+      headers: {
+        apikey: supabaseConfig.apikey,
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(updateScp),
     });
 
     return handleResponse(response);
@@ -84,5 +104,6 @@ export const scpService = {
   getAllScp: scpREST.getAllScp,
   getScp: scpREST.getScp,
   addScp: scpREST.addScp,
+  updateScp: scpREST.updateScp,
   deleteScp: scpREST.deleteScp,
 };

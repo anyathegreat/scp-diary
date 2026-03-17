@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
+import { useMediaQuery } from "@mantine/hooks";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Flex, Group, Table, Title, Typography } from "@mantine/core";
+import { Box, Button, Flex, Group, Table, Title, Typography, useMantineTheme } from "@mantine/core";
+import { IconTrash } from "@tabler/icons-react";
 
 import { deleteArticleScp, getArticleItem } from "../../store/articleItem/slice";
-import { router } from "../../router";
-import { IconTrash } from "@tabler/icons-react";
+
 import ModalAdminArticleAddScp from "../../components/modal/admin/ModalAdminArticleAddScp";
 
 export default function AdminArticleScpPage() {
   const dispatch = useDispatch();
+  const theme = useMantineTheme();
+  const isMobile = useMediaQuery(`(max-width: ${theme.breakpoints.xs})`);
+
   const { id } = useParams();
 
   const [modalArticleAddScp, setModalArticleAddScp] = useState(false);
@@ -28,8 +32,6 @@ export default function AdminArticleScpPage() {
     setModalArticleAddScp((prev) => !prev);
   };
 
-  console.log(creatures);
-
   useEffect(() => {
     dispatch(getArticleItem(id));
   }, [dispatch, id]);
@@ -38,11 +40,11 @@ export default function AdminArticleScpPage() {
     <Box>
       {articleItem && (
         <Box>
-          <Flex justify={{ base: "center", sm: "space-between" }} wrap="wrap" gap="sm">
+          <Flex justify={{ base: "center", md: "space-between" }} wrap="wrap" gap="sm">
             <Title>{`Существа статьи: ${articleItem.title}`} </Title>
 
             <Group gap="sm">
-              <Button size="md" onClick={() => router.navigate("/admin/articles")}>
+              <Button size="md" component={Link} to="/admin/articles">
                 Назад
               </Button>
 
@@ -57,8 +59,7 @@ export default function AdminArticleScpPage() {
               <Table.Tr>
                 <Table.Th>Имя</Table.Th>
                 <Table.Th>Номер</Table.Th>
-                <Table.Th>Описание</Table.Th>
-                <Table.Th w={{ base: "40%", sm: "30%" }} style={{ wordBreak: "break-word" }}>
+                <Table.Th w={{ base: "20%", sm: "30%" }} style={{ wordBreak: "break-word" }}>
                   Редактировать
                 </Table.Th>
               </Table.Tr>
@@ -68,14 +69,9 @@ export default function AdminArticleScpPage() {
               {creatures.length > 0 ? (
                 creatures.map((item) => {
                   return (
-                    <Table.Tr key={`tableCategories-${item.id}`}>
+                    <Table.Tr key={`tableArticleScp-${item.id}`}>
                       <Table.Td>{item.title}</Table.Td>
-                      <Table.Td>{item["scp_number"]}</Table.Td>
-                      <Table.Td>
-                        <Typography>
-                          <div dangerouslySetInnerHTML={{ __html: item.description }} />
-                        </Typography>
-                      </Table.Td>
+                      <Table.Td style={{ wordBreak: "break-word" }}>{item["scp_number"]}</Table.Td>
 
                       <Table.Td ta="center">
                         <Button bg="#961818" onClick={() => handleDeleteScp(item.id)}>

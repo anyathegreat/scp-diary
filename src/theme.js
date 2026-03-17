@@ -115,11 +115,13 @@ export const theme = createTheme({
 
         th: {
           textAlign: "center",
+          padding: "14px",
         },
 
         td: {
           fontSize: "22px",
           fontWeight: 600,
+          padding: "14px",
         },
       }),
     },

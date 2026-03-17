@@ -60,11 +60,10 @@ export const updateCategoryItem = createAsyncThunk(
 
 export const deleteCategoryItem = createAsyncThunk(
   "categoryList/deleteCategoryItem",
-  async (params, { dispatch, rejectWithValue }) => {
+  async (categoryId, { dispatch, rejectWithValue }) => {
     try {
-      const response = await categoryService.addCategory(params.categoryId);
+      const response = await categoryService.deleteCategory(categoryId);
       dispatch(getCategories());
-      params.cb();
 
       toast.success("Категория успешно удалена");
       return response;
@@ -118,6 +117,17 @@ export const categoriesSlice = createSlice({
         state.loading -= 1;
       })
       .addCase(updateCategoryItem.rejected, (state) => {
+        state.loading -= 1;
+      });
+
+    builder
+      .addCase(deleteCategoryItem.pending, (state) => {
+        state.loading += 1;
+      })
+      .addCase(deleteCategoryItem.fulfilled, (state) => {
+        state.loading -= 1;
+      })
+      .addCase(deleteCategoryItem.rejected, (state) => {
         state.loading -= 1;
       });
   },

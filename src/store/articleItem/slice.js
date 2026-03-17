@@ -30,10 +30,12 @@ export const addArticleItem = createAsyncThunk(
       dispatch(getArticles());
       params.cb();
       toast.success("Статья успешно созданна");
+
       return response;
     } catch (error) {
       console.error(error);
       toast.error(error.message);
+
       return rejectWithValue(error.message);
     }
   },
@@ -47,10 +49,12 @@ export const updateArticleItemTitle = createAsyncThunk(
       dispatch(getArticleItem(params.body.articleId));
       params.cb();
       toast.success("Название статьи успешно обновленно");
+
       return response;
     } catch (error) {
       console.error(error);
       toast.error(error.message);
+
       return rejectWithValue(error.message);
     }
   },
@@ -64,10 +68,12 @@ export const deleteArticleItem = createAsyncThunk(
       console.log(params);
       dispatch(getArticles());
       toast.success("Статья успешно удалена");
+
       return response;
     } catch (error) {
       console.error(error);
       toast.error(error.message);
+
       return rejectWithValue(error.message);
     }
   },

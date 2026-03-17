@@ -22,13 +22,30 @@ export const getScpItem = createAsyncThunk("scpItem/getScpItem", async (scpId, {
 
 export const addScpItem = createAsyncThunk("scpItem/addScpItem", async (params, { rejectWithValue }) => {
   try {
-    const response = await scpService.addScp(params.formData);
+    const response = await scpService.addScp(params.newScp);
     toast.success("Объект успешно создан");
     params.cb();
+
     return response;
   } catch (error) {
     console.error(error);
     toast.error(error.message);
+
+    return rejectWithValue(error.message);
+  }
+});
+
+export const updateScpItem = createAsyncThunk("scpItem/updateScpItem", async (params, { rejectWithValue }) => {
+  try {
+    const response = await scpService.updateScp(params.body);
+    toast.success("Объект успешно обновлен");
+    params.cb();
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    toast.error(error.message);
+
     return rejectWithValue(error.message);
   }
 });
@@ -76,6 +93,17 @@ const ScpSlice = createSlice({
         state.loading -= 1;
       })
       .addCase(addScpItem.rejected, (state) => {
+        state.loading -= 1;
+      });
+
+    builder
+      .addCase(updateScpItem.pending, (state) => {
+        state.loading += 1;
+      })
+      .addCase(updateScpItem.fulfilled, (state) => {
+        state.loading -= 1;
+      })
+      .addCase(updateScpItem.rejected, (state) => {
         state.loading -= 1;
       });
 

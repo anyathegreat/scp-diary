@@ -1,9 +1,10 @@
-import { Box, Button, FileInput, Flex, Group, Stack, Textarea, TextInput } from "@mantine/core";
-import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
+import { useForm } from "@mantine/form";
+import { Box, Button, FileInput, Flex, Group, Stack, Textarea, TextInput } from "@mantine/core";
+import { IconPolaroid } from "@tabler/icons-react";
 
 import { addScpItem } from "../../store/scpItem/slice";
-import { IconPolaroid } from "@tabler/icons-react";
+
 import CustomModal from "./CustomModal";
 
 export default function ModalAddScp({ modalVariant, open, close }) {
@@ -27,25 +28,18 @@ export default function ModalAddScp({ modalVariant, open, close }) {
         return !value.trim() ? "Название обязательно" : null;
       },
 
-      image: (value) => {
-        if (!value) return "Изображение обязательно";
-        if (!value.type.startsWith("image/")) return "Файл не является изображением";
-        if (value.size > 5 * 1024 * 1024) return "Файл слишком большой (макс. 5MB)";
+      // image: (value) => {
+      //   if (!value) return "Изображение обязательно";
+      //   if (!value.type.startsWith("image/")) return "Файл не является изображением";
+      //   if (value.size > 5 * 1024 * 1024) return "Файл слишком большой (макс. 5MB)";
 
-        return null;
-      },
+      //   return null;
+      // },
     },
   });
 
   const handleForm = (values) => {
-    const formData = new FormData();
-
-    formData.append("title", values.title);
-    formData.append("scp_number", values.number);
-    if (values.description) formData.append("description", values.description);
-    if (values.image) formData.append("image", values.image);
-
-    dispatch(addScpItem({ formData: formData, cb: close }));
+    // dispatch(addScpItem({ formData: formData, cb: close }));
   };
 
   const handleReset = () => {

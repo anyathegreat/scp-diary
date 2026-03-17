@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Group, Table, Title } from "@mantine/core";
+import { Box, Button, Flex, Group, Table, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
 import { router } from "../../router";
@@ -9,11 +9,13 @@ import { deleteArticleItem } from "../../store/articleItem/slice";
 
 import ModalAdminEditArticle from "../../components/modal/admin/ModalAdminEditArticle";
 import ModalAdminAddArticle from "../../components/modal/admin/ModalAdminAddArticle";
+import { Link } from "react-router";
 
 export default function AdminArticlePage() {
   const dispatch = useDispatch();
 
   const articles = useSelector((state) => state.articleList.list);
+  const { loading } = useSelector((state) => state.articleList);
 
   const [editArticle, setEditArticle] = useState(null);
   const [modalEditArticle, setModalEditArticle] = useState(false);
@@ -41,13 +43,17 @@ export default function AdminArticlePage() {
     dispatch(getArticles());
   }, [dispatch]);
 
+  if (loading) {
+    return <Box></Box>;
+  }
+
   return (
     <Box>
-      <Group justify="space-between">
+      <Flex justify={{ base: "center", xs: "space-between" }} wrap="wrap" gap="sm">
         <Title>Существующие cтатьи</Title>
 
         <Group gap="sm">
-          <Button size="md" onClick={() => router.navigate("/admin")}>
+          <Button size="md" component={Link} to="/admin">
             Назад
           </Button>
 
@@ -55,36 +61,44 @@ export default function AdminArticlePage() {
             Создать
           </Button>
         </Group>
-      </Group>
+      </Flex>
 
       <Table verticalSpacing="md" horizontalSpacing="lg" mt="20px">
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Название</Table.Th>
-            <Table.Th w="30%">Редактировать</Table.Th>
+            <Table.Th w={{ base: "30%", sm: "30%" }} style={{ wordBreak: "break-word" }}>
+              Редактировать
+            </Table.Th>
           </Table.Tr>
         </Table.Thead>
 
         <Table.Tbody>
-          {articles.map((item, index) => {
-            return (
-              <Table.Tr key={`tableArticle-${index}`}>
-                <Table.Td>{item.title}</Table.Td>
+          {articles.length > 0 ? (
+            articles.map((item, index) => {
+              return (
+                <Table.Tr key={`tableArticle-${index}`}>
+                  <Table.Td style={{ wordBreak: "break-word" }}>{item.title}</Table.Td>
 
-                <Table.Td>
-                  <Group justify="center" gap="sm">
-                    <Button onClick={() => handleOpenModalEditArticle(item)}>
-                      <IconEdit />
-                    </Button>
+                  <Table.Td>
+                    <Group justify="center" gap="sm">
+                      <Button onClick={() => handleOpenModalEditArticle(item)}>
+                        <IconEdit />
+                      </Button>
 
-                    <Button bg="#961818" onClick={() => handleDeleteArticle(item.articleId)}>
-                      <IconTrash />
-                    </Button>
-                  </Group>
-                </Table.Td>
-              </Table.Tr>
-            );
-          })}
+                      <Button bg="#961818" onClick={() => handleDeleteArticle(item.articleId)}>
+                        <IconTrash />
+                      </Button>
+                    </Group>
+                  </Table.Td>
+                </Table.Tr>
+              );
+            })
+          ) : (
+            <Table.Tr ta="center">
+              <Table.Td colSpan={2}>Статей не существует</Table.Td>
+            </Table.Tr>
+          )}
         </Table.Tbody>
       </Table>
 

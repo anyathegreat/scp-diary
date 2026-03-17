@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Box, Button, Flex, Group, Table, Title } from "@mantine/core";
 import { deleteNote, getArticleItem } from "../../store/articleItem/slice";
-
-import { router } from "../../router";
 
 import ModalAdminArticleAddNote from "../../components/modal/admin/ModalAdminArticleAddNote";
 import ModalAdminArticleUpdateNote from "../../components/modal/admin/ModalAdminArticleUpdateNote";
@@ -48,11 +46,11 @@ export default function AdminArticleNotesPage() {
     <Box>
       {articleItem && (
         <Box>
-          <Flex justify={{ base: "center", sm: "space-between" }} wrap="wrap" gap="sm">
+          <Flex justify={{ base: "center", md: "space-between" }} wrap="wrap" gap="sm">
             <Title>{`Заметки статьи: ${articleItem.title}`} </Title>
 
             <Group gap="sm">
-              <Button size="md" onClick={() => router.navigate("/admin/articles")}>
+              <Button size="md" component={Link} to="/admin/articles">
                 Назад
               </Button>
 
@@ -66,7 +64,7 @@ export default function AdminArticleNotesPage() {
             <Table.Thead>
               <Table.Tr>
                 <Table.Th>Описание заметки</Table.Th>
-                <Table.Th w={{ base: "40%", sm: "30%" }} style={{ wordBreak: "break-word" }}>
+                <Table.Th w={{ base: "30%", sm: "30%" }} style={{ wordBreak: "break-word" }}>
                   Редактировать
                 </Table.Th>
               </Table.Tr>
@@ -76,7 +74,7 @@ export default function AdminArticleNotesPage() {
               {notes.length > 0 ? (
                 notes.map((item) => {
                   return (
-                    <Table.Tr key={`tableNotes-${item.uid}`}>
+                    <Table.Tr key={`tableArticleNotes-${item.uid}`}>
                       <Table.Td style={{ wordBreak: "break-word" }}>{item.text}</Table.Td>
 
                       <Table.Td>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router";
+import { Link, useParams } from "react-router";
 import { IconTrash } from "@tabler/icons-react";
 import { Box, Button, Flex, Group, Table, Title } from "@mantine/core";
 
@@ -41,11 +41,11 @@ export default function AdminArticleCategoriesPage() {
     <Box>
       {articleItem && (
         <Box>
-          <Flex justify={{ base: "center", sm: "space-between" }} wrap="wrap" gap="sm">
+          <Flex justify={{ base: "center", md: "space-between" }} wrap="wrap" gap="sm">
             <Title>{`Категории статьи: ${articleItem.title}`} </Title>
 
             <Group gap="sm">
-              <Button size="md" onClick={() => router.navigate("/admin/articles")}>
+              <Button size="md" component={Link} to="/admin/articles">
                 Назад
               </Button>
 
@@ -60,7 +60,7 @@ export default function AdminArticleCategoriesPage() {
               <Table.Tr>
                 <Table.Th>Название</Table.Th>
                 <Table.Th>slug</Table.Th>
-                <Table.Th w={{ base: "40%", sm: "30%" }} style={{ wordBreak: "break-word" }}>
+                <Table.Th w={{ base: "10%", sm: "30%" }} style={{ wordBreak: "break-word" }}>
                   Редактировать
                 </Table.Th>
               </Table.Tr>
@@ -70,9 +70,13 @@ export default function AdminArticleCategoriesPage() {
               {categories.length > 0 ? (
                 categories.map((item) => {
                   return (
-                    <Table.Tr key={`tableCategories-${item.id}`}>
-                      <Table.Td>{item.name}</Table.Td>
-                      <Table.Td>{item.slug}</Table.Td>
+                    <Table.Tr key={`tableArticleCategories-${item.id}`}>
+                      <Table.Td w={{ base: "45%", sm: "35%" }} style={{ wordBreak: "break-word" }}>
+                        {item.name}
+                      </Table.Td>
+                      <Table.Td w={{ base: "45%", sm: "35%" }} style={{ wordBreak: "break-word" }}>
+                        {item.slug}
+                      </Table.Td>
 
                       <Table.Td ta="center">
                         <Button bg="#961818" onClick={() => handleDeleteCategory(item.id)}>

@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
-import { Box, Button, Group, Text, TextInput } from "@mantine/core";
+import { Box, Button, Flex, Group, Text, TextInput } from "@mantine/core";
 
 import { Link } from "react-router";
 import { updateArticleItemTitle } from "../../../store/articleItem/slice";
@@ -33,7 +33,7 @@ export default function ModalAdminEditArticle({ modalVariant, article, open, clo
     <Box>
       <form onSubmit={form.onSubmit(handleForm)}>
         <Group gap="16px" justify="center" px="sm">
-          <Group w="100%" justify="space-between">
+          <Flex w="100%" gap="xs" wrap="wrap" justify={{ base: "center", xs: "space-between" }}>
             <Text fz="20px" fw="600">
               Название статьи:
             </Text>
@@ -46,7 +46,7 @@ export default function ModalAdminEditArticle({ modalVariant, article, open, clo
               radius="md"
               placeholder="Введите название статьи"
             />
-          </Group>
+          </Flex>
 
           <Group w="100%" justify="space-between">
             <Text fz="20px" fw="600">
@@ -59,7 +59,7 @@ export default function ModalAdminEditArticle({ modalVariant, article, open, clo
           </Group>
 
           <Group w="100%" justify="space-between">
-            <Text fz="20px" fw="600">
+            <Text fz="20px" fw="600" w="56%">
               Изменить привязанные категории:
             </Text>
 
@@ -69,7 +69,7 @@ export default function ModalAdminEditArticle({ modalVariant, article, open, clo
           </Group>
 
           <Group w="100%" justify="space-between">
-            <Text fz="20px" fw="600">
+            <Text fz="20px" fw="600" w="56%">
               Изменить привязанных scp:
             </Text>
 
