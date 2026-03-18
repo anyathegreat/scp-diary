@@ -3,7 +3,7 @@ import { useForm } from "@mantine/form";
 import { Box, Button, Group, Textarea } from "@mantine/core";
 
 import { addArticleNote } from "@/store/articleItem/slice";
-import { validateNoteText } from "@/utils/validates";
+import { validateNoteText } from "@/helpers/validates";
 
 export default function FormAddArticleNote({ articleId }) {
   const dispatch = useDispatch();

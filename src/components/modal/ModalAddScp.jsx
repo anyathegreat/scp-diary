@@ -4,7 +4,7 @@ import { Box, Button, FileInput, Flex, Group, Stack, Textarea, TextInput } from 
 import { IconPolaroid } from "@tabler/icons-react";
 
 import { addScpItem } from "@/store/scpItem/slice";
-import { validateAddScpImage, validateScpNumber, validateScpTitle } from "@/utils/validates";
+import { validateAddScpImage, validateScpNumber, validateScpTitle } from "@/helpers/validates";
 
 import CustomModal from "@/components/modal/CustomModal";
 

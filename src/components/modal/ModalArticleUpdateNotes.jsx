@@ -3,7 +3,7 @@ import { useForm } from "@mantine/form";
 import { Box, Button, Textarea } from "@mantine/core";
 
 import { updateNote } from "@/store/articleItem/slice";
-import { validateNoteText } from "@/utils/validates";
+import { validateNoteText } from "@/helpers/validates";
 
 import CustomModal from "@/components/modal/CustomModal";
 

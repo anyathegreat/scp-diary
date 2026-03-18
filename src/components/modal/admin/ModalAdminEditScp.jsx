@@ -5,7 +5,7 @@ import { IconPolaroid } from "@tabler/icons-react";
 
 import { updateScpItem } from "@/store/scpItem/slice";
 import { fileToBase64 } from "@/helpers/fileToBase64";
-import { validateEditScpImage, validateScpNumber, validateScpTitle } from "@/utils/validates";
+import { validateEditScpImage, validateScpNumber, validateScpTitle } from "@/helpers/validates";
 
 import CustomModal from "@/components/modal/CustomModal";
 

@@ -3,7 +3,7 @@ import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
 
 import { updateArticleItemTitle } from "@/store/articleItem/slice";
-import { validateArticleTitle } from "@/utils/validates";
+import { validateArticleTitle } from "@/helpers/validates";
 
 import CustomModal from "@/components/modal/CustomModal";
 
