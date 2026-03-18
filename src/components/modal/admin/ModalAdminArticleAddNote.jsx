@@ -1,8 +1,10 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
-import { Box, Button, Group, Stack, Textarea, TextInput } from "@mantine/core";
+import { Box, Button, Stack, Textarea } from "@mantine/core";
 
 import { addArticleNote } from "../../../store/articleItem/slice";
+
+import { validateNoteText } from "../../../utils/validates";
 
 import CustomModal from "../CustomModal";
 
@@ -16,11 +18,7 @@ export default function ModalAdminArticleAddNote({ modalVariant, articleId, open
     },
 
     validate: {
-      text: (value) => {
-        if (!value.trim()) return "Введите описание";
-        if (value.trim().length < 40) return "Описание должно состоять минимум из 40 символов";
-        return null;
-      },
+      text: validateNoteText,
     },
   });
 

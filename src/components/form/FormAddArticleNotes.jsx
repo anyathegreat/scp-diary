@@ -4,6 +4,8 @@ import { Box, Button, Group, Textarea } from "@mantine/core";
 
 import { addArticleNote } from "../../store/articleItem/slice";
 
+import { validateNoteText } from "../../utils/validates";
+
 export default function FormAddArticleNote({ articleId }) {
   const dispatch = useDispatch();
 
@@ -14,11 +16,7 @@ export default function FormAddArticleNote({ articleId }) {
     },
 
     validate: {
-      text: (value) => {
-        if (!value.trim()) return "Введите описание";
-        if (value.trim().length < 40) return "Описание должно состоять минимум из 40 символов";
-        return null;
-      },
+      text: validateNoteText,
     },
   });
 

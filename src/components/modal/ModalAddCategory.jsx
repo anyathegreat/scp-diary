@@ -4,6 +4,8 @@ import { Box, Button, Group, TextInput } from "@mantine/core";
 
 import { addCategoryItem } from "../../store/categoryItem/slice";
 
+import { validateCategorySlug, validateCategoryTitle } from "../../utils/validates";
+
 import CustomModal from "./CustomModal";
 
 export default function ModalAddCategory({ modalVariant, open, close }) {
@@ -17,18 +19,8 @@ export default function ModalAddCategory({ modalVariant, open, close }) {
     },
 
     validate: {
-      name: (value) => {
-        return !value.trim() ? "Название статьи обязательно" : null;
-      },
-
-      slug: (value) => {
-        if (!value.trim()) return "Slug обязателен";
-        if (!/^[a-z0-9]+$/.test(value)) {
-          return "Slug должен быть маленькими буквами";
-        }
-
-        return null;
-      },
+      name: validateCategoryTitle,
+      slug: validateCategorySlug,
     },
   });
 

@@ -4,6 +4,8 @@ import { Box, Button, Group, TextInput } from "@mantine/core";
 
 import { addArticleItem } from "../../store/articleItem/slice";
 
+import { validateArticleTitle } from "../../utils/validates";
+
 import CustomModal from "./CustomModal";
 
 export default function ModalAddArticle({ modalVariant, open, close }) {
@@ -16,9 +18,7 @@ export default function ModalAddArticle({ modalVariant, open, close }) {
     },
 
     validate: {
-      title: (value) => {
-        return !value.trim() ? "Название статьи обязательно" : null;
-      },
+      title: validateArticleTitle,
     },
   });
 

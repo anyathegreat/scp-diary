@@ -4,6 +4,8 @@ import { Box, Button, Textarea } from "@mantine/core";
 
 import { updateNote } from "../../../store/articleItem/slice";
 
+import { validateNoteText } from "../../../utils/validates";
+
 import CustomModal from "../CustomModal";
 
 export default function ModalAdminArticleUpdateNote({ articleId, noteEdit, modalVariant, open, close }) {
@@ -16,12 +18,7 @@ export default function ModalAdminArticleUpdateNote({ articleId, noteEdit, modal
     },
 
     validate: {
-      text: (value) => {
-        if (!value.trim()) return "Введите описание";
-        if (value.trim().length < 40) return "Описание должно состоять минимум из 40 символов";
-
-        return null;
-      },
+      text: validateNoteText,
     },
   });
 

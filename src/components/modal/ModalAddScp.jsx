@@ -5,6 +5,8 @@ import { IconPolaroid } from "@tabler/icons-react";
 
 import { addScpItem } from "../../store/scpItem/slice";
 
+import { validateAddScpImage, validateScpNumber, validateScpTitle } from "../../utils/validates";
+
 import CustomModal from "./CustomModal";
 
 export default function ModalAddScp({ modalVariant, open, close }) {
@@ -20,21 +22,9 @@ export default function ModalAddScp({ modalVariant, open, close }) {
     },
 
     validate: {
-      number: (value) => {
-        return !value.trim() ? "Номер объекта обязателен" : null;
-      },
-
-      title: (value) => {
-        return !value.trim() ? "Название обязательно" : null;
-      },
-
-      // image: (value) => {
-      //   if (!value) return "Изображение обязательно";
-      //   if (!value.type.startsWith("image/")) return "Файл не является изображением";
-      //   if (value.size > 5 * 1024 * 1024) return "Файл слишком большой (макс. 5MB)";
-
-      //   return null;
-      // },
+      number: validateScpNumber,
+      title: validateScpTitle,
+      image: validateAddScpImage,
     },
   });
 

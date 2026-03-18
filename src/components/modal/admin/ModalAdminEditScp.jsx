@@ -3,8 +3,10 @@ import { useForm } from "@mantine/form";
 import { Box, Button, FileInput, Flex, Group, Stack, Textarea, TextInput } from "@mantine/core";
 import { IconPolaroid } from "@tabler/icons-react";
 
-import { fileToBase64 } from "../../../helpers/fileToBase64";
 import { updateScpItem } from "../../../store/scpItem/slice";
+
+import { fileToBase64 } from "../../../helpers/fileToBase64";
+import { validateEditScpImage, validateScpNumber, validateScpTitle } from "../../../utils/validates";
 
 import CustomModal from "../CustomModal";
 
@@ -21,28 +23,9 @@ export default function ModalAdminEditScp({ modalVariant, editScp, open, close }
     },
 
     validate: {
-      number: (value) => {
-        return !value.trim() ? "Номер объекта обязателен" : null;
-      },
-
-      title: (value) => {
-        return !value.trim() ? "Название обязательно" : null;
-      },
-
-      image: (value) => {
-        if (!value) return "Изображение обязательно";
-
-        if (typeof value === "string") {
-          if (!value.startsWith("data:image/")) {
-            return "Неверный формат изображения";
-          }
-        } else {
-          if (!value.type.startsWith("image/")) return "Файл не является изображением";
-          if (value.size > 5 * 1024 * 1024) return "Файл слишком большой (макс. 5MB)";
-        }
-
-        return null;
-      },
+      number: validateScpNumber,
+      title: validateScpTitle,
+      image: validateEditScpImage,
     },
   });
 
