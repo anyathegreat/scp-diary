@@ -1,4 +1,4 @@
-import { ApiError } from "../service/error";
+import { ApiError } from "@/service/error";
 
 export const handleResponse = async (response) => {
   let data = null;

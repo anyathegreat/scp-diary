@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router";
-import { IconEdit, IconTrash } from "@tabler/icons-react";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Flex, Group, Table, Title } from "@mantine/core";
-import { deleteNote, getArticleItem } from "../../store/articleItem/slice";
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 
-import ModalAdminArticleAddNote from "../../components/modal/admin/ModalAdminArticleAddNote";
-import ModalAdminArticleUpdateNote from "../../components/modal/admin/ModalAdminArticleUpdateNote";
+import { deleteNote, getArticleItem } from "@/store/articleItem/slice";
+
+import ModalAdminArticleAddNote from "@/components/modal/admin/ModalAdminArticleAddNote";
+import ModalAdminArticleUpdateNote from "@/components/modal/admin/ModalAdminArticleUpdateNote";
 
 export default function AdminArticleNotesPage() {
   const dispatch = useDispatch();

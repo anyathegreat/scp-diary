@@ -1,20 +1,20 @@
 import { createBrowserRouter } from "react-router";
 
-import HomePage from "./pages/HomePage";
-import AppLayout from "./layouts/AppLayout";
-import NotFoundPage from "./pages/NotFoundPage";
-import ScpListPage from "./pages/ScpListPage";
-import ScpDetailsPage from "./pages/ScpDetailsPage";
-import ArticleListPage from "./pages/ArticleListPage";
-import ArticleDetailsPage from "./pages/ArticleDetailsPage";
-import CategoryListPage from "./pages/CategoryListPage";
-import AdminPanelPage from "./pages/admin/AdminPanelPage";
-import AdminArticlePage from "./pages/admin/AdminArticlePage";
-import AdminArticleNotesPage from "./pages/admin/AdminArticleNotesPage";
-import AdminArticleCategoriesPage from "./pages/admin/AdminArticleCategoriesPage";
-import AdminArticleScpPage from "./pages/admin/AdminArticleScpPage";
-import AdminScpListPage from "./pages/admin/AdminScpListPage";
-import AdminCategoriesPage from "./pages/admin/AdminCategoriesPage";
+import HomePage from "@/pages/HomePage";
+import AppLayout from "@/layouts/AppLayout";
+import NotFoundPage from "@/pages/NotFoundPage";
+import ScpListPage from "@/pages/ScpListPage";
+import ScpDetailsPage from "@/pages/ScpDetailsPage";
+import ArticleListPage from "@/pages/ArticleListPage";
+import ArticleDetailsPage from "@/pages/ArticleDetailsPage";
+import CategoryListPage from "@/pages/CategoryListPage";
+import AdminPanelPage from "@/pages/admin/AdminPanelPage";
+import AdminArticlePage from "@/pages/admin/AdminArticlePage";
+import AdminArticleNotesPage from "@/pages/admin/AdminArticleNotesPage";
+import AdminArticleCategoriesPage from "@/pages/admin/AdminArticleCategoriesPage";
+import AdminArticleScpPage from "@/pages/admin/AdminArticleScpPage";
+import AdminScpListPage from "@/pages/admin/AdminScpListPage";
+import AdminCategoriesPage from "@/pages/admin/AdminCategoriesPage";
 
 export const router = createBrowserRouter([
   {

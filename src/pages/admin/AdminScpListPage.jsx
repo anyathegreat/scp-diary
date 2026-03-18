@@ -1,15 +1,15 @@
+import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router";
 import { useMediaQuery } from "@mantine/hooks";
 import { Box, Button, Flex, Group, Table, Title, Typography, useMantineTheme } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
-import { deleteScpItem } from "../../store/scpItem/slice";
-import { getScps } from "../../store/scpList/slice";
+import { deleteScpItem } from "@/store/scpItem/slice";
+import { getScps } from "@/store/scpList/slice";
 
-import ModalAdminAddScp from "../../components/modal/admin/ModalAdminAddScp";
-import ModalAdminEditScp from "../../components/modal/admin/ModalAdminEditScp";
+import ModalAdminAddScp from "@/components/modal/admin/ModalAdminAddScp";
+import ModalAdminEditScp from "@/components/modal/admin/ModalAdminEditScp";
 
 export default function AdminScpListPage() {
   const dispatch = useDispatch();

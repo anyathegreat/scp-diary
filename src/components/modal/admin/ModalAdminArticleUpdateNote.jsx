@@ -2,11 +2,10 @@ import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Textarea } from "@mantine/core";
 
-import { updateNote } from "../../../store/articleItem/slice";
+import { updateNote } from "@/store/articleItem/slice";
+import { validateNoteText } from "@/utils/validates";
 
-import { validateNoteText } from "../../../utils/validates";
-
-import CustomModal from "../CustomModal";
+import CustomModal from "@/components/modal/CustomModal";
 
 export default function ModalAdminArticleUpdateNote({ articleId, noteEdit, modalVariant, open, close }) {
   const dispatch = useDispatch();

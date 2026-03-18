@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Box, Button, Group } from "@mantine/core";
 
-import FormArticleAddCategory from "../form/FormArticleAddCategory";
-import FormArticleDeleteCategory from "../form/FormArticleDeleteCategory";
-import CustomModal from "./CustomModal";
+import FormArticleAddCategory from "@/components/form/FormArticleAddCategory";
+import FormArticleDeleteCategory from "@/components/form/FormArticleDeleteCategory";
+import CustomModal from "@/components/modal/CustomModal";
 
 export default function ModalArticleEditCategory({ modalVariant, open, close, article }) {
   const [addArticleCategory, setAddArticleCategory] = useState(false);

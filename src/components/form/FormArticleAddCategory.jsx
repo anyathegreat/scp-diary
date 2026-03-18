@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Select, Title } from "@mantine/core";
 
-import { getCategories } from "../../store/categoryList/slice";
-import { addArticleCategory } from "../../store/articleItem/slice";
+import { getCategories } from "@/store/categoryList/slice";
+import { addArticleCategory } from "@/store/articleItem/slice";
 
 export default function FormArticleAddCategory({ articleId, closeModal }) {
   const dispatch = useDispatch();

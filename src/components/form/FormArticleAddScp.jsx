@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Select, Title } from "@mantine/core";
 
-import { getScps } from "../../store/scpList/slice";
-import { addArticleScp } from "../../store/articleItem/slice";
+import { getScps } from "@/store/scpList/slice";
+import { addArticleScp } from "@/store/articleItem/slice";
 
 export default function FormArticleAddScp({ articleId, closeModal }) {
   const dispatch = useDispatch();

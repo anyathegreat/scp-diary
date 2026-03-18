@@ -1,15 +1,14 @@
+import { Link } from "react-router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Flex, Group, Table, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
-import { router } from "../../router";
-import { getArticles } from "../../store/articleList/slice";
-import { deleteArticleItem } from "../../store/articleItem/slice";
+import { getArticles } from "@/store/articleList/slice";
+import { deleteArticleItem } from "@/store/articleItem/slice";
 
-import ModalAdminEditArticle from "../../components/modal/admin/ModalAdminEditArticle";
-import ModalAdminAddArticle from "../../components/modal/admin/ModalAdminAddArticle";
-import { Link } from "react-router";
+import ModalAdminEditArticle from "@/components/modal/admin/ModalAdminEditArticle";
+import ModalAdminAddArticle from "@/components/modal/admin/ModalAdminAddArticle";
 
 export default function AdminArticlePage() {
   const dispatch = useDispatch();

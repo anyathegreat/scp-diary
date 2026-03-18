@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import scpsSlice from "./scpList/slice";
-import scpSlice from "./scpItem/slice";
-import articlesSlice from "./articleList/slice";
-import articleSlice from "./articleItem/slice";
-import categoriesSlice from "./categoryList/slice";
-import combinedDbSlice from "./combinedDb/slice";
+import scpsSlice from "@/store/scpList/slice";
+import scpSlice from "@/store/scpItem/slice";
+import articlesSlice from "@/store/articleList/slice";
+import articleSlice from "@/store/articleItem/slice";
+import categoriesSlice from "@/store/categoryList/slice";
+import combinedDbSlice from "@/store/combinedDb/slice";
 
 export const store = configureStore({
   reducer: {

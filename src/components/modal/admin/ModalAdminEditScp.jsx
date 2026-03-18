@@ -3,12 +3,11 @@ import { useForm } from "@mantine/form";
 import { Box, Button, FileInput, Flex, Group, Stack, Textarea, TextInput } from "@mantine/core";
 import { IconPolaroid } from "@tabler/icons-react";
 
-import { updateScpItem } from "../../../store/scpItem/slice";
+import { updateScpItem } from "@/store/scpItem/slice";
+import { fileToBase64 } from "@/helpers/fileToBase64";
+import { validateEditScpImage, validateScpNumber, validateScpTitle } from "@/utils/validates";
 
-import { fileToBase64 } from "../../../helpers/fileToBase64";
-import { validateEditScpImage, validateScpNumber, validateScpTitle } from "../../../utils/validates";
-
-import CustomModal from "../CustomModal";
+import CustomModal from "@/components/modal/CustomModal";
 
 export default function ModalAdminEditScp({ modalVariant, editScp, open, close }) {
   const dispatch = useDispatch();

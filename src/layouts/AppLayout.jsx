@@ -3,11 +3,11 @@ import { Outlet } from "react-router";
 import { AppShell, Box, Stack } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { attachGarland } from "../helpers/lights";
-import { navigationItems } from "../constants/navigation";
+import { attachGarland } from "@/helpers/lights";
+import { navigationItems } from "@/constants/navigation";
 
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
 
 export default function AppLayout() {
   const headerRef = useRef(null);

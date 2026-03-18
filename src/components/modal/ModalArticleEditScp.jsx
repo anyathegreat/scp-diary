@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Box, Button, Group } from "@mantine/core";
 
-import FormArticleAddScp from "../form/FormArticleAddScp";
-import FormArticleDeleteScp from "../form/FormArticleDeleteScp";
-import CustomModal from "./CustomModal";
+import FormArticleAddScp from "@/components/form/FormArticleAddScp";
+import FormArticleDeleteScp from "@/components/form/FormArticleDeleteScp";
+import CustomModal from "@/components/modal/CustomModal";
 
 export default function ModalArticleEditScp({ modalVariant, open, close, article }) {
   const [addArticleScp, setAddArticleScp] = useState(false);

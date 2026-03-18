@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-import { scpService } from "../../service/scpService";
-import { router } from "../../router";
+import { router } from "@/router";
+import { scpService } from "@/service/scpService";
 
 export const getScpItem = createAsyncThunk("scpItem/getScpItem", async (scpId, { rejectWithValue }) => {
   try {

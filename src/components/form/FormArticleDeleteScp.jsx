@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Select, Title } from "@mantine/core";
 
-import { deleteArticleScp } from "../../store/articleItem/slice";
+import { deleteArticleScp } from "@/store/articleItem/slice";
 
 export default function FormArticleDeleteScp({ article, closeModal }) {
   const dispatch = useDispatch();

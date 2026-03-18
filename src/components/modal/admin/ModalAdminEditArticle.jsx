@@ -1,12 +1,12 @@
 import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
+import { Link } from "react-router";
 import { Box, Button, Flex, Group, Text, TextInput } from "@mantine/core";
 
-import { Link } from "react-router";
-import { updateArticleItemTitle } from "../../../store/articleItem/slice";
-import { getArticles } from "../../../store/articleList/slice";
+import { updateArticleItemTitle } from "@/store/articleItem/slice";
+import { getArticles } from "@/store/articleList/slice";
 
-import CustomModal from "../CustomModal";
+import CustomModal from "@/components/modal/CustomModal";
 
 export default function ModalAdminEditArticle({ modalVariant, article, open, close }) {
   const dispatch = useDispatch();

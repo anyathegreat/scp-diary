@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Select } from "@mantine/core";
 
-import { addArticleCategory } from "../../../store/articleItem/slice";
-import { getCategories } from "../../../store/categoryList/slice";
+import { addArticleCategory } from "@/store/articleItem/slice";
+import { getCategories } from "@/store/categoryList/slice";
 
-import CustomModal from "../CustomModal";
+import CustomModal from "@/components/modal/CustomModal";
 
 export default function ModalAdminArticleAddCategory({ modalVariant, articleId, open, close }) {
   const dispatch = useDispatch();

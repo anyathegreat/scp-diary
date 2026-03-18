@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { Box, Flex, Group, Image, Skeleton, Text, Typography } from "@mantine/core";
 
-import { getScpItem } from "../store/scpItem/slice";
+import { getScpItem } from "@/store/scpItem/slice";
 
 export default function ScpDetailsPage() {
   const dispatch = useDispatch();

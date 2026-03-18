@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Flex, Group, Table, Title, Typography, useMantineTheme } from "@mantine/core";
 import { IconTrash } from "@tabler/icons-react";
 
-import { deleteArticleScp, getArticleItem } from "../../store/articleItem/slice";
+import { deleteArticleScp, getArticleItem } from "@/store/articleItem/slice";
 
-import ModalAdminArticleAddScp from "../../components/modal/admin/ModalAdminArticleAddScp";
+import ModalAdminArticleAddScp from "@/components/modal/admin/ModalAdminArticleAddScp";
 
 export default function AdminArticleScpPage() {
   const dispatch = useDispatch();

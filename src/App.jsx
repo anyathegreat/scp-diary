@@ -1,11 +1,11 @@
+import { Provider as ReduxProvider } from "react-redux";
 import { RouterProvider } from "react-router/dom";
 import { MantineProvider } from "@mantine/core";
 import { ToastContainer } from "react-toastify";
-import { Provider as ReduxProvider } from "react-redux";
 
-import { router } from "./router";
-import { store } from "./store";
-import { theme } from "./theme";
+import { router } from "@/router";
+import { store } from "@/store";
+import { theme } from "@/theme";
 
 import "./style.css";
 

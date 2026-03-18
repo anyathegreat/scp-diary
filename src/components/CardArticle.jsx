@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { Box, Button, Card, Divider, Group, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
-import { deleteArticleItem } from "../store/articleItem/slice";
+import { deleteArticleItem } from "@/store/articleItem/slice";
 
 export default function CardArticle({ article }) {
   const dispatch = useDispatch();

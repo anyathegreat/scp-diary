@@ -1,11 +1,11 @@
-import { Box, Button, Grid, Group, Modal, Skeleton, Stack } from "@mantine/core";
+import { Box, Button, Grid, Group, Skeleton, Stack } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-import { getScps } from "../store/scpList/slice";
+import { getScps } from "@/store/scpList/slice";
 
-import CardScp from "../components/CardScp";
-import ModalAddScp from "../components/modal/ModalAddScp";
+import CardScp from "@/components/CardScp";
+import ModalAddScp from "@/components/modal/ModalAddScp";
 
 export default function ScpList() {
   const dispatch = useDispatch();

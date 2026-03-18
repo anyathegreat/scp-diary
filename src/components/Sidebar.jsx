@@ -1,5 +1,5 @@
-import { Button, Stack } from "@mantine/core";
 import { Link } from "react-router";
+import { Button, Stack } from "@mantine/core";
 
 export default function Sidebar({ toggle, navItems }) {
   return (

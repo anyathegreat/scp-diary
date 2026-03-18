@@ -1,14 +1,14 @@
-import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { useMediaQuery } from "@mantine/hooks";
+import { useDispatch } from "react-redux";
 import { DateTime } from "luxon";
+import { useMediaQuery } from "@mantine/hooks";
 import { Box, Divider, Title, Button, Group, Stack, Text, Timeline, useMantineTheme } from "@mantine/core";
 import { IconCalendarEvent, IconEdit, IconTrash } from "@tabler/icons-react";
 
-import { deleteNote } from "../store/articleItem/slice";
+import { deleteNote } from "@/store/articleItem/slice";
 
-import FormAddArticleNote from "./form/FormAddArticleNotes";
-import ModalArticleUpdateNotes from "./modal/ModalArticleUpdateNotes";
+import FormAddArticleNote from "@/components/form/FormAddArticleNotes";
+import ModalArticleUpdateNotes from "@/components/modal/ModalArticleUpdateNotes";
 
 export default function ArticleNotes({ article, articleId }) {
   const dispatch = useDispatch();

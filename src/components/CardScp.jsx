@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { Button, Card, Group, Image, Stack, Text, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
-import { deleteScpItem } from "../store/scpItem/slice";
+import { deleteScpItem } from "@/store/scpItem/slice";
 
 export default function CardScp({ scp }) {
   const dispatch = useDispatch();

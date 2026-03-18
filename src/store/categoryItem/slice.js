@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-import { router } from "../../router";
-import { getCategories } from "../categoryList/slice";
-import { categoryService } from "../../service/categoryService";
+import { router } from "@/router";
+import { getCategories } from "@/store/categoryList/slice";
+import { categoryService } from "@/service/categoryService";
 
 export const getCategoryItem = createAsyncThunk("categoryList/getCategories", async (_, { rejectWithValue }) => {
   try {

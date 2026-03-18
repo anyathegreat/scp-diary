@@ -2,9 +2,8 @@ import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Group, Textarea } from "@mantine/core";
 
-import { addArticleNote } from "../../store/articleItem/slice";
-
-import { validateNoteText } from "../../utils/validates";
+import { addArticleNote } from "@/store/articleItem/slice";
+import { validateNoteText } from "@/utils/validates";
 
 export default function FormAddArticleNote({ articleId }) {
   const dispatch = useDispatch();

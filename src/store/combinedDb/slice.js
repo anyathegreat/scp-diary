@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-import { scpService } from "../../service/scpService";
-import { articleService } from "../../service/articleService";
-import { categoryService } from "../../service/categoryService";
+import { scpService } from "@/service/scpService";
+import { articleService } from "@/service/articleService";
+import { categoryService } from "@/service/categoryService";
 
 export const getCombinedDbData = createAsyncThunk("combinedDb/combinedDbData", async (params, { rejectWithValue }) => {
   try {

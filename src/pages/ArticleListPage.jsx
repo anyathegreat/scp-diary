@@ -1,11 +1,11 @@
-import { Button, Skeleton, Stack } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Button, Skeleton, Stack } from "@mantine/core";
 
-import { getArticles } from "../store/articleList/slice";
+import { getArticles } from "@/store/articleList/slice";
 
-import CardArticle from "../components/CardArticle";
-import ModalAddArticle from "../components/modal/ModalAddArticle";
+import CardArticle from "@/components/CardArticle";
+import ModalAddArticle from "@/components/modal/ModalAddArticle";
 
 export default function ArticleListPage() {
   const dispatch = useDispatch();

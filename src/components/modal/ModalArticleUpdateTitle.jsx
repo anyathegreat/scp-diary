@@ -2,10 +2,10 @@ import { Box, Button, Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useDispatch } from "react-redux";
 
-import { updateArticleItemTitle } from "../../store/articleItem/slice";
+import { updateArticleItemTitle } from "@/store/articleItem/slice";
+import { validateArticleTitle } from "@/utils/validates";
 
-import CustomModal from "./CustomModal";
-import { validateArticleTitle } from "../../utils/validates";
+import CustomModal from "@/components/modal/CustomModal";
 
 export default function ModalArticleUpdateTitle({ modalVariant, articleId, open, close }) {
   const dispatch = useDispatch();

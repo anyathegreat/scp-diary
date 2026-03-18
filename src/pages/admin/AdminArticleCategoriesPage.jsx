@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router";
-import { IconTrash } from "@tabler/icons-react";
 import { Box, Button, Flex, Group, Table, Title } from "@mantine/core";
+import { IconTrash } from "@tabler/icons-react";
 
-import { deleteArticleCategory, getArticleItem } from "../../store/articleItem/slice";
-import { router } from "../../router";
+import { router } from "@/router";
+import { deleteArticleCategory, getArticleItem } from "@/store/articleItem/slice";
 
-import ModalAdminArticleAddCategory from "../../components/modal/admin/ModalAdminArticleAddCategory";
+import ModalAdminArticleAddCategory from "@/components/modal/admin/ModalAdminArticleAddCategory";
 
 export default function AdminArticleCategoriesPage() {
   const dispatch = useDispatch();

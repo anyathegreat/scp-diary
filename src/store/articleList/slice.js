@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
-import { articleService } from "../../service/articleService";
+import { articleService } from "@/service/articleService";
 
 const initialState = {
   list: [],

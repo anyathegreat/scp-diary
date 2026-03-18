@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Grid } from "@mantine/core";
 
-import { getCategories } from "../store/categoryList/slice";
+import { getCategories } from "@/store/categoryList/slice";
 
-import CardCategory from "../components/CardCategory";
-import ModalAddCategory from "../components/modal/ModalAddCategory";
+import CardCategory from "@/components/CardCategory";
+import ModalAddCategory from "@/components/modal/ModalAddCategory";
 
 export default function CategoryListPage() {
   const dispatch = useDispatch();

@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Group, Table, Title } from "@mantine/core";
+import { Box, Table, Title } from "@mantine/core";
 
-import { getCombinedDbData } from "../../store/combinedDb/slice";
-
-import { router } from "../../router";
+import { router } from "@/router";
+import { getCombinedDbData } from "@/store/combinedDb/slice";
 
 export default function AdminPanelPage() {
   const dispatch = useDispatch();

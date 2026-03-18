@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Select, Title } from "@mantine/core";
 
-import { deleteArticleCategory } from "../../store/articleItem/slice";
+import { deleteArticleCategory } from "@/store/articleItem/slice";
 
 export default function FormArticleDeleteCategory({ article, closeModal }) {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
-import { handleResponse } from "../helpers/api";
-import { supabaseConfig } from "../constants/supabaseUrl";
+import { handleResponse } from "@/helpers/api";
+import { supabaseConfig } from "@/constants/supabaseUrl";
 
 const scpREST = {
   getAllScp: async () => {

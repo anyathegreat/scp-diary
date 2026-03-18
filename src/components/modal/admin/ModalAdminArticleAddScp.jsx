@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "@mantine/form";
 import { Box, Button, Select } from "@mantine/core";
 
-import { addArticleScp } from "../../../store/articleItem/slice";
-import { getScps } from "../../../store/scpList/slice";
+import { addArticleScp } from "@/store/articleItem/slice";
+import { getScps } from "@/store/scpList/slice";
 
-import CustomModal from "../CustomModal";
+import CustomModal from "@/components/modal/CustomModal";
 
 export default function ModalAdminArticleAddScp({ modalVariant, articleId, open, close }) {
   const dispatch = useDispatch();

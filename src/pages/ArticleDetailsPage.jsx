@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Stack, Title, Group, Button, Text, Divider, Tabs, Typography, Modal, Flex } from "@mantine/core";
 import { IconEdit } from "@tabler/icons-react";
 
-import { getArticleItem } from "../store/articleItem/slice";
+import { getArticleItem } from "@/store/articleItem/slice";
 
-import ArticleNotes from "../components/ArticleNotes";
-import ModalArticleEditScp from "../components/modal/ModalArticleEditScp";
-import ModalArticleEditCategory from "../components/modal/ModalArticleEditCategory";
-import ModalArticleUpdateTitle from "../components/modal/ModalArticleUpdateTitle";
+import ArticleNotes from "@/components/ArticleNotes";
+import ModalArticleEditScp from "@/components/modal/ModalArticleEditScp";
+import ModalArticleEditCategory from "@/components/modal/ModalArticleEditCategory";
+import ModalArticleUpdateTitle from "@/components/modal/ModalArticleUpdateTitle";
 
 export default function ArticleDetailsPage() {
   const dispatch = useDispatch();

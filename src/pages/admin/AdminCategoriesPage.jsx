@@ -1,11 +1,11 @@
+import { Link } from "react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router";
-import { Box, Button, Flex, Group, Table, Title, Typography } from "@mantine/core";
+import { Box, Button, Flex, Group, Table, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
 
-import { getCategories } from "../../store/categoryList/slice";
-import { deleteCategoryItem } from "../../store/categoryItem/slice";
+import { getCategories } from "@/store/categoryList/slice";
+import { deleteCategoryItem } from "@/store/categoryItem/slice";
 
 export default function AdminCategoriesPage() {
   const dispatch = useDispatch();
