@@ -44,7 +44,7 @@ export const updateCategoryItem = createAsyncThunk(
   "categoryList/updateCategoryItem",
   async (params, { dispatch, rejectWithValue }) => {
     try {
-      const response = await categoryService.addCategory(params.body);
+      const response = await categoryService.updateCategory(params.body);
       dispatch(getCategories());
       params.cb();
 

@@ -47,7 +47,7 @@ export const validateCategoryTitle = (title) => {
 export const validateCategorySlug = (slug) => {
   if (!slug.trim()) return "Slug обязателен";
   if (!/^[a-z0-9]+$/.test(slug)) {
-    return "Slug должен быть маленькими буквами";
+    return "Slug должен быть маленькими буквами и латинскими буквами";
   }
 
   return null;

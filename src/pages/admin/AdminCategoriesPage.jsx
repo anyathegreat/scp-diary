@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, Flex, Group, Table, Title } from "@mantine/core";
 import { IconEdit, IconTrash } from "@tabler/icons-react";
@@ -7,10 +7,31 @@ import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { getCategories } from "@/store/categoryList/slice";
 import { deleteCategoryItem } from "@/store/categoryItem/slice";
 
+import ModalAdminAddCategory from "@/components/modal/admin/ModalAdminAddCategory";
+import ModalAdminEditCategory from "@/components/modal/admin/ModalAdminEditCategory";
+
 export default function AdminCategoriesPage() {
   const dispatch = useDispatch();
 
   const categories = useSelector((state) => state.categoryList.list);
+
+  const [editCategory, setEditCategory] = useState(null);
+  const [modalAddCategory, setModalAddCategories] = useState(false);
+  const [modalEditCategory, setModalEditCategory] = useState(false);
+
+  const handleOpenModalEditCategory = (category) => {
+    setEditCategory(category);
+    setModalEditCategory(true);
+  };
+
+  const handleCloseModalEditCategory = () => {
+    setEditCategory(null);
+    setModalEditCategory(false);
+  };
+
+  const handleModalAddCategory = () => {
+    setModalAddCategories((prev) => !prev);
+  };
 
   const handleDeleteCategory = (categoryId) => {
     dispatch(deleteCategoryItem(categoryId));
@@ -30,7 +51,9 @@ export default function AdminCategoriesPage() {
             Назад
           </Button>
 
-          <Button size="md">Создать</Button>
+          <Button size="md" onClick={handleModalAddCategory}>
+            Создать
+          </Button>
         </Group>
       </Flex>
 
@@ -55,7 +78,7 @@ export default function AdminCategoriesPage() {
 
                   <Table.Td ta="center">
                     <Group justify="center" gap="xs">
-                      <Button>
+                      <Button onClick={() => handleOpenModalEditCategory(item)}>
                         <IconEdit />
                       </Button>
 
@@ -74,6 +97,30 @@ export default function AdminCategoriesPage() {
           )}
         </Table.Tbody>
       </Table>
+
+      {modalAddCategory && (
+        <ModalAdminAddCategory modalVariant="desktop" open={modalAddCategory} close={handleModalAddCategory} />
+      )}
+      {modalAddCategory && (
+        <ModalAdminAddCategory modalVariant="mobile" open={modalAddCategory} close={handleModalAddCategory} />
+      )}
+
+      {editCategory && (
+        <ModalAdminEditCategory
+          modalVariant="desktop"
+          editCategory={editCategory}
+          open={modalEditCategory}
+          close={handleCloseModalEditCategory}
+        />
+      )}
+      {editCategory && (
+        <ModalAdminEditCategory
+          modalVariant="mobile"
+          editCategory={editCategory}
+          open={modalEditCategory}
+          close={handleCloseModalEditCategory}
+        />
+      )}
     </Box>
   );
 }
